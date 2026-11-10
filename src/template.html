@@ -599,7 +599,7 @@ section[id]{scroll-margin-top:76px}
 .sh-try+.sh-try{margin-left:18px}
 @media (max-width:760px){.works .cfil{margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-right:16px}.works-top .arrows{display:none}.sh-try{display:block}.sh-try+.sh-try{margin-left:0}}
 /* v6: трейлер без растянутых фото */
-.tf.mat img{filter:saturate(.9) brightness(.82)}
+.tf.mat img{filter:none}
 .tf.metal{background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 2px,transparent 2px 7px),linear-gradient(100deg,#0b0d10 0%,#2b2e33 20%,#6a655a 33%,#1a1c20 47%,#3b3934 61%,#9c8960 77%,#14161a 100%);background-size:auto,auto,240% 100%;background-position:0 0,0 0,0% 0;transition:opacity .45s,background-position 2.6s cubic-bezier(.15,.6,.3,1)}
 .tf.metal.on{background-position:0 0,0 0,70% 0}
 .tf .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,226,170,.16) 46%,transparent 60%);transform:translateX(-70%);transition:transform 1.8s cubic-bezier(.3,.1,.2,1)}
@@ -618,10 +618,10 @@ section[id]{scroll-margin-top:76px}
     <svg width="190" height="190" viewBox="0 0 240 240" fill="none" aria-hidden="true" style="width:min(190px,44vw);height:auto"><g id="gen-rings" transform="rotate(-90 120 120)"></g><g transform="scale(2)"><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></g></svg>
     <div class="brand">SHARK GROUP</div>
   </div>
-  <!-- Слова о материалах идут по своим фактурам высокого разрешения, работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
-  <div class="tf mat" data-d="1100"><img src="{{T:walnut}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
-  <div class="tf mat metal" data-d="950"><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
-  <div class="tf mat" data-d="950"><img decoding="async" src="{{X:stone_tumbled}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
+  <!-- Слова о материалах идут по лицензионным кадрам Unsplash (src/stock.py — это не цех Shark Group, заменить своей съёмкой), работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
+  <div class="tf mat" data-d="1100"><img src="{{P:s_wood}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
+  <div class="tf mat" data-d="950"><img decoding="async" src="{{P:s_metal}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
+  <div class="tf mat" data-d="950"><img decoding="async" src="{{P:s_stone}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p124}}" alt=""><span class="fr"><img decoding="async" src="{{P:p124}}" alt=""></span><span class="lab">Лестницы</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p25}}" alt=""><span class="fr"><img decoding="async" src="{{P:p25}}" alt=""></span><span class="lab">Панели из шпона</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p48}}" alt=""><span class="fr"><img decoding="async" src="{{P:p48}}" alt=""></span><span class="lab">Двери из массива</span><span class="blade"></span></div>

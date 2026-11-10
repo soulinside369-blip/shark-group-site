@@ -604,7 +604,7 @@ section[id]{scroll-margin-top:76px}
 .sh-try+.sh-try{margin-left:18px}
 @media (max-width:760px){.works .cfil{margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-right:16px}.works-top .arrows{display:none}.sh-try{display:block}.sh-try+.sh-try{margin-left:0}}
 /* v6: трейлер без растянутых фото */
-.tf.mat img{filter:saturate(.9) brightness(.82)}
+.tf.mat img{filter:none}
 .tf.metal{background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 2px,transparent 2px 7px),linear-gradient(100deg,#0b0d10 0%,#2b2e33 20%,#6a655a 33%,#1a1c20 47%,#3b3934 61%,#9c8960 77%,#14161a 100%);background-size:auto,auto,240% 100%;background-position:0 0,0 0,0% 0;transition:opacity .45s,background-position 2.6s cubic-bezier(.15,.6,.3,1)}
 .tf.metal.on{background-position:0 0,0 0,70% 0}
 .tf .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,226,170,.16) 46%,transparent 60%);transform:translateX(-70%);transition:transform 1.8s cubic-bezier(.3,.1,.2,1)}
@@ -626,11 +626,11 @@ section[id]{scroll-margin-top:76px}
     <svg width="190" height="190" viewBox="0 0 240 240" fill="none" aria-hidden="true" style="width:min(190px,44vw);height:auto"><g id="gen-rings" transform="rotate(-90 120 120)"></g><g transform="scale(2)"><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></g></svg>
     <div class="brand">SHARK GROUP</div>
   </div>
-  <!-- Слова о материалах идут по своим фактурам высокого разрешения, работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
-  <div class="tf mat" data-d="1100"><img src="m/walnut.webp?h=55843323" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
-  <div class="tf mat metal" data-d="950"><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
-  <div class="tf mat" data-d="950"><img decoding="async" src="m/stone_tumbled.webp?h=190a7269" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p124.webp?h=3a9c66ca" alt=""><span class="fr"><img decoding="async" src="m/p124.webp?h=3a9c66ca" alt=""></span><span class="lab">Лестницы</span><span class="blade"></span></div>
+  <!-- Слова о материалах идут по лицензионным кадрам Unsplash (src/stock.py — это не цех Shark Group, заменить своей съёмкой), работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
+  <div class="tf mat" data-d="1100"><img src="m/s_wood.webp?h=ece7c4f4" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
+  <div class="tf mat" data-d="950"><img decoding="async" src="m/s_metal.webp?h=238aaa9b" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
+  <div class="tf mat" data-d="950"><img decoding="async" src="m/s_stone.webp?h=c4953506" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""><span class="fr"><img decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""></span><span class="lab">Лестницы</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p25.webp?h=fc4a6614" alt=""><span class="fr"><img decoding="async" src="m/p25.webp?h=fc4a6614" alt=""></span><span class="lab">Панели из шпона</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p48.webp?h=cd4b012b" alt=""><span class="fr"><img decoding="async" src="m/p48.webp?h=cd4b012b" alt=""></span><span class="lab">Двери из массива</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p123.webp?h=6a1a16a3" alt=""><span class="fr"><img decoding="async" src="m/p123.webp?h=6a1a16a3" alt=""></span><span class="lab">Мебель и корпус</span><span class="blade"></span></div>
@@ -664,7 +664,7 @@ section[id]{scroll-margin-top:76px}
 
 <main>
 <section class="hero" id="top" aria-label="Первый экран">
-  <img fetchpriority="high" src="m/p124.webp?h=3a9c66ca" alt="Парящая лестница из тёмного дерева со стеклянным ограждением и подсветкой ступеней">
+  <img fetchpriority="high" src="m/p124.webp?h=13dc8ec6" alt="Парящая лестница из тёмного дерева со стеклянным ограждением и подсветкой ступеней">
   <canvas class="hero-gl" id="hero-gl" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="eyebrow">Своё производство · Сочи и Краснодарский край · по всей России</div>
@@ -1120,7 +1120,7 @@ var INC_P=['Лист фанеры, облицованный шпоном выб�
 /* o: группы опций [название, значения, 1 = можно несколько] */
 var ITEMS=[
  {id:'panels',c:'ven',d:0,n:'Стеновые панели из шпона',s:'Наш главный продукт. Панели под ключ в шпоне любой породы: с профилем, зеркалами и скрытыми дверями.',p:'от 25 000 ₽/м²',pn:'под ключ',t:'3–5 недель',im:'m/p25.webp?h=fc4a6614',g:[['m/p25.webp?h=fc4a6614','Панели из шпона ореха с чёрным профилем'],['m/p24.webp?h=4c10ad2b','Панели из ореха, гостиная'],['m/p22.webp?h=3a9836ec','Панели из ореха с зеркальными вставками']],o:[['Порода',SP],['Покрытие',CT]],hot:1,tr:1},
- {id:'stairs',c:'st',d:2,n:'Лестницы',s:'На бетон, металлокаркас, парящие и винтовые. Массив дуба, шпон 1,5 мм, стекло, подсветка ступеней.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p56.webp?h=83ab7526',g:[['m/p56.webp?h=83ab7526','Лестница из дуба с подсветкой'],['m/p124.webp?h=3a9c66ca','Парящая лестница со стеклом'],['m/p83.webp?h=9e49ceb1','Облицовка бетонной лестницы'],['m/p42.webp?h=4b749399','Лестница с коваными перилами'],['m/p100.webp?h=9c023440','Металлокаркас с площадками']],o:[['Тип',['На металлокаркасе','На бетон','Парящая','Винтовая']]]},
+ {id:'stairs',c:'st',d:2,n:'Лестницы',s:'На бетон, металлокаркас, парящие и винтовые. Массив дуба, шпон 1,5 мм, стекло, подсветка ступеней.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p56.webp?h=83ab7526',g:[['m/p56.webp?h=83ab7526','Лестница из дуба с подсветкой'],['m/p124.webp?h=13dc8ec6','Парящая лестница со стеклом'],['m/p83.webp?h=9e49ceb1','Облицовка бетонной лестницы'],['m/p42.webp?h=4b749399','Лестница с коваными перилами'],['m/p100.webp?h=9c023440','Металлокаркас с площадками']],o:[['Тип',['На металлокаркасе','На бетон','Парящая','Винтовая']]]},
  null, /* сюда встанет первая плитка — чтобы первый экран каталога был разным */
  {id:'doors',c:'door',d:3,n:'Двери',s:'Входные группы и межкомнатные из массива и в шпоне: скрытые, с резьбой, арками, стеклом и ковкой.',p:'от 65 000 ₽',pn:'входные — от 180 000 ₽',t:'4–8 недель',im:'m/p48.webp?h=cd4b012b',g:[['m/p48.webp?h=cd4b012b','Резные двери из массива'],['m/p103.webp?h=9354d307','Арочные двери со стеклом'],['m/p28.webp?h=5c6758e7','Входная дверь с пирамидами'],['m/p121.webp?h=bc30eeb7','Классическая дверь из массива'],['m/p145.webp?h=9d08dc16','Двери в зал']],o:[['Тип',['Межкомнатная','Скрытая','Входная группа']]]},
  {id:'kitchen',c:'kit',d:4,n:'Кухни и корпус',s:'Кухни, стеллажи, гардеробные и винные шкафы из массива и шпона.',p:'от 150 000 ₽',pn:'',t:'6–10 недель',im:'m/p52.webp?h=c9faa045',g:[['m/p52.webp?h=c9faa045','Белая кухня из массива'],['m/p4.webp?h=ff0c6cbc','Стеллаж из массива'],['m/p123.webp?h=6a1a16a3','Винный шкаф под лестницей'],['m/p5.webp?h=046c85ef','Винный стеллаж']],o:[['Что нужно',['Кухня','Стеллаж','Гардеробная','Винный шкаф'],1]]},
@@ -1250,7 +1250,7 @@ var CASES=[
  {c:'rest',n:'Harat’s',s:'Барная стойка, стена из старых дверей, цветные панели',ph:['m/p15.webp?h=798e07be','m/p17.webp?h=9c0cdfd8','m/p19.webp?h=914fde31','m/p16.webp?h=5dbf7552','m/p14.webp?h=b0801a4f','m/p18.webp?h=8b3f193d','m/p20.webp?h=6ad0cd57','m/p21.webp?h=0bec6b11']},
  {c:'home',n:'Гостиная в панелях из ореха',s:'Шпон американского ореха, зеркальные вставки, чёрный матовый профиль, скрытая дверь',ph:['m/p25.webp?h=fc4a6614','m/p24.webp?h=4c10ad2b','m/p22.webp?h=3a9836ec','m/p112.webp?h=5a059eec']},
  {c:'home',n:'Дом с резными дверями',s:'Резные двери, двери в зал и гаражные ворота — один дом',ph:['m/p48.webp?h=cd4b012b','m/p46.webp?h=c3824ef5','m/p47.webp?h=1cdccd76','m/p145.webp?h=9d08dc16','m/p146.webp?h=0c002b94','m/p147.webp?h=51bb1643','m/p40.webp?h=0c002b94']},
- {c:'st',n:'Парящая лестница со стеклом',s:'Тёмный дуб, стеклянное ограждение, подсветка каждой ступени',ph:['m/p124.webp?h=3a9c66ca','m/p34.webp?h=e518357b']},
+ {c:'st',n:'Парящая лестница со стеклом',s:'Тёмный дуб, стеклянное ограждение, подсветка каждой ступени',ph:['m/p124.webp?h=13dc8ec6','m/p34.webp?h=e518357b']},
  {c:'st',n:'Лестница от бетона до света',s:'Металлокаркас, ступени из массива со шпоном 1,5 мм, подсветка',ph:['m/p56.webp?h=83ab7526','m/p58.webp?h=9ef4d842','m/p55.webp?h=5cae35cf','m/p99.webp?h=0bb87fee','m/p100.webp?h=9c023440','m/p26.webp?h=2d318e99']},
  {c:'st',n:'Облицовка бетонной лестницы',s:'Ступени и подступенки, поручень, балюстрада',ph:['m/p83.webp?h=9e49ceb1','m/p81.webp?h=c92fc89a','m/p84.webp?h=a0a5dbec','m/p82.webp?h=8e901845','m/p85.webp?h=a94a0441']},
  {c:'st',n:'Лестницы и ограждения: дерево и ковка',s:'Кованые перила, резной экран, винтовая и деревянная лестницы',ph:['m/p42.webp?h=4b749399','m/p74.webp?h=f10b300b','m/p62.webp?h=dd2c4baf','m/p36.webp?h=cad16e58','m/p73.webp?h=ed388870','m/p79.webp?h=35b24166']},

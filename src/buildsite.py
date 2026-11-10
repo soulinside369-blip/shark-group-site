@@ -12,7 +12,7 @@ os.makedirs(ROOT+'m',exist_ok=True)
 cache={}
 def webp(kind,name):
     if kind=='P':
-        src=SRC+f'img/{name}.jpg'; mw=2200 if name=='p124' else 1280; q=86 if name=='p124' else 78
+        src=SRC+f'img/{name}.jpg'; big=name=='p124' or name.startswith('s_'); mw=2200 if big else 1280; q=84 if big else 78
     elif kind=='T':
         src=SRC+f'wood/{name}.jpg'; mw=2000; q=90
     else:
