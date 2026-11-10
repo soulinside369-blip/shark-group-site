@@ -1,4 +1,4 @@
-import re,base64,io,os
+import re,base64,io,os,hashlib
 from PIL import Image
 
 # Repo layout: this script + template.html + img/ wood/ tile/ live in src/.
@@ -12,7 +12,7 @@ os.makedirs(ROOT+'m',exist_ok=True)
 cache={}
 def webp(kind,name):
     if kind=='P':
-        src=SRC+f'img/{name}.jpg'; mw=2200 if name=='p124' else 1800; q=86
+        src=SRC+f'img/{name}.jpg'; mw=2200 if name=='p124' else 1280; q=86 if name=='p124' else 78
     elif kind=='T':
         src=SRC+f'wood/{name}.jpg'; mw=2000; q=90
     else:
@@ -38,15 +38,24 @@ def wrap(head_resolved, body_resolved):
 # split build: external webp files at repo root (m/)
 def split_sub(m):
     open(ROOT+f'm/{m.group(2)}.webp','wb').write(get(m.group(1),m.group(2)))
-    return f'm/{m.group(2)}.webp'
+    return f'm/{m.group(2)}.webp?h='+hashlib.md5(get(m.group(1),m.group(2))).hexdigest()[:8]  # ?h= — чтобы браузер не показывал старую версию фото
 hs=re.sub(r'\{\{([PTX]):(\w+)\}\}',split_sub,head_frag)
 bs=re.sub(r'\{\{([PTX]):(\w+)\}\}',split_sub,body_frag)
 open(ROOT+'index.html','w',encoding='utf-8').write(wrap(hs,bs))
 
 # single-file version (everything embedded) at repo root
 def emb(m): return 'data:image/webp;base64,'+base64.b64encode(get(m.group(1),m.group(2))).decode()
+# Картинки, на которые ссылается скрипт (каталог, кейсы), кладём в файл ОДИН раз — в таблицу __I,
+# а в коде оставляем ссылку на неё. Иначе каждое повторное упоминание раздувало файл.
+used={}
+def ref(m):
+    used[m.group(2)]=m.group(1); return '__I.'+m.group(2)
+b1=re.sub(r"'\{\{([PTX]):(\w+)\}\}'",ref,body_frag)
+b64=lambda k,n: 'data:image/webp;base64,'+base64.b64encode(get(k,n)).decode()
+table='<script>var __I={'+','.join(n+':"'+b64(k,n)+'"' for n,k in used.items())+'};</script>\n'
+i1=b1.rindex('<script>'); b1=b1[:i1]+table+b1[i1:]
 h1=re.sub(r'\{\{([PTX]):(\w+)\}\}',emb,head_frag)
-b1=re.sub(r'\{\{([PTX]):(\w+)\}\}',emb,body_frag)
+b1=re.sub(r'\{\{([PTX]):(\w+)\}\}',emb,b1)
 open(ROOT+'shark-group.html','w',encoding='utf-8').write(wrap(h1,b1))
 tot=sum(len(v) for v in cache.values())
 print(len(cache),'imgs',round(tot/1e6,2),'MB; single',round(len(one:=open(ROOT+"shark-group.html",encoding="utf-8").read())/1e6,2),'MB')

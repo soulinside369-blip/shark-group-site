@@ -497,6 +497,107 @@ section[id]{scroll-margin-top:76px}
   .slab .hint{display:none}
   .ruler span:nth-child(6){display:none}
 }
+/* ============ v5: каталог, окно позиции, мобильная версия ============ */
+.cat{padding-block:72px 64px}
+.cfil{display:flex;gap:8px;overflow-x:auto;margin-top:22px;padding:2px 0 12px;scrollbar-width:none}
+.cfil::-webkit-scrollbar,.sh-gs::-webkit-scrollbar,.steps::-webkit-scrollbar{display:none}
+.cfil button{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(242,235,221,.25);background:transparent;color:var(--soft);font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;transition:background-color .25s,border-color .25s,color .25s}
+.cfil button:hover{border-color:var(--brass)}
+.cfil button[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--night)}
+.cgrid{margin-top:8px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ccard{position:relative;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--night-2);transition:transform .5s var(--ease),box-shadow .5s}
+.ccard:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.ccard .ph{aspect-ratio:4/3;overflow:hidden;background:var(--pit)}
+.ccard img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.ccard:hover img{transform:scale(1.05)}
+.ccard .hit{position:absolute;inset:0;z-index:1;border:0;padding:0;background:transparent;border-radius:inherit;cursor:pointer}
+.ccard .qadd{position:absolute;top:8px;right:8px;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(242,235,221,.45);background:rgba(9,15,26,.74);color:var(--ivory);font-size:22px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background-color .25s,border-color .25s,color .25s}
+.ccard .qadd:hover{border-color:var(--brass);color:var(--brass)}
+.ccard .qadd[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--night);font-size:18px;font-weight:700}
+.ccard .tag-hot{position:absolute;top:16px;left:10px;margin:0;z-index:1}
+.cc-in{flex:1;display:flex;flex-direction:column;padding:12px 14px 14px}
+.cc-in small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.cc-in h3{margin-top:4px;font-size:25px;line-height:1.05}
+.cc-p{margin-top:auto;padding-top:10px;font-family:var(--display);font-size:21px;font-weight:600;line-height:1.1;color:var(--brass)}
+.cc-t{margin-top:2px;font-size:12px;color:var(--mute)}
+.cmore{margin-top:18px;display:flex;justify-content:center}
+.cnote{margin-top:16px;font-size:13px;color:var(--mute);max-width:60em}
+.opt .sm{display:none}
+/* окно позиции */
+.lb{z-index:93}
+.sheet{position:fixed;inset:0;z-index:92}
+.sh-bg{position:absolute;inset:0;background:rgba(5,8,14,.74);opacity:0;transition:opacity .45s}
+.sheet.open .sh-bg{opacity:1}
+.sh-p{position:absolute;left:0;right:0;bottom:0;max-height:92vh;max-height:92svh;display:flex;flex-direction:column;overflow:hidden;background:var(--night);border-top:1px solid rgba(201,164,106,.45);border-radius:22px 22px 0 0;transform:translateY(103%);transition:transform .45s var(--ease)}
+.sheet.open .sh-p{transform:none}
+.sh-grab{position:absolute;z-index:3;top:8px;left:50%;width:44px;height:4px;margin-left:-22px;border-radius:4px;background:rgba(242,235,221,.6)}
+.sh-x{position:absolute;z-index:3;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(242,235,221,.35);background:rgba(9,15,26,.74);font-size:16px;cursor:pointer}
+.sh-sc{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.sh-g{position:relative}
+.sh-gs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.sh-gs img{flex:0 0 100%;width:100%;max-width:none;height:min(62vw,300px);object-fit:cover;scroll-snap-align:start;cursor:zoom-in}
+.sh-gc{position:absolute;left:14px;bottom:12px;padding:5px 10px;border-radius:999px;background:rgba(9,15,26,.74);font-size:12px;font-variant-numeric:tabular-nums}
+.sh-b{padding:18px 16px 20px}
+.sh-b h3{margin-top:6px;font-size:32px}
+.sh-b>p{margin-top:8px;font-size:15px;color:var(--soft)}
+.sh-kv{margin-top:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(201,164,106,.3);border-radius:14px;overflow:hidden}
+.sh-kv div{background:var(--night-2);padding:11px 13px;font-weight:600}
+.sh-kv small{display:block;font-size:12px;font-weight:400;color:var(--mute)}
+.sh-og{margin-top:16px}
+.sh-og>span{display:block;font-size:13px;color:var(--mute)}
+.sh-og>div{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
+.sh-og button{min-height:44px;padding:0 14px;border-radius:999px;border:1px solid rgba(242,235,221,.25);background:transparent;color:var(--soft);font-size:14px;font-weight:600;cursor:pointer}
+.sh-og button[aria-pressed="true"]{border-color:var(--brass);background:rgba(201,164,106,.16);color:var(--brass)}
+.sh-inc{margin:18px 0 0;padding:0;list-style:none;font-size:14px;color:var(--soft)}
+.sh-inc li{position:relative;padding:8px 0 8px 22px;border-top:1px solid var(--line)}
+.sh-inc li::before{content:"";position:absolute;left:2px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--brass)}
+.sh-try{display:inline-block;margin-top:14px;font-size:14px;font-weight:600}
+.sh-b>.sh-note{margin-top:12px;font-size:12px;color:var(--mute)}
+.sh-f{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--night-2)}
+.sh-f b{display:block;font-family:var(--display);font-size:22px;line-height:1.1;color:var(--brass)}
+.sh-f small{font-size:12px;color:var(--mute)}
+.sh-f .btn{flex:none;min-height:48px;padding:0 22px;white-space:nowrap}
+@media (min-width:900px){
+  .sh-p{left:50%;right:auto;bottom:auto;top:50%;width:min(980px,92vw);max-height:86vh;border:1px solid rgba(201,164,106,.45);border-radius:22px;transform:translate(-50%,-46%);opacity:0;transition:transform .45s var(--ease),opacity .3s}
+  .sheet.open .sh-p{transform:translate(-50%,-50%);opacity:1}
+  .sh-grab{display:none}
+  .sh-sc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .sh-g{position:sticky;top:0;align-self:start}
+  .sh-gs img{height:min(64vh,540px)}
+  .sh-b{padding:30px 28px 24px}
+  .sh-b h3{font-size:40px;padding-right:44px}
+  .sh-f{padding:14px 28px}
+}
+@media (max-width:1100px){.cgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:761px){.acc{height:500px}}
+@media (max-width:760px){
+  .acc{height:auto}
+  .cat{padding-block:48px 40px}
+  .cfil{margin-top:16px;margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-right:16px}
+  .cgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .cc-in{padding:10px 11px 12px}
+  .cc-in small{font-size:10px}
+  .cc-in h3{font-size:20px}
+  .cc-p{font-size:18px}
+  .sec-head p{font-size:14px}
+  .hero-cta{width:100%}
+  .hero-cta .btn{flex:1 1 100%}
+  .cut-note{margin-top:14px}
+  .board{aspect-ratio:1/1}
+  .opts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .opt{text-align:center;padding:0 8px}
+  .opt .fl{display:none}
+  .opt .sm{display:inline}
+  .mbar a{font-weight:600}
+}
+/* v5: кейсы */
+.works .cfil{margin-top:0}
+.reel button[hidden]{display:none}
+.reel .cnt{position:absolute;top:12px;left:12px;padding:5px 10px;border-radius:999px;background:rgba(9,15,26,.74);font-size:12px;font-weight:600}
+.reel figcaption i{display:block;margin-top:4px;font-style:normal;font-weight:400;font-size:12px;line-height:1.4;color:var(--soft)}
+.sh-in input{display:block;margin-top:8px;width:100%;min-height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(242,235,221,.25);background:var(--night-2);color:var(--ivory);font:inherit;font-size:16px}
+.sh-try+.sh-try{margin-left:18px}
+@media (max-width:760px){.works .cfil{margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-right:16px}.works-top .arrows{display:none}.sh-try{display:block}.sh-try+.sh-try{margin-left:0}}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
@@ -530,7 +631,7 @@ section[id]{scroll-margin-top:76px}
       <span>SHARK GROUP</span>
     </a>
     <nav class="nav" aria-label="Разделы">
-      <a href="#dir">Направления</a><a href="#veneer">Шпон</a><a href="#tiles">Плитка</a><a href="#mood">Сочетания</a><a href="#works">Работы</a>
+      <a href="#cat">Каталог</a><a href="#veneer">Шпон</a><a href="#mood">Сочетания</a><a href="#how">Процесс</a><a href="#works">Работы</a>
     </nav>
     <div class="top-r">
       <button class="pill tr-btn" id="replay" type="button">▶ Трейлер</button>
@@ -549,7 +650,7 @@ section[id]{scroll-margin-top:76px}
     <div class="hero-row">
       <div class="hero-cta">
         <a class="btn btn-brass" href="#quiz">Прислать фото — посчитаем</a>
-        <a class="btn btn-ghost" href="#veneer">Подобрать шпон</a>
+        <a class="btn btn-ghost" href="#cat">Каталог и цены</a>
       </div>
       <div class="facts">
         <span><b>1,5 мм</b>шпона на массиве</span>
@@ -560,13 +661,16 @@ section[id]{scroll-margin-top:76px}
   </div>
 </section>
 
-<section class="dir saw" id="dir" aria-labelledby="dir-h">
+<section class="cat saw" id="cat" aria-labelledby="cat-h">
   <div class="wrap">
-    <div class="sec-head rv">
-      <h2 id="dir-h">Девять направлений —<br>один цех</h2>
-      <p>Нажмите на направление: цена «от», сроки и пример работы.</p>
+    <div class="sec-head rv" style="margin-bottom:0">
+      <div><div class="eyebrow">Каталог</div><h2 id="cat-h" style="margin-top:12px">Что делаем и сколько стоит</h2></div>
+      <p>Откройте позицию: цена «от», срок, что входит. Отметьте нужное — соберём всё в один расчёт.</p>
     </div>
-    <div class="acc rv" id="acc" role="tablist" aria-label="Направления"></div>
+    <div class="cfil" id="cfil" role="group" aria-label="Раздел каталога"></div>
+    <div class="cgrid" id="cgrid"></div>
+    <div class="cmore"><button class="btn btn-ghost" type="button" id="cmore"></button></div>
+    <p class="cnote">Цены — ориентир «от», точную сумму считаем по замеру и проекту. Фактуры плитки и шпона — визуализация, фото работ — реальные.</p>
   </div>
 </section>
 
@@ -584,12 +688,6 @@ section[id]{scroll-margin-top:76px}
         <img loading="lazy" decoding="async" src="{{P:p26}}" alt="Разрез ступени: массив дуба, шпонка и шпон дуба 1,5 мм">
         <div><b>Шпон 1,5 мм на массиве.</b> В 2,5 раза толще обычного 0,6 мм — ступень и столешницу можно шлифовать заново.</div>
       </div>
-      <div class="ply">
-        <div class="ply-h"><b>Шпонированная фанера — под заказ</b><span>для тех, кто делает сам</span></div>
-        <p>Лист фанеры, облицованный шпоном выбранной породы. Берут на мебель, двери и панели своими силами. Толщина:</p>
-        <div class="ply-th" role="radiogroup" aria-label="Толщина фанеры" id="plyth"></div>
-        <div class="ply-cta"><a class="btn btn-ghost" href="#quiz" id="ply-calc">Запросить фанеру</a><small>Цена листа — по размеру и породе, по запросу</small></div>
-      </div>
     </div>
     <div class="stage rv">
       <div class="slab" id="slab">
@@ -605,16 +703,6 @@ section[id]{scroll-margin-top:76px}
   </div>
 </section>
 
-<section class="tiles" id="tiles" aria-labelledby="tiles-h">
-  <div class="wrap">
-    <div class="sec-head rv" style="margin-bottom:0">
-      <div><div class="eyebrow">Плитка и камень</div><h2 id="tiles-h" style="margin-top:12px">Шесть решений, которые выбирают сейчас</h2></div>
-      <p>Подбираем раскладку, затирку и стык с деревом. Укладывает своя бригада — тот же договор и та же гарантия.</p>
-    </div>
-    <div class="tgrid rv" id="tgrid"></div>
-    <div class="tiles-foot"><span>Цены — под ключ (материал, подготовка и укладка), ориентир, уточняем по объёму и сложности. Изображения — визуализация фактуры.</span><a class="btn btn-brass" href="#quiz" data-pre="1">Подобрать плитку</a></div>
-  </div>
-</section>
 
 <section class="mood" id="mood" aria-labelledby="mood-h">
   <div class="wrap">
@@ -671,8 +759,9 @@ section[id]{scroll-margin-top:76px}
 
 <section class="works" id="works" aria-labelledby="works-h">
   <div class="wrap">
-    <div class="works-top"><div><div class="eyebrow">Работы</div><h2 id="works-h" style="margin-top:12px">Сделано в нашем цеху</h2></div><div class="arrows"><button type="button" id="rl-prev" aria-label="Назад">←</button><button type="button" id="rl-next" aria-label="Вперёд">→</button></div></div>
-    <div class="reel" id="reel" aria-label="Галерея работ"></div>
+    <div class="works-top"><div><div class="eyebrow">Работы</div><h2 id="works-h" style="margin-top:12px">Кейсы: сделано в нашем цеху</h2></div><div class="arrows"><button type="button" id="rl-prev" aria-label="Назад">←</button><button type="button" id="rl-next" aria-label="Вперёд">→</button></div></div>
+    <div class="cfil" id="wfil" role="group" aria-label="Тип работ"></div>
+    <div class="reel" id="reel" aria-label="Кейсы"></div>
   </div>
 </section>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр работы" hidden><img id="lb-img" alt=""><button class="x" type="button" id="lb-x" aria-label="Закрыть">✕</button><button class="pv" type="button" id="lb-pv" aria-label="Предыдущая">←</button><button class="nx" type="button" id="lb-nx" aria-label="Следующая">→</button><div class="cap" id="lb-cap"></div></div>
@@ -715,9 +804,31 @@ section[id]{scroll-margin-top:76px}
     <div class="links"><span>[телефон]</span><span>Telegram</span><span>MAX</span><span>Политика ПДн</span><span>[ИП/ООО, ИНН]</span></div>
   </div>
 </footer>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-n" hidden>
+  <div class="sh-bg" data-close></div>
+  <div class="sh-p">
+    <span class="sh-grab" aria-hidden="true"></span>
+    <button class="sh-x" id="sh-x" type="button" data-close aria-label="Закрыть">✕</button>
+    <div class="sh-sc">
+      <div class="sh-g"><div class="sh-gs" id="sh-gs"></div><span class="sh-gc" id="sh-gc"></span></div>
+      <div class="sh-b">
+        <div class="eyebrow" id="sh-c"></div>
+        <h3 id="sh-n"></h3>
+        <p id="sh-s"></p>
+        <div class="sh-kv" id="sh-kv"></div>
+        <div id="sh-o"></div>
+        <ul class="sh-inc" id="sh-inc"></ul>
+        <a class="sh-try" id="sh-try" href="#veneer" hidden>Примерить породу на свету →</a>
+        <a class="sh-try" id="sh-wk" href="#works" hidden></a>
+        <p class="sh-note" id="sh-note"></p>
+      </div>
+    </div>
+    <div class="sh-f"><div><b id="sh-p"></b><small id="sh-pn"></small></div><button class="btn btn-brass" type="button" id="sh-add">В расчёт</button></div>
+  </div>
+</div>
 <a class="dock" id="dock" href="#quiz"><span class="dock-n" id="dock-n">0</span><span class="dock-b"><b>Ваш расчёт</b><small id="dock-t"></small></span><span class="dock-go">Оформить →</span></a>
 <div class="grain-g" aria-hidden="true"></div>
-<div class="mbar"><nav aria-label="Быстрая связь"><a href="#quiz">Позвонить</a><a href="#quiz">Telegram</a><a class="go" href="#quiz">Расчёт</a></nav></div>
+<div class="mbar"><nav aria-label="Быстрые действия" id="mnav"><a href="#cat">Каталог</a><a class="go" href="#quiz">Расчёт</a></nav></div>
 
 <script>
 (function(){
@@ -773,17 +884,6 @@ var DIRS=[
  ['Металл и ковка','Ковка','Ворота, перила, винтовые лестницы, мангалы и декор.','150 000 ₽','4–6 недель','{{P:p62}}','Винтовая лестница с коваными перилами'],
  ['Улица и фасады','Фасады','Перголы, ставни, ограждения террас, плитка и камень.','[…] ₽','4–8 недель','{{P:p114}}','Ограждение террасы с видом на горы']
 ];
-var acc=d.getElementById('acc'),gx=-1,gy=-1,realMove=false;
-d.addEventListener('pointermove',function(e){realMove=(e.clientX!==gx||e.clientY!==gy);gx=e.clientX;gy=e.clientY},true);
-DIRS.forEach(function(x,i){
-  var b=d.createElement('div');b.className='panel'+(i===0?' on':'');
-  b.innerHTML='<img src="'+x[5]+'" alt="'+x[6]+'" loading="lazy" decoding="async"><span class="sh"></span><button type="button" class="hit" aria-expanded="'+(i===0)+'" aria-label="'+x[0]+'"></button><span class="vt"><i>0'+(i+1)+'</i><b>'+x[1]+'</b></span><div class="info"><span class="num">0'+(i+1)+' / 09</span><h3>'+x[0]+(x[7]?'<span class="tag-hot">хит</span>':'')+'</h3><p>'+x[2]+'</p><span class="meta"><span>от <b>'+x[3]+'</b></span><span>'+x[4]+'</span></span><a class="btn btn-brass calc" href="#quiz" data-pre="'+i+'">Рассчитать '+x[1].toLowerCase()+'</a></div>';
-  var open=function(){acc.querySelectorAll('.panel').forEach(function(p,j){p.classList.toggle('on',j===i);p.querySelector('.hit').setAttribute('aria-expanded',j===i)})};
-  b.querySelector('.hit').addEventListener('click',open);
-  var tm,lx=-1,ly2=-1;b.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse'||b.classList.contains('on'))return;if(!realMove)return;clearTimeout(tm);tm=setTimeout(open,170)});
-  b.addEventListener('mouseleave',function(){clearTimeout(tm)});
-  acc.appendChild(b);
-});
 
 /* ---------- veneer ---------- */
 var WOODS=[
@@ -920,7 +1020,7 @@ var ba=d.getElementById('ba');d.getElementById('ba-range').addEventListener('inp
 /* «В расчёт»: всё, что человек выбрал на странице, копится в подборке и уходит в заявку */
 var W=DIRS.map(function(x){return x[0]}), sel=[0], step=0, touched=false, picks=[];
 var opts=d.getElementById('opts');
-W.forEach(function(w,i){var b=d.createElement('button');b.dataset.i=i;b.type='button';b.className='opt';b.textContent=w;b.setAttribute('aria-pressed',i===0);b.addEventListener('click',function(){touched=true;var k=sel.indexOf(i);k<0?sel.push(i):sel.splice(k,1);b.setAttribute('aria-pressed',sel.indexOf(i)>=0)});opts.appendChild(b)});
+W.forEach(function(w,i){var b=d.createElement('button');b.dataset.i=i;b.type='button';b.className='opt';b.innerHTML='<span class="fl">'+w+'</span><span class="sm">'+DIRS[i][1]+'</span>';b.setAttribute('aria-pressed',i===0);b.addEventListener('click',function(){touched=true;var k=sel.indexOf(i);k<0?sel.push(i):sel.splice(k,1);b.setAttribute('aria-pressed',sel.indexOf(i)>=0)});opts.appendChild(b)});
 var fs=[].slice.call(d.querySelectorAll('#q fieldset')), err=d.getElementById('q-err');
 function syncOpts(){opts.querySelectorAll('.opt').forEach(function(b){b.setAttribute('aria-pressed',sel.indexOf(+b.dataset.i)>=0)})}
 function hasPick(k){return picks.some(function(p){return p.k===k})}
@@ -938,15 +1038,13 @@ function syncPicks(){
   d.getElementById('dock-n').textContent=n;d.getElementById('dock-t').textContent=picks.map(function(p){return p.t}).join(' · ');
   dock.classList.toggle('show',n>0);
   var go=d.querySelector('.mbar .go');go.innerHTML=n?'Расчёт <b>'+n+'</b>':'Расчёт';
-  [].forEach.call(d.querySelectorAll('.tcard .add'),function(b){var on=hasPick(b.dataset.k);b.setAttribute('aria-pressed',on);b.textContent=on?'✓ В расчёте':'+ В расчёт'});
+  [].forEach.call(d.querySelectorAll('.qadd'),function(b){var on=hasPick(b.dataset.k);b.setAttribute('aria-pressed',on);b.textContent=on?'✓':'+'});
+  if(typeof shBtn==='function'&&shIt)shBtn();
   if(step===2)show();
 }
 function preset(i,k,t){addPick(i,k,t);if(step===3)step=0;show()}
 d.addEventListener('click',function(e){var a=e.target.closest('[data-pre]');if(a)preset(+a.dataset.pre);var x=e.target.closest('[data-drop]');if(x)dropPick(x.dataset.drop)});
-d.getElementById('ven-calc').addEventListener('click',function(){preset(0,'wood','Шпон: '+WOODS[cur].n.toLowerCase()+', '+COATS[coat][0].toLowerCase())});
-var plyTh=['12 мм','15 мм','18 мм'],plyi=1,pt=d.getElementById('plyth');
-plyTh.forEach(function(t,i){var b=d.createElement('button');b.type='button';b.textContent=t;b.setAttribute('role','radio');b.setAttribute('aria-checked',i===plyi);b.addEventListener('click',function(){plyi=i;pt.querySelectorAll('button').forEach(function(x,j){x.setAttribute('aria-checked',j===i)})});pt.appendChild(b)});
-d.getElementById('ply-calc').addEventListener('click',function(){preset(0,'ply','Фанера '+plyTh[plyi]+', шпон '+WOODS[cur].n.toLowerCase())});
+d.getElementById('ven-calc').addEventListener('click',function(){var it=ITEMS[0];it.sel=[cur,coat];preset(0,'it:panels',itLabel(it))});
 var tel=d.getElementById('q-tel');
 tel.addEventListener('input',function(){var v=tel.value;if(/^[@a-zA-Z]/.test(v.trim()))return;var n=v.replace(/\D/g,'');if(!n)return;if(n[0]==='8')n='7'+n.slice(1);if(n[0]!=='7')n='7'+n;n=n.slice(0,11);var f='+7';if(n.length>1)f+=' ('+n.slice(1,4);if(n.length>=4)f+=')';if(n.length>4)f+=' '+n.slice(4,7);if(n.length>7)f+='-'+n.slice(7,9);if(n.length>9)f+='-'+n.slice(9,11);tel.value=f});
 function show(){
@@ -983,12 +1081,123 @@ var TILES=[
  ['{{X:stone_tumbled}}','Галтованный камень','терраса, кухня, винная комната','10×10, 10×20 см, микс','от 7 900 ₽/м²'],
  ['{{X:concrete}}','Микроцемент','санузел, пол, стены','бесшовно','от 4 500 ₽/м²']
 ];
-var tg=d.getElementById('tgrid');
-TILES.forEach(function(t,i){var b=d.createElement('div');b.className='tcard';b.style.backgroundImage='url('+t[0]+')';
-  b.innerHTML='<button type="button" class="hit" aria-label="'+t[1]+' — рассмотреть крупно"></button><span class="fmt">'+t[3]+'</span><button type="button" class="add" data-k="tile'+i+'" aria-pressed="false">+ В расчёт</button><span class="tc-in"><h3>'+t[1]+'</h3><p>'+t[2]+'</p><p class="fm2">'+t[3]+'</p><span class="tprice">'+t[4]+' <i>под ключ</i></span></span>';
-  b.querySelector('.hit').addEventListener('click',function(){lbOpen(i,TILES.map(function(x){return [x[0],x[1]+' · '+x[3]]}))});
-  b.querySelector('.add').addEventListener('click',function(){hasPick('tile'+i)?dropPick('tile'+i):addPick(1,'tile'+i,t[1])});
-  tg.appendChild(b)});
+/* ---------- каталог: карточки позиций + окно выбора ---------- */
+/* Контакты: когда заказчик даст телефон и Telegram — вписать сюда, в нижней панели появятся кнопки. */
+var CONTACTS={tel:'',tg:''};
+(function(){var n=d.getElementById('mnav'),h='';
+  if(CONTACTS.tel)h+='<a href="tel:'+CONTACTS.tel.replace(/[^+\d]/g,'')+'">Позвонить</a>';
+  if(CONTACTS.tg)h+='<a href="https://t.me/'+CONTACTS.tg.replace(/^@/,'')+'" rel="noopener">Telegram</a>';
+  if(h)n.querySelector('.go').insertAdjacentHTML('beforebegin',h)})();
+var CATS=[['all','Всё'],['ven','Шпон'],['tile','Плитка и камень'],['st','Лестницы'],['door','Двери'],['kit','Кухни'],['fur','Мебель'],['rest','Рестораны'],['met','Металл'],['out','Улица']];
+var CATN={};CATS.forEach(function(c){CATN[c[0]]=c[1]});
+var SP=WOODS.map(function(w){return w.n}),CT=COATS.map(function(c){return c[0]});
+/* «Что входит» — только то, что уже подтверждено на сайте */
+var INC=['Замер: Сочи и край — за 1–2 дня, по России — по видео и чертежам','Проект и смета — до начала работ','Изготовление в своём цеху','Монтаж своей бригадой','Гарантия 2 года в договоре'];
+var INC_T=['Материал, подготовка и укладка','Подбор раскладки, затирки и стыка с деревом','Укладывает своя бригада','Тот же договор и та же гарантия'];
+var INC_P=['Лист фанеры, облицованный шпоном выбранной породы','Толщина 12, 15 или 18 мм','Изготовление под заказ'];
+/* o: группы опций [название, значения, 1 = можно несколько] */
+var ITEMS=[
+ {id:'panels',c:'ven',d:0,n:'Стеновые панели из шпона',s:'Наш главный продукт. Панели под ключ в шпоне любой породы: с профилем, зеркалами и скрытыми дверями.',p:'от 25 000 ₽/м²',pn:'под ключ',t:'3–5 недель',im:'{{P:p25}}',g:[['{{P:p25}}','Панели из шпона ореха с чёрным профилем'],['{{P:p24}}','Панели из ореха, гостиная'],['{{P:p22}}','Панели из ореха с зеркальными вставками']],o:[['Порода',SP],['Покрытие',CT]],hot:1,tr:1},
+ {id:'stairs',c:'st',d:2,n:'Лестницы',s:'На бетон, металлокаркас, парящие и винтовые. Массив дуба, шпон 1,5 мм, стекло, подсветка ступеней.',p:'от 180 000 ₽',pn:'',t:'3–8 недель',im:'{{P:p56}}',g:[['{{P:p56}}','Лестница из дуба с подсветкой'],['{{P:p124}}','Парящая лестница со стеклом'],['{{P:p83}}','Облицовка бетонной лестницы'],['{{P:p42}}','Лестница с коваными перилами'],['{{P:p100}}','Металлокаркас с площадками']],o:[['Тип',['На металлокаркасе','На бетон','Парящая','Винтовая']]]},
+ null, /* сюда встанет первая плитка — чтобы первый экран каталога был разным */
+ {id:'doors',c:'door',d:3,n:'Двери',s:'Входные группы и межкомнатные из массива и в шпоне: скрытые, с резьбой, арками, стеклом и ковкой.',p:'от 65 000 ₽',pn:'входные — от 180 000 ₽',t:'4–8 недель',im:'{{P:p48}}',g:[['{{P:p48}}','Резные двери из массива'],['{{P:p103}}','Арочные двери со стеклом'],['{{P:p28}}','Входная дверь с пирамидами'],['{{P:p121}}','Классическая дверь из массива'],['{{P:p145}}','Двери в зал']],o:[['Тип',['Межкомнатная','Скрытая','Входная группа']]]},
+ {id:'kitchen',c:'kit',d:4,n:'Кухни и корпус',s:'Кухни, стеллажи, гардеробные и винные шкафы из массива и шпона.',p:'от 450 000 ₽',pn:'кухня',t:'6–10 недель',im:'{{P:p52}}',g:[['{{P:p52}}','Белая кухня из массива'],['{{P:p4}}','Стеллаж из массива'],['{{P:p123}}','Винный шкаф под лестницей'],['{{P:p5}}','Винный стеллаж']],o:[['Что нужно',['Кухня','Стеллаж','Гардеробная','Винный шкаф'],1]]},
+ {id:'metal',c:'met',d:7,n:'Металл и ковка',s:'Ворота, перила, винтовые лестницы, мангалы и декор.',p:'от 150 000 ₽',pn:'ворота',t:'4–6 недель',im:'{{P:p72}}',g:[['{{P:p72}}','Кованые ворота с калиткой'],['{{P:p62}}','Винтовая лестница с коваными перилами'],['{{P:p61}}','Кованая дверь'],['{{P:p65}}','Мангал'],['{{P:p59}}','Кованые секции']],o:[['Что нужно',['Ворота','Перила','Винтовая лестница','Мангал','Декор'],1]]},
+ {id:'rest',c:'rest',d:6,n:'Рестораны под ключ',s:'Fish Bone, «Мамай Кале», Hearst’s pub: стойки, потолки, мебель, мягкая мебель.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'{{P:p1}}',g:[['{{P:p1}}','Зал ресторана Fish Bone'],['{{P:p15}}','Барная стойка паба'],['{{P:p11}}','Уличная стойка «Мамай Кале»'],['{{P:p9}}','Потолок с канатами']],o:[['Что нужно',['Стойка','Потолок','Мебель','Мягкая мебель'],1]]},
+ {id:'furn',c:'fur',d:5,n:'Мебель из массива',s:'Столы, кровати, резные панно и реставрация.',p:'[…] ₽',pn:'',t:'4–8 недель',im:'{{P:p118}}',g:[['{{P:p118}}','Кровать из дуба'],['{{P:p54}}','Обеденный стол'],['{{P:p87}}','Резное панно'],['{{P:p115}}','Кровать, деталь']],o:[['Что нужно',['Обеденный стол','Кровать','Мягкая мебель','Резное панно','Реставрация'],1]]},
+ {id:'ply',c:'ven',d:0,n:'Шпонированная фанера',s:'Для тех, кто делает сам: лист фанеры в шпоне выбранной породы — на мебель, двери и панели.',p:'по запросу',pn:'по размеру и породе',t:'под заказ',im:'{{T:walnut}}',g:[['{{T:walnut}}','Шпон: американский орех'],['{{T:oak}}','Шпон: дуб натуральный']],o:[['Толщина',['12 мм','15 мм','18 мм']],['Порода',SP],['Размер листа, мм','например 2440 × 1220','in'],['Количество, листов','например 10','in']],inc:INC_P,viz:1},
+ {id:'plinth',c:'ven',d:0,n:'Плинтусы',s:'Плинтус из МДФ под покраску и в шпоне на фанере — разные профили и высота.',p:'по запросу',pn:'по профилю и метражу',t:'под заказ',im:'{{T:oak_white}}',g:[['{{T:oak_white}}','Шпон: дуб беленый']],o:[['Исполнение',['МДФ под покраску','Шпон на фанере']],['Метраж, пог. м','например 60','in']],inc:['Профиль и высота — по образцу или эскизу','Покраска в малярной камере','Изготовление под заказ'],viz:1},
+ {id:'paint',c:'ven',d:0,n:'Покраска фасадов',s:'Своя малярная камера: красим мебельные фасады, двери и детали — ровно и без пыли.',p:'по запросу',pn:'по площади и покрытию',t:'по объёму',im:'{{P:p53}}',g:[['{{P:p53}}','Кухня в эмали'],['{{P:p103}}','Двери в эмали']],o:[['Покрытие',['Эмаль','Лак','Масло','Тонировка']],['Площадь, м²','например 12','in']],inc:['Покраска в малярной камере','Подготовка и шлифовка','Цвет — по каталогу или образцу']},
+ {id:'out',c:'out',d:8,n:'Улица и фасады',s:'Перголы, ставни, ограждения террас, плитка и камень.',p:'[…] ₽',pn:'',t:'4–8 недель',im:'{{P:p114}}',g:[['{{P:p114}}','Ограждение террасы с видом на горы'],['{{P:p39}}','Пергола'],['{{P:p89}}','Ставни-жалюзи'],['{{P:p90}}','Уличные кашпо']],o:[['Что нужно',['Пергола','Ставни','Ограждение террасы','Плитка и камень'],1]]}
+];
+(function(){var T=TILES.map(function(t,i){return {id:'tile'+i,c:'tile',d:1,n:t[1],s:'Куда кладём: '+t[2]+'.',p:t[4],pn:'под ключ, ориентир',t:'от 2 недель',im:t[0],g:[[t[0],t[1]+' · '+t[3]]],o:[['Формат',t[3].replace(/ см/g,'').split(', ')]],inc:INC_T,viz:1}});
+  ITEMS[2]=T[0];var i=ITEMS.indexOf(ITEMS.filter(function(x){return x.id==='ply'})[0]);[].splice.apply(ITEMS,[i,0].concat(T.slice(1)))})();
+ITEMS.forEach(function(it){it.sel=(it.o||[]).map(function(g){return g[2]==='in'?'':g[2]?[]:0})});
+function itLabel(it){var a=[];(it.o||[]).forEach(function(g,gi){if(g[2]==='in'){if(it.sel[gi])a.push(g[0].split(',')[0].toLowerCase()+' '+it.sel[gi])}else if(g[2]){if(it.sel[gi].length)a.push(it.sel[gi].map(function(k){return g[1][k].toLowerCase()}).join(', '))}else if(g[1].length>1)a.push(g[1][it.sel[gi]].toLowerCase())});return it.n+(a.length?': '+a.join(', '):'')}
+var cfil=d.getElementById('cfil'),cgrid=d.getElementById('cgrid'),cmore=d.getElementById('cmore'),cf='all',cAll=false,CFIRST=6;
+CATS.forEach(function(c){var b=d.createElement('button');b.type='button';b.dataset.c=c[0];b.textContent=c[1];b.setAttribute('aria-pressed',c[0]==='all');b.addEventListener('click',function(){cf=c[0];catSync();if(b.scrollIntoView)b.scrollIntoView({block:'nearest',inline:'center',behavior:reduce?'auto':'smooth'})});cfil.appendChild(b)});
+ITEMS.forEach(function(it){
+  var a=d.createElement('article');a.className='ccard';it.el=a;
+  a.innerHTML='<div class="ph"><img src="'+it.im+'" alt="'+it.g[0][1]+'" loading="lazy" decoding="async"></div>'+(it.hot?'<span class="tag-hot">хит</span>':'')+
+   '<div class="cc-in"><small>'+CATN[it.c]+'</small><h3>'+it.n+'</h3><span class="cc-p">'+it.p+'</span><span class="cc-t">'+it.t+'</span></div>'+
+   '<button type="button" class="hit" aria-label="'+it.n+' — цена, срок и что входит"></button>'+
+   '<button type="button" class="qadd" data-k="it:'+it.id+'" aria-pressed="false" aria-label="В расчёт: '+it.n+'">+</button>';
+  a.querySelector('.hit').addEventListener('click',function(e){shOpen(it,e.currentTarget)});
+  a.querySelector('.qadd').addEventListener('click',function(){hasPick('it:'+it.id)?dropPick('it:'+it.id):addPick(it.d,'it:'+it.id,itLabel(it))});
+  cgrid.appendChild(a);
+});
+function catSync(){
+  var n=0,tot=0;
+  ITEMS.forEach(function(it){var ok=cf==='all'||it.c===cf;if(ok)tot++;it.el.hidden=!ok||(cf==='all'&&!cAll&&n>=CFIRST);if(ok)n++});
+  [].forEach.call(cfil.children,function(b){b.setAttribute('aria-pressed',b.dataset.c===cf)});
+  cmore.parentNode.hidden=!(cf==='all'&&tot>CFIRST);
+  cmore.textContent=cAll?'Свернуть':'Показать все '+tot+' позиций';
+}
+cmore.addEventListener('click',function(){cAll=!cAll;catSync();if(!cAll)d.getElementById('cat').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+catSync();
+
+/* окно позиции: на телефоне — шторка снизу, на десктопе — окно по центру */
+var sheet=d.getElementById('sheet'),shIt=null,shFrom=null,shGs=d.getElementById('sh-gs'),shO=d.getElementById('sh-o');
+function shBtn(){var on=hasPick('it:'+shIt.id),b=d.getElementById('sh-add');b.textContent=on?'✓ В расчёте — убрать':'В расчёт';b.className='btn '+(on?'btn-ghost':'btn-brass')}
+function shOpts(){
+  var it=shIt;
+  shO.innerHTML=(it.o||[]).map(function(g,gi){
+    if(g[2]==='in')return '<label class="sh-og sh-in"><span>'+g[0]+'</span><input type="text" inputmode="'+(/Размер/.test(g[0])?'text':'decimal')+'" data-g="'+gi+'" placeholder="'+g[1]+'" value="'+String(it.sel[gi]).replace(/"/g,'&quot;')+'"></label>';
+    if(g[1].length<2&&!g[2])return '<div class="sh-og"><span>'+g[0]+': '+g[1][0]+'</span></div>';
+    return '<div class="sh-og"><span>'+g[0]+(g[2]?' — можно несколько':'')+'</span><div>'+g[1].map(function(v,k){var on=g[2]?it.sel[gi].indexOf(k)>=0:it.sel[gi]===k;return '<button type="button" data-g="'+gi+'" data-k="'+k+'" aria-pressed="'+on+'">'+v+'</button>'}).join('')+'</div></div>'}).join('');
+}
+function shOpen(it,from){
+  shIt=it;shFrom=from||null;
+  if(it.id==='panels')it.sel=[cur,coat];
+  shGs.innerHTML=it.g.map(function(x){return '<img src="'+x[0]+'" alt="'+x[1]+'" loading="lazy" decoding="async">'}).join('');shGs.scrollLeft=0;
+  d.getElementById('sh-gc').textContent=it.g.length>1?'1 / '+it.g.length:'';d.getElementById('sh-gc').hidden=it.g.length<2;
+  d.getElementById('sh-c').textContent=CATN[it.c];d.getElementById('sh-n').textContent=it.n;d.getElementById('sh-s').textContent=it.s;
+  d.getElementById('sh-kv').innerHTML='<div><small>Цена</small>'+it.p+'</div><div><small>Срок</small>'+it.t+'</div>';
+  d.getElementById('sh-inc').innerHTML=(it.inc||INC).map(function(x){return '<li>'+x+'</li>'}).join('');
+  d.getElementById('sh-try').hidden=!it.tr;
+  var wc=CASEMAP[it.c],wn=wc?CASES.filter(function(w){return w.c===wc}).length:0,wk=d.getElementById('sh-wk');wk.hidden=!wn;wk.dataset.c=wc||'';wk.textContent='Наши работы: '+(wc?WCN[wc].toLowerCase():'')+' ('+wn+') →';
+  d.getElementById('sh-note').textContent=(it.viz?'Изображение — визуализация фактуры. ':'')+'Цена — ориентир, точную считаем по замеру и проекту.';
+  d.getElementById('sh-p').textContent=it.p;d.getElementById('sh-pn').textContent=it.pn||it.t;
+  shOpts();shBtn();
+  sheet.hidden=false;void sheet.offsetWidth;sheet.classList.add('open');R.style.overflow='hidden';
+  sheet.querySelector('.sh-sc').scrollTop=0;
+  try{history.pushState({sh:1},'')}catch(e){}
+  d.getElementById('sh-x').focus({preventScroll:true});
+}
+function shClose(viaPop){
+  if(!sheet.classList.contains('open'))return;
+  sheet.classList.remove('open');R.style.overflow='';
+  setTimeout(function(){if(!sheet.classList.contains('open'))sheet.hidden=true},470);
+  if(!viaPop){try{if(history.state&&history.state.sh)history.back()}catch(e){}}
+  if(shFrom&&shFrom.focus)shFrom.focus({preventScroll:true});
+}
+addEventListener('popstate',function(){shClose(true)});
+sheet.addEventListener('click',function(e){if(e.target.closest('[data-close]'))shClose()});
+d.addEventListener('keydown',function(e){if(e.key==='Escape'&&sheet.classList.contains('open')&&lb.hidden)shClose()});
+shO.addEventListener('click',function(e){
+  var b=e.target.closest('button[data-g]');if(!b)return;var it=shIt,gi=+b.dataset.g,k=+b.dataset.k,g=it.o[gi];
+  if(g[2]){var j=it.sel[gi].indexOf(k);j<0?it.sel[gi].push(k):it.sel[gi].splice(j,1)}else it.sel[gi]=k;
+  shOpts();
+  if(it.id==='panels'){if(gi===0)pick(k);else{coat=k;paint()}} /* та же порода и покрытие — в примерочной */
+  if(hasPick('it:'+it.id))addPick(it.d,'it:'+it.id,itLabel(it));
+});
+shO.addEventListener('input',function(e){var i=e.target;if(i.tagName!=='INPUT')return;shIt.sel[+i.dataset.g]=i.value.trim().slice(0,40).replace(/[<>]/g,'');if(hasPick('it:'+shIt.id))addPick(shIt.d,'it:'+shIt.id,itLabel(shIt))});
+d.getElementById('sh-add').addEventListener('click',function(){
+  var it=shIt,k='it:'+it.id;
+  if(hasPick(k)){dropPick(k);return}
+  addPick(it.d,k,itLabel(it));setTimeout(shClose,380);
+});
+var CASEMAP={ven:'home',st:'st',door:'door',kit:'fur',fur:'fur',rest:'rest',met:'met',out:'out'};
+d.getElementById('sh-wk').addEventListener('click',function(e){e.preventDefault();var c=e.currentTarget.dataset.c;shClose();setTimeout(function(){workFilter(c);d.getElementById('works').scrollIntoView({behavior:reduce?'auto':'smooth'})},380)});
+d.getElementById('sh-try').addEventListener('click',function(e){e.preventDefault();shClose();setTimeout(function(){d.getElementById('veneer').scrollIntoView({behavior:reduce?'auto':'smooth'})},380)});
+shGs.addEventListener('scroll',function(){if(shIt&&shIt.g.length>1)d.getElementById('sh-gc').textContent=(Math.round(shGs.scrollLeft/shGs.clientWidth)+1)+' / '+shIt.g.length},{passive:true});
+shGs.addEventListener('click',function(e){if(e.target.tagName==='IMG')lbOpen([].indexOf.call(shGs.children,e.target),shIt.g)});
+/* смахивание шторки вниз (телефон) */
+(function(){var sp=sheet.querySelector('.sh-p'),sc=sheet.querySelector('.sh-sc'),y0=null,dy=0;
+  sp.addEventListener('touchstart',function(e){y0=(innerWidth<900&&sc.scrollTop<=0&&!e.target.closest('.sh-gs,.sh-og'))?e.touches[0].clientY:null;dy=0},{passive:true});
+  sp.addEventListener('touchmove',function(e){if(y0===null)return;dy=e.touches[0].clientY-y0;if(dy>0){sp.style.transition='none';sp.style.transform='translateY('+dy+'px)'}},{passive:true});
+  sp.addEventListener('touchend',function(){if(y0===null)return;sp.style.transition='';sp.style.transform='';if(dy>90)shClose();y0=null});
+})();
 
 /* ---------- palettes ---------- */
 var PALS=[
@@ -1010,9 +1219,40 @@ function mBy(k){mr.scrollBy({left:k*(mr.firstChild.offsetWidth+18)*2,behavior:re
 d.getElementById('md-prev').addEventListener('click',function(){mBy(-1)});d.getElementById('md-next').addEventListener('click',function(){mBy(1)});
 
 /* ---------- works ---------- */
-var WORKS=[['{{P:p1}}','Ресторан Fish Bone','рестораны'],['{{P:p24}}','Панели из ореха','шпон'],['{{P:p58}}','Лестница с подсветкой','лестницы'],['{{P:p48}}','Резные двери из массива','двери'],['{{P:p3}}','Барная стойка','рестораны'],['{{P:p62}}','Винтовая лестница, ковка','металл'],['{{P:p87}}','Резное панно','мебель'],['{{P:p5}}','Винный стеллаж','мебель'],['{{P:p30}}','Двери с пирамидами','двери'],['{{P:p115}}','Кровать из дуба','мебель'],['{{P:p61}}','Кованая дверь','металл'],['{{P:p114}}','Ограждение террасы','фасады']];
+/* Кейсы: все согласованные фото заказчика, разложенные по объектам и типам работ.
+   Не вошли: референсы и чужие картинки из переписки (плитка-мудборды, домики, плинтусы из каталогов), скриншоты и кадры с лицами. */
+var WCATS=[['all','Все'],['rest','Рестораны'],['home','Интерьеры'],['st','Лестницы'],['door','Двери'],['fur','Кухни и мебель'],['met','Металл'],['out','Улица']];
+var CASES=[
+ {c:'rest',n:'Ресторан Fish Bone',s:'Зал, потолок с канатами, стойка, стеллажи и двери',ph:['{{P:p1}}','{{P:p9}}','{{P:p4}}','{{P:p5}}','{{P:p2}}','{{P:p6}}','{{P:p7}}','{{P:p8}}']},
+ {c:'rest',n:'«Мамай Кале»',s:'Уличная стойка с аквариумом',ph:['{{P:p11}}','{{P:p12}}','{{P:p13}}']},
+ {c:'rest',n:'Hearst’s pub',s:'Барная стойка, стена из старых дверей, цветные панели',ph:['{{P:p15}}','{{P:p17}}','{{P:p19}}','{{P:p16}}','{{P:p14}}','{{P:p18}}','{{P:p20}}','{{P:p21}}']},
+ {c:'home',n:'Гостиная в панелях из ореха',s:'Шпон американского ореха, зеркальные вставки, чёрный матовый профиль, скрытая дверь',ph:['{{P:p25}}','{{P:p24}}','{{P:p22}}','{{P:p112}}']},
+ {c:'home',n:'Дом с резными дверями',s:'Резные двери, двери в зал и гаражные ворота — один дом',ph:['{{P:p48}}','{{P:p46}}','{{P:p47}}','{{P:p145}}','{{P:p146}}','{{P:p147}}','{{P:p40}}']},
+ {c:'st',n:'Парящая лестница со стеклом',s:'Тёмный дуб, стеклянное ограждение, подсветка каждой ступени',ph:['{{P:p124}}','{{P:p34}}']},
+ {c:'st',n:'Лестница от бетона до света',s:'Металлокаркас, ступени из массива со шпоном 1,5 мм, подсветка',ph:['{{P:p56}}','{{P:p58}}','{{P:p55}}','{{P:p99}}','{{P:p100}}','{{P:p26}}']},
+ {c:'st',n:'Облицовка бетонной лестницы',s:'Ступени и подступенки, поручень, балюстрада',ph:['{{P:p83}}','{{P:p81}}','{{P:p84}}','{{P:p82}}','{{P:p85}}']},
+ {c:'st',n:'Лестницы и ограждения: дерево и ковка',s:'Кованые перила, резной экран, винтовая и деревянная лестницы',ph:['{{P:p42}}','{{P:p74}}','{{P:p62}}','{{P:p36}}','{{P:p73}}','{{P:p79}}']},
+ {c:'door',n:'Арочные двери со стеклом',s:'Двустворчатые и одинарные, эмаль, гравированное стекло, арочные порталы',ph:['{{P:p103}}','{{P:p107}}','{{P:p105}}','{{P:p104}}','{{P:p108}}','{{P:p109}}']},
+ {c:'door',n:'Входная дверь с пирамидами',s:'Массив, филёнки-пирамиды, кованые накладки',ph:['{{P:p28}}','{{P:p27}}','{{P:p29}}','{{P:p31}}','{{P:p30}}']},
+ {c:'door',n:'Классические двери из массива',s:'Филёнчатые двери с карнизом и наличником',ph:['{{P:p121}}','{{P:p120}}','{{P:p49}}']},
+ {c:'fur',n:'Белая кухня и обеденный стол',s:'Кухня и стол из массива в эмали',ph:['{{P:p52}}','{{P:p53}}','{{P:p54}}']},
+ {c:'fur',n:'Мебель из массива',s:'Кровати, винный шкаф под лестницей, резные панно',ph:['{{P:p118}}','{{P:p115}}','{{P:p119}}','{{P:p123}}','{{P:p87}}','{{P:p88}}','{{P:p80}}']},
+ {c:'met',n:'Ворота и заборы',s:'Кованые ворота с калиткой, секции, ворота с заклёпками',ph:['{{P:p72}}','{{P:p77}}','{{P:p59}}','{{P:p66}}','{{P:p71}}']},
+ {c:'met',n:'Кованые двери и решётки',s:'Двери с львиной маской, виноградная лоза, балконное ограждение',ph:['{{P:p61}}','{{P:p60}}','{{P:p75}}','{{P:p67}}']},
+ {c:'met',n:'Мангалы и малые формы',s:'Мангалы, кашпо-велосипед, штендер',ph:['{{P:p65}}','{{P:p68}}','{{P:p64}}','{{P:p76}}','{{P:p69}}']},
+ {c:'out',n:'Террасы, перголы, ставни',s:'Ограждение террасы, пергола, кашпо, ставни-жалюзи',ph:['{{P:p114}}','{{P:p116}}','{{P:p117}}','{{P:p39}}','{{P:p90}}','{{P:p91}}','{{P:p89}}']}
+];
+var WORKS=[],wf='all',wfil=d.getElementById('wfil');
 var reel=d.getElementById('reel'),lb=d.getElementById('lb'),li=0,LBL=WORKS,lbFrom=null;
-WORKS.forEach(function(w,i){var b=d.createElement('button');b.type='button';b.innerHTML='<figure style="margin:0;height:100%"><img src="'+w[0]+'" alt="'+w[1]+'" loading="lazy" decoding="async"><figcaption><small>'+w[2]+'</small>'+w[1]+'</figcaption></figure>';b.addEventListener('click',function(){lbOpen(i)});reel.appendChild(b)});
+var WCN={};WCATS.forEach(function(c){WCN[c[0]]=c[1]});
+WCATS.forEach(function(c){var b=d.createElement('button');b.type='button';b.dataset.c=c[0];b.textContent=c[1];b.setAttribute('aria-pressed',c[0]==='all');b.addEventListener('click',function(){workFilter(c[0])});wfil.appendChild(b)});
+CASES.forEach(function(w){
+  var list=w.ph.map(function(x){return [x,w.n]});
+  var b=d.createElement('button');b.type='button';w.el=b;
+  b.innerHTML='<figure style="margin:0;height:100%"><img src="'+w.ph[0]+'" alt="'+w.n+'" loading="lazy" decoding="async"><span class="cnt">'+w.ph.length+' фото</span><figcaption><small>'+WCN[w.c]+'</small>'+w.n+'<i>'+w.s+'</i></figcaption></figure>';
+  b.addEventListener('click',function(){lbOpen(0,list)});reel.appendChild(b);
+});
+function workFilter(c){wf=c;CASES.forEach(function(w){w.el.hidden=!(c==='all'||w.c===c)});[].forEach.call(wfil.children,function(b){b.setAttribute('aria-pressed',b.dataset.c===c)});reel.scrollLeft=0}
 function lbShow(){var w=LBL[li];d.getElementById('lb-img').src=w[0];d.getElementById('lb-img').alt=w[1];d.getElementById('lb-cap').textContent=w[1]+' · '+(li+1)+' / '+LBL.length}
 function lbOpen(i,list){LBL=list||WORKS;lbFrom=d.activeElement;li=i;lbShow();lb.hidden=false;R.style.overflow='hidden';d.getElementById('lb-x').focus()}
 function lbClose(){lb.hidden=true;R.style.overflow='';if(lbFrom)lbFrom.focus()}
@@ -1021,7 +1261,7 @@ d.getElementById('lb-x').addEventListener('click',lbClose);d.getElementById('lb-
 lb.addEventListener('click',function(e){if(e.target===lb)lbClose()});
 d.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')lbClose();if(e.key==='ArrowLeft')lbGo(-1);if(e.key==='ArrowRight')lbGo(1)});
 var sx=null;lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)lbGo(dx<0?1:-1);sx=null});
-function reelBy(k){reel.scrollBy({left:k*(reel.firstChild.offsetWidth+14)*2,behavior:reduce?'auto':'smooth'})}
+function reelBy(k){reel.scrollBy({left:k*(reel.querySelector('button:not([hidden])').offsetWidth+14)*2,behavior:reduce?'auto':'smooth'})}
 d.getElementById('rl-prev').addEventListener('click',function(){reelBy(-1)});d.getElementById('rl-next').addEventListener('click',function(){reelBy(1)});
 
 /* ---------- sticky header & mobile bar ---------- */
@@ -1086,7 +1326,7 @@ if(fine&&!reduce)(function(){
   d.addEventListener('pointermove',function(e){
     if(e.pointerType!=='mouse')return;x=e.clientX;y=e.clientY;
     if(!on){on=true;rx=x;ry=y;R.classList.add('cur-on')}
-    var tg=e.target.closest?e.target:null,lab=tg&&tg.closest('.reel button,.tcard .hit');
+    var tg=e.target.closest?e.target:null,lab=tg&&tg.closest('.reel button,.ccard .hit');
     ring.classList.toggle('lab',!!lab);
     ring.classList.toggle('act',!lab&&!!(tg&&tg.closest('a,button,label,input,.chip')));
     ring.classList.toggle('off',!!(tg&&tg.closest('.slab,.ba,.trailer,.lb')));
@@ -1141,11 +1381,13 @@ function cue(kind){
 function end(){
   sndOff();
   clear();tr.classList.add('gone');tr.setAttribute('aria-hidden','true');R.style.overflow='';
-  hero.classList.remove('play');void hero.offsetWidth;if(!reduce)hero.classList.add('play');
+  hero.classList.remove('play');void hero.offsetWidth;if(!reduce&&played)hero.classList.add('play');
   [].forEach.call(d.querySelectorAll('.hero h1 .w'),function(w,i){w.style.animationDelay=(0.5+i*0.1)+'s'});
 }
+var played=false;
 function play(){
   if(reduce){end();return}
+  played=true;
   clear();sndOff();tfs.forEach(function(f){f.classList.remove('on')});
   if(snd)sndOn();
   tr.classList.remove('gone');tr.setAttribute('aria-hidden','false');R.style.overflow='hidden';
@@ -1171,6 +1413,6 @@ var sndB=d.getElementById('snd');
 sndB.addEventListener('click',function(){snd=!snd;sndB.setAttribute('aria-pressed',snd);sndB.textContent=snd?'Звук включён':'Со звуком';if(snd)play();else sndOff()});
 tr.addEventListener('click',function(e){if(!e.target.closest('.t-ui button'))end()});
 var seen=false;try{seen=sessionStorage.getItem('sg_trailer')==='1';sessionStorage.setItem('sg_trailer','1')}catch(e){}
-if(!seen&&!location.hash)play();else end();
+if(!seen&&!location.hash&&innerWidth>760)play();else end(); /* на телефоне сразу контент, трейлер — по кнопке на десктопе */
 })();
 </script>
