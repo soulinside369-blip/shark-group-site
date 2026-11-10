@@ -29,7 +29,8 @@ def ramp(t, stops):
 def hexc(h): return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 
 def wood(name, seed, palette, ring_freq, tilt, depth, warp, pores, pore_amt,
-         fiber_amt, ring_sharp, figure=0.0, knots=(), cracks=(), gray=0.0, sheen=0.06):
+         fiber_amt, ring_sharp, figure=0.0, knots=(), cracks=(), gray=0.0, sheen=0.0, rays=0.0):
+    # sheen=0: блик больше не запекается в картинку — его считает шейдер примерочной (свет по волокну)
     rng = np.random.default_rng(seed)
     y, x = np.mgrid[0:H, 0:W].astype(float)
     X = x / W; Y = (y - H * 0.5) / H
@@ -37,6 +38,8 @@ def wood(name, seed, palette, ring_freq, tilt, depth, warp, pores, pore_amt,
     d = depth + tilt * (X - 0.2) + fbm((H, W), (1.5, 2), rng, 2) * 0.03
     R = np.sqrt((Y + wv) ** 2 + d ** 2)
     rings = R * ring_freq + fbm((H, W), (40, 3), rng, 3) * 0.12
+    # волокнистая кромка годового кольца: линия не «векторная», а слегка рваная вдоль волокна
+    rings = rings + noise((H, W), (H / 5, W / 70), rng, order=3) * 0.014
     for kx, ky, kr in knots:
         dx = (x - kx * W) / (kr * W); dy = (y - ky * H) / (kr * W * 0.45)
         kd = np.sqrt(dx ** 2 + dy ** 2)
@@ -45,15 +48,23 @@ def wood(name, seed, palette, ring_freq, tilt, depth, warp, pores, pore_amt,
     # thin latewood line + porous earlywood band
     var = 0.55 + 0.45 * np.clip(fbm((H, W), (6, 2), rng, 3) * 2.2 + 0.5, 0, 1)
     lw = np.exp(-((f - 0.9) / ring_sharp) ** 2) * var
-    broad = np.clip((f - 0.45) / 0.45, 0, 1) ** 2 * 0.22
+    # пилообразный профиль кольца: плавное потемнение к поздней древесине, резкий обрыв
+    broad = np.clip((f - 0.25) / 0.65, 0, 1) ** 1.6 * 0.24 * (f < 0.965)
     ew = np.exp(-((f - 0.04) / 0.05) ** 2) * 0.10
-    tone = 0.30 + 0.30 * lw + broad + ew
+    tone = 0.30 + 0.20 * lw + broad + ew
     # lengthwise tonal stripes of veneer
     tone += fbm((H, W), (14, 1.2), rng, 4) * 0.09
     tone += fbm((H, W), (3, 3), rng, 3) * 0.05
     # fibres
     fib = noise((H, W), (H / 3, W / 160), rng, order=3)
     tone += fib * fiber_amt
+    # анизотропия волокна: длинные тонкие штрихи двух масштабов
+    tone += noise((H, W), (H / 1.6, W / 420), rng, order=1) * fiber_amt * 0.55
+    tone += noise((H, W), (H / 7, W / 900), rng, order=3) * fiber_amt * 0.5
+    if rays:
+        # сердцевинные лучи (зеркальца дуба): короткие светлые чёрточки вдоль волокна
+        rn = noise((H, W), (H / 5, W / 55), rng, order=1)
+        tone -= np.clip((rn - np.quantile(rn, 0.985)) * 3, 0, 1) * rays
     if figure:
         tone += np.sin(x / W * 70 + fbm((H, W), (3, 5), rng, 3) * 10) * figure * (0.5 + fbm((H, W), (2, 2), rng, 2))
     if pore_amt:
@@ -73,6 +84,9 @@ def wood(name, seed, palette, ring_freq, tilt, depth, warp, pores, pore_amt,
         tone += np.clip(gaussian_filter(m, 0.8) * 2, 0, 1) * 0.7
     tone = np.clip(tone, 0, 1)
     rgb = ramp(tone, palette)
+    # крупные тёплые/холодные пятна — живой лист шпона не бывает одного тона
+    hue = fbm((H, W), (2, 3), rng, 3)[..., None]
+    rgb = rgb * (1 + hue * np.array([0.05, 0.0, -0.06]))
     if gray:
         g = rgb.mean(-1, keepdims=True); rgb = rgb * (1 - gray) + g * gray
     # soft light sheen
@@ -86,12 +100,12 @@ def wood(name, seed, palette, ring_freq, tilt, depth, warp, pores, pore_amt,
 P = lambda *hs: [(i / (len(hs) - 1), hexc(h)) for i, h in enumerate(hs)]
 
 jobs = {
- 'oak':        dict(seed=11, palette=P('#E9CDA2', '#D7B383', '#BE9564', '#946C42', '#5E4325'), ring_freq=70, tilt=0.12, depth=0.015, warp=0.03, pores=1, pore_amt=0.30, fiber_amt=0.06, ring_sharp=0.05),
- 'oak_rustic': dict(seed=23, palette=P('#E0C49C', '#CBA77C', '#AE875C', '#7F5E3C', '#4A3420'), ring_freq=75, tilt=0.16, depth=0.01, warp=0.04, pores=1, pore_amt=0.32, fiber_amt=0.07, ring_sharp=0.06, knots=[(0.34, 0.6, 0.02), (0.8, 0.28, 0.014)], cracks=[(0.06, 0.4, 0.2), (0.56, 0.74, 0.16)]),
+ 'oak':        dict(seed=11, rays=0.10, palette=P('#E9CDA2', '#D7B383', '#BE9564', '#946C42', '#5E4325'), ring_freq=70, tilt=0.12, depth=0.015, warp=0.03, pores=1, pore_amt=0.30, fiber_amt=0.06, ring_sharp=0.05),
+ 'oak_rustic': dict(seed=23, rays=0.10, palette=P('#E0C49C', '#CBA77C', '#AE875C', '#7F5E3C', '#4A3420'), ring_freq=75, tilt=0.16, depth=0.01, warp=0.04, pores=1, pore_amt=0.32, fiber_amt=0.07, ring_sharp=0.06, knots=[(0.34, 0.6, 0.02), (0.8, 0.28, 0.014)], cracks=[(0.06, 0.4, 0.2), (0.56, 0.74, 0.16)]),
  'walnut':     dict(seed=5, palette=P('#A47C58', '#86623F', '#67472D', '#4A311F', '#2C1C11'), ring_freq=45, tilt=0.14, depth=0.02, warp=0.04, pores=1, pore_amt=0.14, fiber_amt=0.07, ring_sharp=0.11),
  'ash':        dict(seed=31, palette=P('#F3E8D2', '#E8D6B6', '#D6BF98', '#B99C72', '#8C7150'), ring_freq=50, tilt=0.13, depth=0.015, warp=0.03, pores=1, pore_amt=0.26, fiber_amt=0.05, ring_sharp=0.06),
- 'oak_white':  dict(seed=47, palette=P('#EFE9DE', '#E0D7C8', '#CDC0AC', '#AC9B84', '#807261'), ring_freq=70, tilt=0.12, depth=0.02, warp=0.03, pores=1, pore_amt=0.30, fiber_amt=0.05, ring_sharp=0.05, gray=0.25),
- 'oak_smoked': dict(seed=59, palette=P('#8F6D4E', '#76563A', '#5C412A', '#422D1D', '#281A10'), ring_freq=68, tilt=0.12, depth=0.015, warp=0.035, pores=1, pore_amt=0.20, fiber_amt=0.07, ring_sharp=0.06),
+ 'oak_white':  dict(seed=47, rays=0.10, palette=P('#EFE9DE', '#E0D7C8', '#CDC0AC', '#AC9B84', '#807261'), ring_freq=70, tilt=0.12, depth=0.02, warp=0.03, pores=1, pore_amt=0.30, fiber_amt=0.05, ring_sharp=0.05, gray=0.25),
+ 'oak_smoked': dict(seed=59, rays=0.10, palette=P('#8F6D4E', '#76563A', '#5C412A', '#422D1D', '#281A10'), ring_freq=68, tilt=0.12, depth=0.015, warp=0.035, pores=1, pore_amt=0.20, fiber_amt=0.07, ring_sharp=0.06),
  'elm':        dict(seed=71, palette=P('#CF9F6E', '#B58253', '#93643A', '#6D4628', '#452A16'), ring_freq=55, tilt=0.18, depth=0.01, warp=0.06, pores=1, pore_amt=0.24, fiber_amt=0.07, ring_sharp=0.07),
 }
 for k in (sys.argv[2:] or jobs):
