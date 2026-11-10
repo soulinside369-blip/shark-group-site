@@ -598,6 +598,18 @@ section[id]{scroll-margin-top:76px}
 .sh-in input{display:block;margin-top:8px;width:100%;min-height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(242,235,221,.25);background:var(--night-2);color:var(--ivory);font:inherit;font-size:16px}
 .sh-try+.sh-try{margin-left:18px}
 @media (max-width:760px){.works .cfil{margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-right:16px}.works-top .arrows{display:none}.sh-try{display:block}.sh-try+.sh-try{margin-left:0}}
+/* v6: трейлер без растянутых фото */
+.tf.mat img{filter:saturate(.9) brightness(.82)}
+.tf.metal{background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 2px,transparent 2px 7px),linear-gradient(100deg,#0b0d10 0%,#2b2e33 20%,#6a655a 33%,#1a1c20 47%,#3b3934 61%,#9c8960 77%,#14161a 100%);background-size:auto,auto,240% 100%;background-position:0 0,0 0,0% 0;transition:opacity .45s,background-position 2.6s cubic-bezier(.15,.6,.3,1)}
+.tf.metal.on{background-position:0 0,0 0,70% 0}
+.tf .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,226,170,.16) 46%,transparent 60%);transform:translateX(-70%);transition:transform 1.8s cubic-bezier(.3,.1,.2,1)}
+.tf.on .sweep{transform:translateX(70%)}
+.tf.work{display:flex;align-items:center;justify-content:center;background:#05080E}
+.tf.work img.bg{inset:-8%;width:116%;height:116%;filter:blur(30px) brightness(.36) saturate(.9);transform:none}
+.tf.work .fr{position:relative;z-index:2;display:block;line-height:0}
+.tf.work .fr img{position:static;display:block;width:auto;height:auto;max-height:min(70vh,900px);max-width:84vw;object-fit:contain;border-radius:4px;box-shadow:0 0 0 1px rgba(201,164,106,.75),0 50px 140px rgba(0,0,0,.75);transform:scale(1.05);transition:transform 2.2s cubic-bezier(.15,.6,.3,1)}
+.tf.work.on .fr img{transform:scale(1)}
+.tf.work .lab{position:absolute;z-index:3;left:max(24px,7vw);bottom:11vh;font:600 clamp(11px,1.1vw,15px)/1.4 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
@@ -606,15 +618,17 @@ section[id]{scroll-margin-top:76px}
     <svg width="190" height="190" viewBox="0 0 240 240" fill="none" aria-hidden="true" style="width:min(190px,44vw);height:auto"><g id="gen-rings" transform="rotate(-90 120 120)"></g><g transform="scale(2)"><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></g></svg>
     <div class="brand">SHARK GROUP</div>
   </div>
-  <div class="tf" data-d="1000"><img src="{{T:oak}}" alt=""><div class="shade"></div><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
-  <div class="tf" data-d="850"><img loading="lazy" decoding="async" src="{{P:p59}}" alt=""><div class="shade"></div><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
-  <div class="tf" data-d="850"><img loading="lazy" decoding="async" src="{{P:p116}}" alt=""><div class="shade"></div><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
-  <div class="tf cut" data-d="340"><img loading="lazy" decoding="async" src="{{P:p124}}" alt=""><span class="blade"></span></div>
-  <div class="tf cut" data-d="340"><img loading="lazy" decoding="async" src="{{P:p25}}" alt=""><span class="blade"></span></div>
-  <div class="tf cut" data-d="340"><img loading="lazy" decoding="async" src="{{P:p1}}" alt=""><span class="blade"></span></div>
-  <div class="tf cut" data-d="340"><img loading="lazy" decoding="async" src="{{P:p48}}" alt=""><span class="blade"></span></div>
-  <div class="tf cut" data-d="340"><img loading="lazy" decoding="async" src="{{P:p62}}" alt=""><span class="blade"></span></div>
-  <div class="tf center" data-d="1100"><img loading="lazy" decoding="async" src="{{P:p26}}" alt="" style="filter:blur(10px) brightness(.32) saturate(.8);transform:scale(1.1)"><h2 style="position:relative">Своё производство</h2><div class="eyebrow" style="position:relative">Сочи · Краснодарский край · вся Россия</div></div>
+  <!-- Слова о материалах идут по своим фактурам высокого разрешения, работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
+  <div class="tf mat" data-d="1100"><img src="{{T:walnut}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
+  <div class="tf mat metal" data-d="950"><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
+  <div class="tf mat" data-d="950"><img decoding="async" src="{{X:stone_tumbled}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p124}}" alt=""><span class="fr"><img decoding="async" src="{{P:p124}}" alt=""></span><span class="lab">Лестницы</span><span class="blade"></span></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p25}}" alt=""><span class="fr"><img decoding="async" src="{{P:p25}}" alt=""></span><span class="lab">Панели из шпона</span><span class="blade"></span></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p48}}" alt=""><span class="fr"><img decoding="async" src="{{P:p48}}" alt=""></span><span class="lab">Двери из массива</span><span class="blade"></span></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p123}}" alt=""><span class="fr"><img decoding="async" src="{{P:p123}}" alt=""></span><span class="lab">Мебель и корпус</span><span class="blade"></span></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p62}}" alt=""><span class="fr"><img decoding="async" src="{{P:p62}}" alt=""></span><span class="lab">Металл и ковка</span><span class="blade"></span></div>
+  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="{{P:p15}}" alt=""><span class="fr"><img decoding="async" src="{{P:p15}}" alt=""></span><span class="lab">Рестораны под ключ</span><span class="blade"></span></div>
+  <div class="tf center" data-d="1100"><img decoding="async" src="{{T:walnut}}" alt="" style="filter:blur(14px) brightness(.26) saturate(.8);transform:scale(1.1)"><h2 style="position:relative">Своё производство</h2><div class="eyebrow" style="position:relative">Сочи · Краснодарский край · вся Россия</div></div>
   <div class="tf center" data-d="1000" style="background:var(--night)">
     <svg width="110" height="110" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle class="ring" cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="2.5" pathLength="360"/><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></svg>
     <div class="brand">SHARK GROUP</div>
@@ -880,7 +894,7 @@ var DIRS=[
  ['Двери','Двери','Входные группы и межкомнатные из массива: резьба, арки, стекло, ковка.','65 000 ₽','4–8 недель','{{P:p48}}','Резные двери из массива'],
  ['Кухни и корпус','Кухни','Кухни, стеллажи, гардеробные и винные шкафы из массива и шпона.','450 000 ₽','6–10 недель','{{P:p4}}','Стеллаж из массива'],
  ['Мебель из массива','Мебель','Столы, кровати, резные панно и реставрация.','[…] ₽','4–8 недель','{{P:p87}}','Резное панно'],
- ['Рестораны под ключ','Рестораны','Fish Bone, «Мамай Кале», Hearst’s pub: стойки, потолки, мебель, мягкая мебель.','индивидуально','проект — 2 недели','{{P:p1}}','Зал ресторана Fish Bone'],
+ ['Рестораны под ключ','Рестораны','Fish Bone, «Мамай Кале», Harat’s: стойки, потолки, мебель, мягкая мебель.','индивидуально','проект — 2 недели','{{P:p1}}','Зал ресторана Fish Bone'],
  ['Металл и ковка','Ковка','Ворота, перила, винтовые лестницы, мангалы и декор.','150 000 ₽','4–6 недель','{{P:p62}}','Винтовая лестница с коваными перилами'],
  ['Улица и фасады','Фасады','Перголы, ставни, ограждения террас, плитка и камень.','[…] ₽','4–8 недель','{{P:p114}}','Ограждение террасы с видом на горы']
 ];
@@ -1103,7 +1117,7 @@ var ITEMS=[
  {id:'doors',c:'door',d:3,n:'Двери',s:'Входные группы и межкомнатные из массива и в шпоне: скрытые, с резьбой, арками, стеклом и ковкой.',p:'от 65 000 ₽',pn:'входные — от 180 000 ₽',t:'4–8 недель',im:'{{P:p48}}',g:[['{{P:p48}}','Резные двери из массива'],['{{P:p103}}','Арочные двери со стеклом'],['{{P:p28}}','Входная дверь с пирамидами'],['{{P:p121}}','Классическая дверь из массива'],['{{P:p145}}','Двери в зал']],o:[['Тип',['Межкомнатная','Скрытая','Входная группа']]]},
  {id:'kitchen',c:'kit',d:4,n:'Кухни и корпус',s:'Кухни, стеллажи, гардеробные и винные шкафы из массива и шпона.',p:'от 450 000 ₽',pn:'кухня',t:'6–10 недель',im:'{{P:p52}}',g:[['{{P:p52}}','Белая кухня из массива'],['{{P:p4}}','Стеллаж из массива'],['{{P:p123}}','Винный шкаф под лестницей'],['{{P:p5}}','Винный стеллаж']],o:[['Что нужно',['Кухня','Стеллаж','Гардеробная','Винный шкаф'],1]]},
  {id:'metal',c:'met',d:7,n:'Металл и ковка',s:'Ворота, перила, винтовые лестницы, мангалы и декор.',p:'от 150 000 ₽',pn:'ворота',t:'4–6 недель',im:'{{P:p72}}',g:[['{{P:p72}}','Кованые ворота с калиткой'],['{{P:p62}}','Винтовая лестница с коваными перилами'],['{{P:p61}}','Кованая дверь'],['{{P:p65}}','Мангал'],['{{P:p59}}','Кованые секции']],o:[['Что нужно',['Ворота','Перила','Винтовая лестница','Мангал','Декор'],1]]},
- {id:'rest',c:'rest',d:6,n:'Рестораны под ключ',s:'Fish Bone, «Мамай Кале», Hearst’s pub: стойки, потолки, мебель, мягкая мебель.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'{{P:p1}}',g:[['{{P:p1}}','Зал ресторана Fish Bone'],['{{P:p15}}','Барная стойка паба'],['{{P:p11}}','Уличная стойка «Мамай Кале»'],['{{P:p9}}','Потолок с канатами']],o:[['Что нужно',['Стойка','Потолок','Мебель','Мягкая мебель'],1]]},
+ {id:'rest',c:'rest',d:6,n:'Рестораны под ключ',s:'Fish Bone, «Мамай Кале», Harat’s: стойки, потолки, мебель, мягкая мебель.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'{{P:p1}}',g:[['{{P:p1}}','Зал ресторана Fish Bone'],['{{P:p15}}','Барная стойка Harat’s'],['{{P:p11}}','Уличная стойка «Мамай Кале»'],['{{P:p9}}','Потолок с канатами']],o:[['Что нужно',['Стойка','Потолок','Мебель','Мягкая мебель'],1]]},
  {id:'furn',c:'fur',d:5,n:'Мебель из массива',s:'Столы, кровати, резные панно и реставрация.',p:'[…] ₽',pn:'',t:'4–8 недель',im:'{{P:p118}}',g:[['{{P:p118}}','Кровать из дуба'],['{{P:p54}}','Обеденный стол'],['{{P:p87}}','Резное панно'],['{{P:p115}}','Кровать, деталь']],o:[['Что нужно',['Обеденный стол','Кровать','Мягкая мебель','Резное панно','Реставрация'],1]]},
  {id:'ply',c:'ven',d:0,n:'Шпонированная фанера',s:'Для тех, кто делает сам: лист фанеры в шпоне выбранной породы — на мебель, двери и панели.',p:'по запросу',pn:'по размеру и породе',t:'под заказ',im:'{{T:walnut}}',g:[['{{T:walnut}}','Шпон: американский орех'],['{{T:oak}}','Шпон: дуб натуральный']],o:[['Толщина',['12 мм','15 мм','18 мм']],['Порода',SP],['Размер листа, мм','например 2440 × 1220','in'],['Количество, листов','например 10','in']],inc:INC_P,viz:1},
  {id:'plinth',c:'ven',d:0,n:'Плинтусы',s:'Плинтус из МДФ под покраску и в шпоне на фанере — разные профили и высота.',p:'по запросу',pn:'по профилю и метражу',t:'под заказ',im:'{{T:oak_white}}',g:[['{{T:oak_white}}','Шпон: дуб беленый']],o:[['Исполнение',['МДФ под покраску','Шпон на фанере']],['Метраж, пог. м','например 60','in']],inc:['Профиль и высота — по образцу или эскизу','Покраска в малярной камере','Изготовление под заказ'],viz:1},
@@ -1225,7 +1239,7 @@ var WCATS=[['all','Все'],['rest','Рестораны'],['home','Интерь�
 var CASES=[
  {c:'rest',n:'Ресторан Fish Bone',s:'Зал, потолок с канатами, стойка, стеллажи и двери',ph:['{{P:p1}}','{{P:p9}}','{{P:p4}}','{{P:p5}}','{{P:p2}}','{{P:p6}}','{{P:p7}}','{{P:p8}}']},
  {c:'rest',n:'«Мамай Кале»',s:'Уличная стойка с аквариумом',ph:['{{P:p11}}','{{P:p12}}','{{P:p13}}']},
- {c:'rest',n:'Hearst’s pub',s:'Барная стойка, стена из старых дверей, цветные панели',ph:['{{P:p15}}','{{P:p17}}','{{P:p19}}','{{P:p16}}','{{P:p14}}','{{P:p18}}','{{P:p20}}','{{P:p21}}']},
+ {c:'rest',n:'Harat’s',s:'Барная стойка, стена из старых дверей, цветные панели',ph:['{{P:p15}}','{{P:p17}}','{{P:p19}}','{{P:p16}}','{{P:p14}}','{{P:p18}}','{{P:p20}}','{{P:p21}}']},
  {c:'home',n:'Гостиная в панелях из ореха',s:'Шпон американского ореха, зеркальные вставки, чёрный матовый профиль, скрытая дверь',ph:['{{P:p25}}','{{P:p24}}','{{P:p22}}','{{P:p112}}']},
  {c:'home',n:'Дом с резными дверями',s:'Резные двери, двери в зал и гаражные ворота — один дом',ph:['{{P:p48}}','{{P:p46}}','{{P:p47}}','{{P:p145}}','{{P:p146}}','{{P:p147}}','{{P:p40}}']},
  {c:'st',n:'Парящая лестница со стеклом',s:'Тёмный дуб, стеклянное ограждение, подсветка каждой ступени',ph:['{{P:p124}}','{{P:p34}}']},
@@ -1413,6 +1427,6 @@ var sndB=d.getElementById('snd');
 sndB.addEventListener('click',function(){snd=!snd;sndB.setAttribute('aria-pressed',snd);sndB.textContent=snd?'Звук включён':'Со звуком';if(snd)play();else sndOff()});
 tr.addEventListener('click',function(e){if(!e.target.closest('.t-ui button'))end()});
 var seen=false;try{seen=sessionStorage.getItem('sg_trailer')==='1';sessionStorage.setItem('sg_trailer','1')}catch(e){}
-if(!seen&&!location.hash&&innerWidth>760)play();else end(); /* на телефоне сразу контент, трейлер — по кнопке на десктопе */
+if(!seen&&!location.hash)play();else end(); /* один раз за визит, на телефоне тоже (решение владельца) */
 })();
 </script>
