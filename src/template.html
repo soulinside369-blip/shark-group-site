@@ -715,6 +715,72 @@ section[id]{scroll-margin-top:76px}
   .vsum div{padding:10px 12px}
   .vsum .v-price{font-size:19px}
 }
+/* ============ v9: переходы, скролл-сцены, микровзаимодействия ============ */
+/* нумерация разделов — единая «упаковка» заголовков */
+main{counter-reset:sec}
+main>section:not(.hero){counter-increment:sec}
+.sec-head .eyebrow::before,.ven-top .eyebrow::before,.works-top .eyebrow::before,.proc>.wrap>.eyebrow::before,.case-grid .eyebrow::before{content:counter(sec,decimal-leading-zero) "  —  ";color:var(--ivory);opacity:.55}
+/* прогресс чтения и точки-разделы */
+.prog{position:fixed;z-index:61;left:0;right:0;top:env(safe-area-inset-top,0px);height:2px;pointer-events:none}
+.prog span{display:block;height:100%;background:linear-gradient(90deg,var(--brass),var(--brass-hi));transform-origin:left;transform:scaleX(0)}
+.dots{position:fixed;z-index:18;right:14px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:2px}
+.dots a{position:relative;width:26px;height:22px;display:grid;place-items:center}
+.dots a::before{content:"";width:6px;height:6px;border-radius:50%;background:rgba(242,235,221,.35);transition:transform .35s var(--ease),background-color .3s}
+.dots a.on::before{background:var(--brass);transform:scale(1.7)}
+.dots a span{position:absolute;right:28px;top:50%;transform:translate(6px,-50%);padding:5px 10px;border-radius:999px;background:rgba(14,23,38,.94);border:1px solid rgba(201,164,106,.4);color:var(--ivory);font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s,transform .35s var(--ease)}
+.dots a:hover span{opacity:1;transform:translate(0,-50%)}
+@media (min-width:1400px) and (hover:hover){.dots{display:flex}}
+/* первый экран */
+.hero .wrap{will-change:transform,opacity}
+.scrl{position:absolute;right:max(32px,env(safe-area-inset-right,0px));bottom:150px;writing-mode:vertical-rl;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(242,235,221,.6);display:none}
+.scrl::after{content:"";display:block;width:1px;height:54px;margin:12px auto 0;background:linear-gradient(180deg,var(--brass),transparent);animation:scrl 2.2s var(--ease) infinite}
+@keyframes scrl{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (min-width:1100px) and (hover:hover){.scrl{display:block}}
+/* бегущая строка */
+.mq{overflow:hidden;padding-block:26px;border-block:1px solid var(--line);background:var(--pit)}
+.mq>div{will-change:transform}
+.mq-t{display:inline-block;white-space:nowrap;font-family:var(--display);font-weight:600;font-size:clamp(54px,10vw,150px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(201,164,106,.7);animation:mq 46s linear infinite;animation-play-state:paused}
+.mq.run .mq-t{animation-play-state:running}
+.mq-t i{font-style:normal;color:var(--brass);-webkit-text-stroke:0;margin:0 .12em}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* кнопки: латунная заливка снизу */
+@media (hover:hover){
+  .btn-ghost{position:relative;overflow:hidden;isolation:isolate;transition:color .35s,border-color .35s,transform .3s var(--ease)}
+  .btn-ghost::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--brass);transform:translateY(102%);transition:transform .5s var(--ease)}
+  .btn-ghost:hover{color:var(--night);border-color:var(--brass)}
+  .btn-ghost:hover::before{transform:none}
+  .nav a{position:relative}
+  .nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+  .nav a:hover::after{transform:scaleX(1);transform-origin:left}
+}
+.ctile,.ccard,.reel button{transition:transform .5s var(--ease),box-shadow .5s;transform-style:preserve-3d}
+/* полёт в расчёт */
+.flyd{position:fixed;z-index:97;left:-26px;top:-26px;width:52px;height:52px;border-radius:50%;background:var(--brass) center/cover;box-shadow:0 0 0 2px var(--brass),0 12px 30px rgba(0,0,0,.5);pointer-events:none}
+.bump{animation:bump .6s var(--ease)}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.09)}100%{transform:scale(1)}}
+.dock.bump{animation-name:bumpd}
+@keyframes bumpd{0%{box-shadow:0 20px 50px rgba(0,0,0,.5)}35%{box-shadow:0 0 0 6px rgba(201,164,106,.35),0 20px 50px rgba(0,0,0,.5)}100%{box-shadow:0 20px 50px rgba(0,0,0,.5)}}
+/* View Transitions */
+.ch-im img{view-transition-name:cathero}
+.sheet.open .sh-gs img:first-child{view-transition-name:shimg}
+.sheet.open .sh-p{view-transition-name:sheet}
+.sheet.inst .sh-p,.sheet.inst .sh-bg{transition:none}
+#cgrid{view-transition-name:cgrid}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.4s}
+::view-transition-group(cathero),::view-transition-group(shimg){animation-duration:.55s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-new(sheet){animation:vtUp .5s cubic-bezier(.2,.8,.2,1) both}
+::view-transition-new(cgrid){animation:vtUp .55s cubic-bezier(.2,.8,.2,1) both}
+::view-transition-old(cgrid){animation:vtOut .25s both}
+@keyframes vtUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes vtOut{to{opacity:0}}
+/* подвал */
+.fword{overflow:hidden;padding:34px 0 6px;text-align:center}
+.fword span{display:block;font-family:var(--display);font-weight:700;letter-spacing:.02em;line-height:.9;font-size:clamp(36px,11.6vw,210px);white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(201,164,106,.55);transform:translateY(40%);opacity:0;transition:transform 1.4s var(--ease),opacity 1.2s}
+.fword.in span{transform:none;opacity:1}
+footer{border-top:0;padding-top:0}
+footer .wrap{padding-top:26px}
+@media (prefers-reduced-motion:reduce){.fword span{transform:none;opacity:1}.mq-t{animation:none}}
+@media (max-width:760px){.mq{padding-block:16px}}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
@@ -743,6 +809,8 @@ section[id]{scroll-margin-top:76px}
   <div class="t-prog" id="tprog"></div>
 </div>
 
+<div class="prog" aria-hidden="true"><span id="prog"></span></div>
+<nav class="dots" id="dots" aria-label="Разделы страницы"></nav>
 <header class="top" id="hdr">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Shark Group — наверх">
@@ -766,6 +834,7 @@ section[id]{scroll-margin-top:76px}
   <div class="wrap">
     <div class="eyebrow">Своё производство · Сочи и Краснодарский край · по всей России</div>
     <h1><span class="w">Дерево,</span> <span class="w">металл</span> <span class="w">и&nbsp;камень</span> <span class="w">в&nbsp;одном</span> <span class="w">интерьере</span></h1>
+    <span class="scrl" aria-hidden="true">листайте</span>
     <div class="hero-row">
       <div class="hero-cta">
         <a class="btn btn-brass" href="#quiz">Прислать фото — посчитаем</a>
@@ -793,6 +862,8 @@ section[id]{scroll-margin-top:76px}
     <p class="cnote">Цены — ориентир «от», точную сумму считаем по замеру и проекту. Фактуры плитки и шпона — визуализация, фото работ — реальные.</p>
   </div>
 </section>
+
+<div class="mq" id="mq" aria-hidden="true"><div><div class="mq-t">Дерево <i>·</i> Металл <i>·</i> Камень <i>·</i> Шпон <i>·</i> Лестницы <i>·</i> Двери <i>·</i> Кухни <i>·</i> Ковка <i>·</i> Дерево <i>·</i> Металл <i>·</i> Камень <i>·</i> Шпон <i>·</i> Лестницы <i>·</i> Двери <i>·</i> Кухни <i>·</i> Ковка <i>·</i> </div></div></div>
 
 <section class="ven" id="veneer" aria-labelledby="ven-h">
   <div class="wrap">
@@ -927,6 +998,7 @@ section[id]{scroll-margin-top:76px}
 </main>
 
 <footer>
+  <div class="fword saw" aria-hidden="true"><span>SHARK GROUP</span></div>
   <div class="wrap">
     <div style="display:flex;align-items:center;gap:10px"><svg width="28" height="28" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="5"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></svg><b style="color:var(--ivory)">Shark Group</b> · цех: [адрес], Сочи</div>
     <div class="links"><span>[телефон]</span><span>Telegram</span><span>MAX</span><span>Политика ПДн</span><span>[ИП/ООО, ИНН]</span></div>
@@ -1159,7 +1231,7 @@ function hasPick(k){return picks.some(function(p){return p.k===k})}
 function addPick(i,k,t){
   if(!touched){sel=[];touched=true}
   if(sel.indexOf(i)<0)sel.push(i);
-  if(k){picks=picks.filter(function(p){return p.k!==k});picks.push({k:k,t:t})}
+  if(k){var had=hasPick(k);picks=picks.filter(function(p){return p.k!==k});picks.push({k:k,t:t});if(!had)fly()}
   syncOpts();syncPicks();
 }
 function dropPick(k){picks=picks.filter(function(p){return p.k!==k});syncPicks()}
@@ -1203,9 +1275,9 @@ d.getElementById('q').addEventListener('submit',function(e){
     if(d.getElementById('q-tel').value.replace(/\D/g,'').length<10&&!/^@\w{4,}/.test(d.getElementById('q-tel').value.trim())){err.textContent='Укажите телефон из 10–11 цифр или ник в Telegram через @.';return}
     if(!d.getElementById('q-ok').checked){err.textContent='Отметьте согласие на обработку данных.';return}
   }
-  step=step===3?0:step+1;show();
+  step=step===3?0:step+1;vt(show);
 });
-d.getElementById('q-back').addEventListener('click',function(){step=Math.max(0,step-1);show()});
+d.getElementById('q-back').addEventListener('click',function(){step=Math.max(0,step-1);vt(show)});
 show();
 
 /* ---------- tiles ---------- */
@@ -1287,11 +1359,11 @@ function plural(n){var a=n%10,b=n%100;return n+' '+(a===1&&b!==11?'позици�
 var cfil=d.getElementById('cfil'),cgrid=d.getElementById('cgrid'),ctiles=d.getElementById('ctiles'),chead=d.getElementById('chead'),cf='all';
 function catGo(c,scroll){cf=c;catSync();if(scroll)d.getElementById('cat').scrollIntoView({behavior:reduce?'auto':'smooth'})}
 /* чипы разделов */
-[['all','Все разделы']].concat(CATS).forEach(function(c){var b=d.createElement('button');b.type='button';b.dataset.c=c[0];b.innerHTML=c[1]+(c[0]==='all'?'':' <i>'+catCount(c[0])+'</i>');b.setAttribute('aria-pressed',c[0]==='all');b.addEventListener('click',function(){catGo(c[0]);if(b.scrollIntoView)b.scrollIntoView({block:'nearest',inline:'center',behavior:reduce?'auto':'smooth'})});cfil.appendChild(b)});
+[['all','Все разделы']].concat(CATS).forEach(function(c){var b=d.createElement('button');b.type='button';b.dataset.c=c[0];b.innerHTML=c[1]+(c[0]==='all'?'':' <i>'+catCount(c[0])+'</i>');b.setAttribute('aria-pressed',c[0]==='all');b.addEventListener('click',function(){catVT(c[0]);if(b.scrollIntoView)b.scrollIntoView({block:'nearest',inline:'center',behavior:reduce?'auto':'smooth'})});cfil.appendChild(b)});
 /* «Все разделы» — девять плиток-разделов */
 CATS.forEach(function(c,i){var b=d.createElement('button');b.type='button';b.className='ctile';
   b.innerHTML='<img src="'+c[5]+'" alt="" loading="lazy" decoding="async"><span class="ct-n">0'+(i+1)+'</span><span class="ct-b"><b>'+c[1]+'</b><small>'+plural(catCount(c[0]))+' · '+c[3]+'</small></span>';
-  b.addEventListener('click',function(){catGo(c[0],true)});ctiles.appendChild(b)});
+  b.addEventListener('click',function(){catVT(c[0],b.querySelector('img'))});ctiles.appendChild(b)});
 /* карточки позиций */
 ITEMS.forEach(function(it){
   var a=d.createElement('article');a.className='ccard';it.el=a;
@@ -1310,7 +1382,7 @@ function catSync(){
   [].forEach.call(cfil.children,function(b){b.setAttribute('aria-pressed',b.dataset.c===cf)});
   if(!all){var m=CMETA[cf];chead.innerHTML='<div class="ch-im"><img src="'+m[5]+'" alt="" decoding="async"></div><div class="ch-b"><button type="button" class="cback" data-all>← Все разделы</button><h3>'+m[1]+'</h3><p>'+m[2]+'</p><div class="ch-kv"><div><small>Цена</small>'+m[3]+'</div><div><small>Срок</small>'+m[4]+'</div><div><small>В разделе</small>'+plural(catCount(cf))+'</div></div></div>'}
 }
-chead.addEventListener('click',function(e){if(e.target.closest('[data-all]'))catGo('all',true)});
+chead.addEventListener('click',function(e){if(e.target.closest('[data-all]'))catVT('all')});
 catSync();
 
 /* окно позиции: на телефоне — шторка снизу, на десктопе — окно по центру */
@@ -1323,7 +1395,7 @@ function shOpts(){
     if(g[1].length<2&&!g[2])return '<div class="sh-og"><span>'+g[0]+': '+g[1][0]+'</span></div>';
     return '<div class="sh-og"><span>'+g[0]+(g[2]?' — можно несколько':'')+'</span><div>'+g[1].map(function(v,k){var on=g[2]?it.sel[gi].indexOf(k)>=0:it.sel[gi]===k;return '<button type="button" data-g="'+gi+'" data-k="'+k+'" aria-pressed="'+on+'">'+v+'</button>'}).join('')+'</div></div>'}).join('');
 }
-function shOpen(it,from){
+function shShow(it,from){
   shIt=it;shFrom=from||null;
   if(it.id==='panels')it.sel=[cur,coat];
   shGs.innerHTML=it.g.map(function(x){return '<img src="'+x[0]+'" alt="'+x[1]+'" loading="lazy" decoding="async">'}).join('');shGs.scrollLeft=0;
@@ -1422,7 +1494,7 @@ var CASES=[
 var WORKS=[],wf='all',wfil=d.getElementById('wfil');
 var reel=d.getElementById('reel'),lb=d.getElementById('lb'),li=0,LBL=WORKS,lbFrom=null;
 var WCN={};WCATS.forEach(function(c){WCN[c[0]]=c[1]});
-WCATS.forEach(function(c){var b=d.createElement('button');b.type='button';b.dataset.c=c[0];b.textContent=c[1];b.setAttribute('aria-pressed',c[0]==='all');b.addEventListener('click',function(){workFilter(c[0])});wfil.appendChild(b)});
+WCATS.forEach(function(c){var b=d.createElement('button');b.type='button';b.dataset.c=c[0];b.textContent=c[1];b.setAttribute('aria-pressed',c[0]==='all');b.addEventListener('click',function(){vt(function(){workFilter(c[0])})});wfil.appendChild(b)});
 CASES.forEach(function(w){
   var list=w.ph.map(function(x){return [x,w.n]});
   var b=d.createElement('button');b.type='button';w.el=b;
@@ -1515,6 +1587,77 @@ if(fine&&!reduce)(function(){
     el.addEventListener('pointerleave',function(){el.style.transform=''});
   });
 })();
+
+/* ================= v9: переходы и микровзаимодействия ================= */
+/* View Transitions: состояние меняется не «щелчком», а переходом; старые браузеры просто меняют без анимации */
+var canVT=!reduce&&typeof d.startViewTransition==='function';
+function vt(fn){var ran=false,f=function(){if(!ran){ran=true;fn()}};if(!canVT){f();return}try{d.startViewTransition(f)}catch(e){f()}setTimeout(f,450)} /* если переход не стартовал — просто меняем состояние */
+/* каталог: плитка раздела «перетекает» в шапку раздела */
+function catVT(c,img){
+  if(!canVT){catGo(c,!!img||c==='all');return}
+  if(img)img.style.viewTransitionName='cathero';
+  vt(function(){
+    if(img)img.style.viewTransitionName='';cf=c;catSync();
+    var r=d.getElementById('cat').getBoundingClientRect();
+    if(img||r.top<0)scrollTo({top:scrollY+r.top-(innerWidth>760?64:6),behavior:'instant'});
+  });
+}
+/* карточка позиции: её фото вырастает в окно позиции */
+function shOpen(it,from){
+  var img=from&&from.parentNode&&from.parentNode.querySelector?from.parentNode.querySelector('.ph img'):null;
+  if(!canVT||!img){shShow(it,from);return}
+  img.style.viewTransitionName='shimg';sheet.classList.add('inst');
+  var done=function(){sheet.classList.remove('inst')};
+  var ran=false,go=function(){if(ran)return;ran=true;img.style.viewTransitionName='';shShow(it,from)};setTimeout(function(){go();done()},450);
+  try{var t=d.startViewTransition(go);t.finished.then(done,done)}
+  catch(e){go();done()}
+}
+/* «в расчёт»: позиция улетает в кнопку расчёта, счётчик подпрыгивает */
+var lastTap=null;
+d.addEventListener('pointerdown',function(e){lastTap=e.target},true);
+function fly(){
+  var el=lastTap&&lastTap.closest?lastTap:null;if(!el||reduce||!el.animate)return;
+  var host=el.closest('.ccard,.sheet,.vcfg,.pal'),im=host&&host.querySelector('.ph img,.sh-gs img,#texs img.on,.band'),r=el.getBoundingClientRect();
+  var dot=d.createElement('span');dot.className='flyd';
+  if(im&&im.tagName==='IMG')dot.style.backgroundImage='url('+(im.currentSrc||im.src)+')';
+  d.body.appendChild(dot);
+  var mob=innerWidth<=760,go=d.querySelector('.mbar .go'),gr=go.getBoundingClientRect();
+  var tx=mob?(gr.width?gr.left+gr.width/2:innerWidth*.72):innerWidth-150,ty=mob?innerHeight-44:innerHeight-52;
+  var x0=r.left+r.width/2,y0=r.top+r.height/2;
+  dot.animate([{transform:'translate('+x0+'px,'+y0+'px) scale(1)',opacity:1},
+               {transform:'translate('+((x0+tx)/2)+'px,'+(Math.min(y0,ty)-70)+'px) scale(.85)',opacity:1,offset:.45},
+               {transform:'translate('+tx+'px,'+ty+'px) scale(.25)',opacity:.2}],{duration:720,easing:'cubic-bezier(.3,.1,.2,1)'}).onfinish=function(){
+    dot.remove();[d.querySelector('.mbar .go'),d.getElementById('dock')].forEach(function(t){t.classList.remove('bump');void t.offsetWidth;t.classList.add('bump')});
+  };
+}
+/* полоса прогресса чтения и точки-разделы справа (десктоп) */
+(function(){
+  var bar=d.getElementById('prog'),raf=0;
+  function upd(){raf=0;var h=R.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+  addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});upd();
+  var SEC=[['top','Начало'],['cat','Каталог'],['veneer','Шпон'],['mood','Сочетания'],['how','Процесс'],['case','Было — стало'],['works','Кейсы'],['quiz','Расчёт']],nav=d.getElementById('dots');
+  SEC.forEach(function(x){var a=d.createElement('a');a.href='#'+x[0];a.innerHTML='<span>'+x[1]+'</span>';nav.appendChild(a)});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)[].forEach.call(nav.children,function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
+    SEC.forEach(function(x){io.observe(d.getElementById(x[0]))})}
+})();
+/* первый экран уходит мягко: текст отстаёт и гаснет (только десктоп) */
+if(fine&&!reduce)(function(){var w=hero.querySelector('.wrap'),raf=0;
+  addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var y=scrollY,h=hero.offsetHeight;if(y>h)return;var k=y/h;w.style.transform='translate3d(0,'+(y*.22).toFixed(1)+'px,0)';w.style.opacity=(1-k*1.25).toFixed(3)})},{passive:true})})();
+/* бегущая строка материалов: едет сама и подталкивается скроллом */
+(function(){var m=d.getElementById('mq');if(!m||reduce)return;var t=m.firstElementChild,raf=0;
+  addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var r=m.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;t.style.transform='translate3d('+(-(innerHeight-r.top)*.18).toFixed(1)+'px,0,0)'})},{passive:true});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){m.classList.toggle('run',es[0].isIntersecting)}).observe(m)})();
+/* карточки наклоняются за курсором (только мышь) */
+if(fine&&!reduce)d.addEventListener('pointermove',function(e){
+  var c=e.target.closest?e.target.closest('.ctile,.ccard,.reel button'):null;
+  if(d._tilt&&d._tilt!==c){d._tilt.style.transform='';d._tilt=null}
+  if(!c||e.pointerType!=='mouse')return;d._tilt=c;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.transform='perspective(900px) rotateX('+(-y*5).toFixed(2)+'deg) rotateY('+(x*6).toFixed(2)+'deg) translateY(-4px)';
+},{passive:true});
+/* «было — стало»: ползунок сам качнётся один раз, чтобы было видно, что его можно тянуть */
+if(!reduce&&'IntersectionObserver' in window)(function(){var done=false,rg=d.getElementById('ba-range');
+  new IntersectionObserver(function(es,o){if(!es[0].isIntersecting||done)return;done=true;o.disconnect();var t0=performance.now();
+    (function step(now){var k=Math.min(1,(now-t0)/1700),v=34+Math.sin(k*Math.PI)*30;ba.style.setProperty('--x',v+'%');rg.value=v;if(k<1)requestAnimationFrame(step)})(t0)},{threshold:.6}).observe(ba)})();
 
 /* ---------- trailer ---------- */
 var tr=d.getElementById('trailer'), tfs=[].slice.call(tr.querySelectorAll('.tf')), timers=[];
