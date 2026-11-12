@@ -209,3 +209,16 @@ View Transitions (плитка раздела → шапка раздела, ф�
 полоса прогресса чтения, точки-разделы справа (≥1400 px), нумерация разделов в заголовках, бегущая строка
 материалов, наклон карточек за курсором, заливка кнопок, авто-качание ползунка «было — стало», надпись
 SHARK GROUP в подвале. Проверено на десктопе 1440 px; на ширине телефона после последних правок НЕ проверено.
+
+## Боевой сайт: https://sharkgroup.pro (12.11.2026)
+- Домен sharkgroup.pro (Reg.ru, до 12.11.2027) → хостинг Reg.ru «Хост-0» (ispmanager, server109.hosting.reg.ru,
+  37.140.192.62), папка `/www/sharkgroup.pro`. DNS — серверы хостинга (ns1/ns2.hosting.reg.ru), зону менять не нужно.
+- HTTPS: Let's Encrypt на sharkgroup.pro + www, выпущен в ispmanager («SSL-сертификаты»), продлевается панелью.
+- `.htaccess`: www и http → https://sharkgroup.pro (301), кэш картинок на год (имена с ?h=хэш), gzip,
+  однофайловая shark-group.html закрыта. `robots.txt` — индексация разрешена. В странице canonical на sharkgroup.pro.
+- **Как обновлять:** `python src/buildsite.py`, затем `python src/deploy.py` (FTPS, заливает только изменённое,
+  index.html последним). Пароль FTP/SFTP — в `.env` в корне (шаблон `.env.example`, `.env` в .gitignore);
+  пароль берётся в кабинете Reg.ru: Хостинг → «Доступ в панель управления, SSH, SFTP».
+  Без пароля можно залить через ispmanager → «Менеджер файлов» → «Загрузить».
+- GitHub Pages (soulinside369-blip.github.io/shark-group-site/) остаётся как черновой показ; боевой — домен.
+- На хостинге есть второй сайт эвентчай.рф — к Shark Group не относится, не трогать.
