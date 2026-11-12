@@ -9,7 +9,7 @@
 Источники:
   wood  — Clem Onojeghuo,  https://unsplash.com/photos/hdW4rZPHe2g  (стружка на верстаке)
   metal — Ben Spray,       https://unsplash.com/photos/P_Obxo3hrVQ  (сварка в тёмном цеху, лица не видно)
-  stone — Jan Folwarczny,  https://unsplash.com/photos/Qp1Pa-ACYwo  (тёмный камень крупным планом)
+  stone — Peter Muniz,     https://unsplash.com/photos/lhIOmjqf728  (душевая, облицованная травертином)
 """
 import io, os, urllib.request
 import numpy as np
@@ -20,7 +20,7 @@ SRC = {
     # имя: (id фото, обрезка в долях кадра l,t,r,b, яркость)
     'wood':  ('photo-1470342495351-a5f90c5011cd', (0, .06, 1, .94), .80),
     'metal': ('photo-1745448797900-35d08e85e9db', (.24, .04, .82, .66), 1.25),
-    'stone': ('photo-1781954031816-cf15470cc3fc', (0, .04, 1, .96), 1.05),
+    'stone': ('photo-1763485956229-a5e1396f7d3a', (.36, 0, 1, 1), .92),
 }
 
 
@@ -39,7 +39,9 @@ def grade(im, gain):
     return Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8))
 
 
+import sys
 for name, (pid, (l, t, r, b), gain) in SRC.items():
+    if len(sys.argv) > 1 and name not in sys.argv[1:]: continue
     raw = urllib.request.urlopen(f'https://images.unsplash.com/{pid}?w=3600&q=88&fm=jpg', timeout=60).read()
     im = Image.open(io.BytesIO(raw)).convert('RGB'); w, h = im.size
     im = im.crop((int(l * w), int(t * h), int(r * w), int(b * h)))

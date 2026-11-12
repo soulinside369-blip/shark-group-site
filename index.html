@@ -801,7 +801,7 @@ footer .wrap{padding-top:26px}
   <!-- Слова о материалах идут по лицензионным кадрам Unsplash (src/stock.py — это не цех Shark Group, заменить своей съёмкой), работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
   <div class="tf mat" data-d="1100"><img src="m/s_wood.webp?h=ece7c4f4" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
   <div class="tf mat" data-d="950"><img decoding="async" src="m/s_metal.webp?h=238aaa9b" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
-  <div class="tf mat" data-d="950"><img decoding="async" src="m/s_stone.webp?h=c4953506" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
+  <div class="tf mat" data-d="950"><img decoding="async" src="m/s_stone.webp?h=afd58722" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""><span class="fr"><img decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""></span><span class="lab">Лестницы</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p25.webp?h=fc4a6614" alt=""><span class="fr"><img decoding="async" src="m/p25.webp?h=fc4a6614" alt=""></span><span class="lab">Панели из шпона</span><span class="blade"></span></div>
   <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p48.webp?h=cd4b012b" alt=""><span class="fr"><img decoding="async" src="m/p48.webp?h=cd4b012b" alt=""></span><span class="lab">Двери из массива</span><span class="blade"></span></div>
@@ -1683,7 +1683,7 @@ function clear(){timers.forEach(clearTimeout);timers=[]}
   g.innerHTML=s+'<circle class="gr" style="--i:'+N+'" pathLength="1" cx="120" cy="120" r="112" stroke="#C9A46A" stroke-width="5"/>';
 })();
 /* звук синтезируется в браузере (WebAudio), файлов нет; включается только по кнопке */
-var AC=null,mg=null,rv=null,snd=false,oscs=[];
+var AC=null,mg=null,rv=null,pad=null,snd=false,oscs=[];
 /* мягкий «кинозвук»: тёплый пад из синусов + реверберация; никакой пилы и белого шипения */
 function sndOn(){
   try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){snd=false;return}
@@ -1695,32 +1695,30 @@ function sndOn(){
   var cv=AC.createConvolver();cv.buffer=ir;var wet=AC.createGain();wet.gain.value=.5;cv.connect(wet);wet.connect(mg);
   rv=AC.createGain();rv.connect(cv);
   /* пад D: D2–A2–D3–A3, пары с лёгкой расстройкой, фильтр медленно «дышит» */
-  var lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=650;lp.Q.value=.4;lp.connect(mg);lp.connect(rv);
+  var lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=650;lp.Q.value=.4;lp.connect(mg);lp.connect(rv);pad=lp;
   var lfo=AC.createOscillator(),lg=AC.createGain();lfo.frequency.value=.07;lg.gain.value=260;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();oscs.push(lfo);
   [[73.42,.06],[110,.045],[146.83,.03],[220,.012]].forEach(function(x){[-3,3].forEach(function(dt){
     var o=AC.createOscillator(),g=AC.createGain();o.type=x[0]<100?'sine':'triangle';o.frequency.value=x[0];o.detune.value=dt;g.gain.value=x[1];o.connect(g);g.connect(lp);o.start();oscs.push(o)})});
 }
 function sndOff(){
-  if(!mg)return;var m=mg,os=oscs;mg=null;rv=null;oscs=[];
+  if(!mg)return;var m=mg,os=oscs;mg=null;rv=null;pad=null;oscs=[];
   try{m.gain.cancelScheduledValues(AC.currentTime);m.gain.setTargetAtTime(0,AC.currentTime,.5)}catch(e){}
   setTimeout(function(){os.forEach(function(o){try{o.stop()}catch(e){}});try{m.disconnect()}catch(e){}},3000);
 }
-function noise(sec){var b=AC.createBuffer(1,Math.floor(AC.sampleRate*sec),AC.sampleRate),ch=b.getChannelData(0),l=0;
-  for(var i=0;i<ch.length;i++){l=(l+.04*(Math.random()*2-1))/1.04;ch[i]=l*3.2} /* «коричневый» шум — мягкий, без шипения */
-  var n=AC.createBufferSource();n.buffer=b;return n}
 function cue(kind){
-  if(!mg||!kind)return;var t=AC.currentTime,g=AC.createGain();g.connect(mg);g.connect(rv);
-  if(kind==='cut'){ /* мягкий «вжух» воздуха вместо шипения */
-    var n=noise(1.3),f=AC.createBiquadFilter();f.type='lowpass';f.Q.value=.7;
-    f.frequency.setValueAtTime(260,t);f.frequency.exponentialRampToValueAtTime(1500,t+.45);f.frequency.exponentialRampToValueAtTime(380,t+1.2);
-    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.22,t+.38);g.gain.exponentialRampToValueAtTime(.0001,t+1.25);
-    n.connect(f);f.connect(g);n.start(t);n.stop(t+1.3);
-  }else if(kind==='hit'){ /* глубокий тёплый удар: суббас + приглушённый тон дерева */
+  if(!mg||!kind)return;var t=AC.currentTime;
+  if(kind==='cut'){ /* смена работ — без отдельного звука: пад плавно раскрывается и ведёт монтаж */
+    try{pad.frequency.setTargetAtTime(1500,t,1.4)}catch(e){}
+    return;
+  }
+  var g=AC.createGain();g.connect(mg);g.connect(rv);
+  if(kind==='hit'){ /* глубокий тёплый удар: суббас + приглушённый тон дерева */
     var o=AC.createOscillator();o.frequency.setValueAtTime(82,t);o.frequency.exponentialRampToValueAtTime(41,t+.7);
     g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.5,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+1.6);o.connect(g);o.start(t);o.stop(t+1.7);
     var w=AC.createOscillator(),wg=AC.createGain(),wf=AC.createBiquadFilter();w.type='triangle';w.frequency.value=293.66;wf.type='lowpass';wf.frequency.value=900;
     wg.gain.setValueAtTime(.0001,t);wg.gain.exponentialRampToValueAtTime(.05,t+.02);wg.gain.exponentialRampToValueAtTime(.0001,t+1.1);w.connect(wf);wf.connect(wg);wg.connect(g);w.start(t);w.stop(t+1.2);
   }else{ /* финал: тёплый D-мажор с ноной, медленная атака */
+    try{pad.frequency.setTargetAtTime(650,t,.8)}catch(e){}
     var cf=AC.createBiquadFilter();cf.type='lowpass';cf.frequency.setValueAtTime(500,t);cf.frequency.linearRampToValueAtTime(1600,t+1.5);cf.connect(g);
     [146.83,220,293.66,369.99,329.63].forEach(function(fq,i){var o=AC.createOscillator(),gg=AC.createGain();o.type='triangle';o.frequency.value=fq;o.detune.value=(i%2?4:-4);
       gg.gain.setValueAtTime(.0001,t);gg.gain.linearRampToValueAtTime(.045,t+.6+i*.12);gg.gain.exponentialRampToValueAtTime(.0001,t+4);o.connect(gg);gg.connect(cf);o.start(t);o.stop(t+4.1)});
