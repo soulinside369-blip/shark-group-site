@@ -1675,28 +1675,47 @@ function clear(){timers.forEach(clearTimeout);timers=[]}
   g.innerHTML=s+'<circle class="gr" style="--i:'+N+'" pathLength="1" cx="120" cy="120" r="112" stroke="#C9A46A" stroke-width="5"/>';
 })();
 /* звук синтезируется в браузере (WebAudio), файлов нет; включается только по кнопке */
-var AC=null,mg=null,snd=false,oscs=[];
+var AC=null,mg=null,rv=null,snd=false,oscs=[];
+/* мягкий «кинозвук»: тёплый пад из синусов + реверберация; никакой пилы и белого шипения */
 function sndOn(){
   try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){snd=false;return}
-  mg=AC.createGain();mg.gain.value=0;mg.connect(AC.destination);mg.gain.linearRampToValueAtTime(.5,AC.currentTime+.9);
-  var lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=300;lp.connect(mg);
-  [[55,.17],[82.5,.1],[110.4,.055]].forEach(function(x){var o=AC.createOscillator(),g=AC.createGain();o.type='sawtooth';o.frequency.value=x[0];g.gain.value=x[1];o.connect(g);g.connect(lp);o.start();oscs.push(o)});
+  var t=AC.currentTime,cmp=AC.createDynamicsCompressor();cmp.threshold.value=-20;cmp.ratio.value=3;cmp.connect(AC.destination);
+  mg=AC.createGain();mg.gain.setValueAtTime(0,t);mg.gain.linearRampToValueAtTime(.55,t+2.2);mg.connect(cmp);
+  /* реверберация из сгенерированного импульса (2,8 с) */
+  var len=Math.floor(AC.sampleRate*2.8),ir=AC.createBuffer(2,len,AC.sampleRate);
+  for(var c=0;c<2;c++){var ch=ir.getChannelData(c);for(var i=0;i<len;i++)ch[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2)}
+  var cv=AC.createConvolver();cv.buffer=ir;var wet=AC.createGain();wet.gain.value=.5;cv.connect(wet);wet.connect(mg);
+  rv=AC.createGain();rv.connect(cv);
+  /* пад D: D2–A2–D3–A3, пары с лёгкой расстройкой, фильтр медленно «дышит» */
+  var lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=650;lp.Q.value=.4;lp.connect(mg);lp.connect(rv);
+  var lfo=AC.createOscillator(),lg=AC.createGain();lfo.frequency.value=.07;lg.gain.value=260;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();oscs.push(lfo);
+  [[73.42,.06],[110,.045],[146.83,.03],[220,.012]].forEach(function(x){[-3,3].forEach(function(dt){
+    var o=AC.createOscillator(),g=AC.createGain();o.type=x[0]<100?'sine':'triangle';o.frequency.value=x[0];o.detune.value=dt;g.gain.value=x[1];o.connect(g);g.connect(lp);o.start();oscs.push(o)})});
 }
 function sndOff(){
-  if(!mg)return;var m=mg,os=oscs;mg=null;oscs=[];
-  try{m.gain.cancelScheduledValues(AC.currentTime);m.gain.setTargetAtTime(0,AC.currentTime,.3)}catch(e){}
-  setTimeout(function(){os.forEach(function(o){try{o.stop()}catch(e){}});try{m.disconnect()}catch(e){}},1600);
+  if(!mg)return;var m=mg,os=oscs;mg=null;rv=null;oscs=[];
+  try{m.gain.cancelScheduledValues(AC.currentTime);m.gain.setTargetAtTime(0,AC.currentTime,.5)}catch(e){}
+  setTimeout(function(){os.forEach(function(o){try{o.stop()}catch(e){}});try{m.disconnect()}catch(e){}},3000);
 }
+function noise(sec){var b=AC.createBuffer(1,Math.floor(AC.sampleRate*sec),AC.sampleRate),ch=b.getChannelData(0),l=0;
+  for(var i=0;i<ch.length;i++){l=(l+.04*(Math.random()*2-1))/1.04;ch[i]=l*3.2} /* «коричневый» шум — мягкий, без шипения */
+  var n=AC.createBufferSource();n.buffer=b;return n}
 function cue(kind){
-  if(!mg||!kind)return;var t=AC.currentTime,g=AC.createGain();g.connect(mg);
-  if(kind==='cut'){ /* «пропил»: шум с уходящей вверх полосой */
-    var n=AC.createBufferSource(),b=AC.createBuffer(1,Math.floor(AC.sampleRate*.4),AC.sampleRate),ch=b.getChannelData(0);for(var i=0;i<ch.length;i++)ch[i]=Math.random()*2-1;
-    var f=AC.createBiquadFilter();f.type='bandpass';f.Q.value=1.4;f.frequency.setValueAtTime(700,t);f.frequency.exponentialRampToValueAtTime(4200,t+.32);
-    g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.3,t+.05);g.gain.exponentialRampToValueAtTime(.001,t+.36);n.buffer=b;n.connect(f);f.connect(g);n.start(t);
-  }else if(kind==='hit'){ /* низкий удар на слово */
-    var o=AC.createOscillator();o.frequency.setValueAtTime(96,t);o.frequency.exponentialRampToValueAtTime(42,t+.5);g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.9);o.connect(g);o.start(t);o.stop(t+1);
-  }else{ /* финальный аккорд */
-    [220,277.2,329.6,440].forEach(function(fq,i){var o=AC.createOscillator(),gg=AC.createGain();o.frequency.value=fq;gg.gain.setValueAtTime(.0001,t);gg.gain.linearRampToValueAtTime(.09,t+.5+i*.05);gg.gain.exponentialRampToValueAtTime(.001,t+2.2);o.connect(gg);gg.connect(g);o.start(t);o.stop(t+2.4)});
+  if(!mg||!kind)return;var t=AC.currentTime,g=AC.createGain();g.connect(mg);g.connect(rv);
+  if(kind==='cut'){ /* мягкий «вжух» воздуха вместо шипения */
+    var n=noise(1.3),f=AC.createBiquadFilter();f.type='lowpass';f.Q.value=.7;
+    f.frequency.setValueAtTime(260,t);f.frequency.exponentialRampToValueAtTime(1500,t+.45);f.frequency.exponentialRampToValueAtTime(380,t+1.2);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.22,t+.38);g.gain.exponentialRampToValueAtTime(.0001,t+1.25);
+    n.connect(f);f.connect(g);n.start(t);n.stop(t+1.3);
+  }else if(kind==='hit'){ /* глубокий тёплый удар: суббас + приглушённый тон дерева */
+    var o=AC.createOscillator();o.frequency.setValueAtTime(82,t);o.frequency.exponentialRampToValueAtTime(41,t+.7);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.5,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+1.6);o.connect(g);o.start(t);o.stop(t+1.7);
+    var w=AC.createOscillator(),wg=AC.createGain(),wf=AC.createBiquadFilter();w.type='triangle';w.frequency.value=293.66;wf.type='lowpass';wf.frequency.value=900;
+    wg.gain.setValueAtTime(.0001,t);wg.gain.exponentialRampToValueAtTime(.05,t+.02);wg.gain.exponentialRampToValueAtTime(.0001,t+1.1);w.connect(wf);wf.connect(wg);wg.connect(g);w.start(t);w.stop(t+1.2);
+  }else{ /* финал: тёплый D-мажор с ноной, медленная атака */
+    var cf=AC.createBiquadFilter();cf.type='lowpass';cf.frequency.setValueAtTime(500,t);cf.frequency.linearRampToValueAtTime(1600,t+1.5);cf.connect(g);
+    [146.83,220,293.66,369.99,329.63].forEach(function(fq,i){var o=AC.createOscillator(),gg=AC.createGain();o.type='triangle';o.frequency.value=fq;o.detune.value=(i%2?4:-4);
+      gg.gain.setValueAtTime(.0001,t);gg.gain.linearRampToValueAtTime(.045,t+.6+i*.12);gg.gain.exponentialRampToValueAtTime(.0001,t+4);o.connect(gg);gg.connect(cf);o.start(t);o.stop(t+4.1)});
   }
 }
 function end(){
