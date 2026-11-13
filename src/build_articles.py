@@ -111,7 +111,7 @@ def page(title, desc, canon, body, jsonld, og_img):
 <body>
 <header class="top"><div class="in"><a class="logo" href="/">{LOGO}<span>SHARK GROUP</span></a><a class="pill" href="/#quiz" data-goal="article_cta">Рассчитать проект</a></div></header>
 {body}
-<footer><div class="in"><a href="/">sharkgroup.pro</a><a href="/stati/">Статьи</a><a href="/privacy.html">Политика конфиденциальности</a><span>ИП Шаркова Элина Валерьевна · ИНН 232010079424 · ОГРНИП 319237500229952</span></div></footer>
+<footer><div class="in"><a href="/">sharkgroup.pro</a><a href="tel:+79649446637">+7 964 944-66-37</a><a href="/stati/">Статьи</a><a href="https://dzen.ru/sharkgroup" target="_blank" rel="noopener" data-goal="dzen_click">Наш канал в Дзене</a><a href="/privacy.html">Политика конфиденциальности</a><span>ИП Шаркова Элина Валерьевна · ИНН 232010079424 · ОГРНИП 319237500229952</span></div></footer>
 </body>
 </html>
 '''
@@ -146,7 +146,7 @@ for a in ARTICLES:
 <p>Пришлите фото помещения или проект — ответим в рабочее время, смету покажем до начала работ.</p>
 <div class="row"><a class="btn btn-brass" href="/#quiz" data-goal="article_cta">Рассчитать по фото</a><a class="btn btn-ghost" href="/?cat={cat}#cat" data-goal="article_catalog">{CATN.get(cat, "Каталог")}: цены</a></div>
 </section>
-<nav class="more" aria-label="Другие статьи"><h2 style="margin-top:0">Ещё статьи</h2><ul>{others}</ul></nav>
+<nav class="more" aria-label="Другие статьи"><h2 style="margin-top:0">Ещё статьи</h2><ul>{others}</ul><p>Новые работы и статьи — в нашем канале: <a href="https://dzen.ru/sharkgroup" target="_blank" rel="noopener" data-goal="dzen_click">Shark Group в Дзене</a>.</p></nav>
 </main>'''
     ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': 'Article', 'headline': a['title'], 'description': a['desc'], 'image': SITE + cov.split('?')[0],

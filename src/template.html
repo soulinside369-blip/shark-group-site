@@ -894,6 +894,30 @@ footer .wrap{padding-top:26px}
   .offers a::after{right:10px}
   .offers b{font-size:14px}.offers span{font-size:12px}
 }
+
+/* первый экран: карусель позиций */
+.hero-ph{cursor:pointer;background:var(--pit)}
+.hero-ph img{position:absolute;inset:0;opacity:0;transition:opacity .7s var(--ease),transform 2.6s var(--ease);transform:scale(1.04)}
+.hero-ph img.on{opacity:1;transform:scale(1)}
+.hero-ph .hc{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:2px 14px;left:14px;right:14px;bottom:14px;width:auto;max-width:none;padding:12px 16px 14px;border-radius:14px;background:rgba(7,11,18,.78);color:var(--ivory);overflow:hidden}
+.hc-c{grid-column:1/-1;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.hc-n{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.15}
+.hc-p{font-size:14px;font-weight:600;color:var(--brass-hi);white-space:nowrap}
+.hc-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(242,235,221,.12)}
+.hc-bar i{display:block;height:100%;background:var(--brass);transform-origin:left;animation:hcb 2s linear both}
+.hero-ph.hold .hc-bar i{animation-play-state:paused}
+@keyframes hcb{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hc-nav{position:absolute;top:14px;right:14px;display:flex;gap:8px;opacity:0;transition:opacity .25s}
+.hero-ph:hover .hc-nav,.hero-ph:focus-within .hc-nav{opacity:1}
+.hc-nav button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(242,235,221,.35);background:rgba(7,11,18,.7);color:var(--ivory);font-size:20px;line-height:1;cursor:pointer}
+.hc-nav button:hover{border-color:var(--brass);color:var(--brass)}
+.hero-ph:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+.offers a.on{background:rgba(201,164,106,.12)}
+.offers a.on::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--brass)}
+.hero-tel{font-weight:600;color:var(--ivory);text-decoration:none;border-bottom:1px solid rgba(201,164,106,.5)}
+.hero-tel:hover{color:var(--brass)}
+@media (max-width:899px){.hero-ph .hc,.hc-nav{display:none}.hero-tel{font-size:15px}}
+@media (prefers-reduced-motion:reduce){.hero-ph img{transition:none;transform:none}.hc-bar{display:none}}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
@@ -955,6 +979,7 @@ footer .wrap{padding-top:26px}
       <p class="hero-lead">Стеновые панели из шпона, лестницы, двери и мебель — проектируем, делаем в своём цеху и монтируем своей бригадой.</p>
       <div class="hero-cta">
         <a class="btn btn-brass" href="#quiz">Рассчитать по фото</a>
+        <a class="hero-tel" href="tel:+79649446637">+7 964 944-66-37</a>
         <span class="hero-note">Замер за 1–2 дня · смета до начала работ · гарантия 2 года</span>
       </div>
     </div>
@@ -1143,7 +1168,7 @@ footer .wrap{padding-top:26px}
   <div class="fword saw" aria-hidden="true"><span>SHARK GROUP</span></div>
   <div class="wrap">
     <div style="display:flex;align-items:center;gap:10px"><svg width="28" height="28" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="5"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></svg><b style="color:var(--ivory)">Shark Group</b> · цех: [адрес], Сочи</div>
-    <div class="links"><span>[телефон]</span><span>Telegram</span><span>MAX</span><a href="/stati/">Статьи</a><a href="/privacy.html">Политика конфиденциальности</a><span>ИП Шаркова Элина Валерьевна · ИНН 232010079424 · ОГРНИП 319237500229952</span></div>
+    <div class="links"><a href="tel:+79649446637">+7 964 944-66-37</a><a href="/stati/">Статьи</a><a href="https://dzen.ru/sharkgroup" target="_blank" rel="noopener" data-dzen>Наш канал в Дзене</a><a href="/privacy.html">Политика конфиденциальности</a><span>ИП Шаркова Элина Валерьевна · ИНН 232010079424 · ОГРНИП 319237500229952</span></div>
   </div>
 </footer>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-n" hidden>
@@ -1460,7 +1485,7 @@ var TILES=[
 ];
 /* ---------- каталог: карточки позиций + окно выбора ---------- */
 /* Контакты: когда заказчик даст телефон и Telegram — вписать сюда, в нижней панели появятся кнопки. */
-var CONTACTS={tel:'',tg:''};
+var CONTACTS={tel:'+7 964 944-66-37',tg:''};
 /* ---------- Яндекс Метрика: впишите номер счётчика — код подключится сам ---------- */
 var YM_ID=114234559;
 if(YM_ID){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,d,'script','https://mc.yandex.ru/metrika/tag.js','ym');
@@ -1472,6 +1497,7 @@ var UTM={};(function(){var q=new URLSearchParams(location.search),k=['utm_source
   try{st=JSON.parse(sessionStorage.getItem('sg_utm')||'{}')}catch(e){}
   k.forEach(function(x){if(q.get(x))st[x]=q.get(x).slice(0,200)});
   UTM=st;try{sessionStorage.setItem('sg_utm',JSON.stringify(st))}catch(e){}})();
+d.addEventListener('click',function(e){if(e.target.closest('a[data-dzen]'))goal('dzen_click')});
 d.addEventListener('click',function(e){var a=e.target.closest('a[href^="tel:"],a[href*="t.me/"],a[href*="max.ru"]');if(a)goal(/^tel:/.test(a.getAttribute('href'))?'click_phone':'click_messenger')});
 (function(){var n=d.getElementById('mnav'),h='';
   if(CONTACTS.tel)h+='<a href="tel:'+CONTACTS.tel.replace(/[^+\d]/g,'')+'">Позвонить</a>';
@@ -1826,6 +1852,49 @@ function shOpen(it,from){
   try{var t=d.startViewTransition(go);t.finished.then(done,done)}
   catch(e){go();done()}
 }
+/* первый экран: карточки позиций каталога листаются сами каждые 2 с, по разделам; клик — открыть позицию */
+(function(){
+  var fig=d.querySelector('.hero-ph');if(!fig)return;
+  var list=[];CATS.forEach(function(c){ITEMS.forEach(function(it){if(it.c===c[0]&&/(^|\/)m\/(p\d+|n_\w+)\.webp/.test(it.im))list.push(it)})});
+  if(list.length<2)return;
+  var offers=[].slice.call(d.querySelectorAll('.offers a'));
+  var first=list.findIndex(function(it){return it.id==='panels'});if(first<0)first=0;
+  fig.setAttribute('role','link');fig.tabIndex=0;
+  var img0=fig.querySelector('img');img0.classList.add('on');
+  var img1=d.createElement('img');img1.alt='';img1.decoding='async';img0.after(img1);
+  fig.querySelector('figcaption').outerHTML='<figcaption class="hc"><span class="hc-c"></span><b class="hc-n"></b><span class="hc-p"></span><span class="hc-bar"><i></i></span></figcaption>'+
+    '<span class="hc-nav"><button type="button" data-d="-1" aria-label="Предыдущая позиция">‹</button><button type="button" data-d="1" aria-label="Следующая позиция">›</button></span>';
+  var cap=fig.querySelector('.hc'),bar=fig.querySelector('.hc-bar i'),i=first,cur=img0,nxt=img1,timer=0,paused=false,vis=true,tok=0;
+  /* подпись и фото меняются в один момент — только когда новый кадр загружен, чтобы текст всегда совпадал с картинкой */
+  function show(k){
+    i=(k+list.length)%list.length;var it=list[i],my=++tok;
+    var apply=function(swap){if(my!==tok)return;
+      if(swap){nxt.classList.add('on');cur.classList.remove('on');var t=cur;cur=nxt;nxt=t}
+      cur.alt=it.n;
+      cap.querySelector('.hc-c').textContent=(CATN[it.c]||'');
+      cap.querySelector('.hc-n').textContent=it.n;
+      cap.querySelector('.hc-p').textContent=it.p;
+      fig.setAttribute('aria-label',it.n+' — открыть позицию');
+      var oc=it.c==='kit'?'fur':it.c;offers.forEach(function(a){a.classList.toggle('on',a.dataset.c===oc)});
+      bar.style.animation='none';void bar.offsetWidth;bar.style.animation='';
+      var pre=new Image();pre.src=list[(i+1)%list.length].im;
+    };
+    if(cur.getAttribute('src')===it.im){apply(false);return}
+    nxt.onload=null;nxt.src=it.im;
+    if(nxt.complete&&nxt.naturalWidth)apply(true);else nxt.onload=function(){apply(true)};
+  }
+  function run(){clearTimeout(timer);if(paused||!vis||d.hidden){fig.classList.add('hold');return}fig.classList.remove('hold');timer=setTimeout(function(){show(i+1);run()},2000)}
+  show(first,true);
+  if(reduce){fig.classList.add('hold')}else run();
+  fig.addEventListener('mouseenter',function(){paused=true;run()});
+  fig.addEventListener('mouseleave',function(){paused=false;run()});
+  fig.addEventListener('focusin',function(){paused=true;run()});
+  fig.addEventListener('focusout',function(){paused=false;run()});
+  d.addEventListener('visibilitychange',run);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;run()}).observe(fig);
+  fig.addEventListener('click',function(e){var b=e.target.closest('.hc-nav button');if(b){show(i+(+b.dataset.d));if(!reduce)run();return}goal('hero_card');shOpen(list[i])});
+  fig.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();goal('hero_card');shOpen(list[i])}else if(e.key==='ArrowRight'||e.key==='ArrowLeft'){show(i+(e.key==='ArrowRight'?1:-1))}});
+})();
 /* «в расчёт»: позиция улетает в кнопку расчёта, счётчик подпрыгивает */
 var lastTap=null;
 d.addEventListener('pointerdown',function(e){lastTap=e.target},true);
