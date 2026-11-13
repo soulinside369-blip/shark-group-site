@@ -753,13 +753,6 @@ main>section:not(.hero){counter-increment:sec}
 .scrl::after{content:"";display:block;width:1px;height:54px;margin:12px auto 0;background:linear-gradient(180deg,var(--brass),transparent);animation:scrl 2.2s var(--ease) infinite}
 @keyframes scrl{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @media (min-width:1100px) and (hover:hover){.scrl{display:block}}
-/* бегущая строка */
-.mq{overflow:hidden;padding-block:26px;border-block:1px solid var(--line);background:var(--pit)}
-.mq>div{will-change:transform}
-.mq-t{display:inline-block;white-space:nowrap;font-family:var(--display);font-weight:600;font-size:clamp(54px,10vw,150px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(201,164,106,.7);animation:mq 46s linear infinite;animation-play-state:paused}
-.mq.run .mq-t{animation-play-state:running}
-.mq-t i{font-style:normal;color:var(--brass);-webkit-text-stroke:0;margin:0 .12em}
-@keyframes mq{to{transform:translateX(-50%)}}
 /* кнопки: латунная заливка снизу */
 @media (hover:hover){
   .btn-ghost{position:relative;overflow:hidden;isolation:isolate;transition:color .35s,border-color .35s,transform .3s var(--ease)}
@@ -796,8 +789,7 @@ main>section:not(.hero){counter-increment:sec}
 .fword.in span{transform:none;opacity:1}
 footer{border-top:0;padding-top:0}
 footer .wrap{padding-top:26px}
-@media (prefers-reduced-motion:reduce){.fword span{transform:none;opacity:1}.mq-t{animation:none}}
-@media (max-width:760px){.mq{padding-block:16px}}
+@media (prefers-reduced-motion:reduce){.fword span{transform:none;opacity:1}}
 
 /* ---------- реставрация ---------- */
 .rst{padding-block:96px;background:linear-gradient(180deg,transparent,rgba(201,164,106,.05) 40%,transparent)}
@@ -865,6 +857,48 @@ footer .wrap{padding-top:26px}
 .tf.tt .tt-a{margin:0;font:600 12px/1.4 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--brass);opacity:0;transition:opacity .7s .1s}
 .tf.tt.on .tt-a{opacity:1}
 .tf.tt h2{line-height:1.02}
+
+/* ---------- первый экран v2: текст + фото + предложения ---------- */
+.hero{height:auto;min-height:min(100svh,940px);display:flex;align-items:center;background:radial-gradient(60% 55% at 78% 40%,rgba(201,164,106,.10),transparent 70%),linear-gradient(180deg,var(--pit),var(--night))}
+.hero::before,.hero::after{display:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:"txt ph" "off off";column-gap:clamp(32px,5vw,80px);row-gap:clamp(28px,4vh,48px);align-items:center;padding-block:clamp(104px,14vh,140px) 32px}
+.hero-txt{grid-area:txt}
+.hero h1{font-size:clamp(44px,5.6vw,88px);max-width:12ch}
+.hero-lead{margin-top:22px;max-width:30em;font-size:17px;color:var(--soft)}
+.hero .hero-cta{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.hero-note{font-size:13px;color:var(--mute)}
+.hero-ph{grid-area:ph;position:relative;margin:0;justify-self:end;width:100%;max-width:520px;aspect-ratio:4/5;max-height:62svh;border-radius:20px;overflow:hidden;border:1px solid rgba(201,164,106,.35);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 60%;animation:none;transform:none}
+.hero-ph figcaption{position:absolute;left:14px;bottom:14px;right:14px;width:max-content;max-width:calc(100% - 28px);padding:7px 12px;border-radius:999px;background:rgba(7,11,18,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-size:12px;color:var(--soft)}
+.offers{grid-area:off;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(14,23,38,.6)}
+.offers a{position:relative;display:flex;flex-direction:column;gap:4px;min-height:76px;padding:16px 34px 16px 18px;text-decoration:none;color:var(--ivory);border-left:1px solid var(--line);transition:background-color .25s}
+.offers a:first-child{border-left:0}
+.offers a::after{content:"→";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--brass);opacity:.55;transition:transform .25s var(--ease),opacity .25s}
+.offers b{font-size:15px;font-weight:600;line-height:1.25}
+.offers span{font-size:13px;color:var(--brass)}
+.offers a:hover,.offers a:focus-visible{background:rgba(201,164,106,.1)}
+.offers a:hover::after{opacity:1;transform:translate(3px,-50%)}
+@media (max-width:1100px){.offers{grid-template-columns:repeat(3,minmax(0,1fr))}.offers a:nth-child(4){border-left:0}.offers a:nth-child(n+4){border-top:1px solid var(--line)}}
+@media (max-width:899px){
+  .hero{min-height:0;display:block}
+  .hero .wrap{position:relative;display:block;padding-block:0 20px}
+  .hero-ph{position:absolute;left:-16px;right:-16px;top:0;width:calc(100% + 32px);max-width:none;height:430px;max-height:none;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none}
+  .hero-ph img{object-position:50% 72%}
+  .hero-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,18,.72) 0%,rgba(7,11,18,.62) 40%,rgba(7,11,18,.78) 70%,var(--pit) 100%)}
+  .hero-txt .eyebrow,.hero h1{text-shadow:0 2px 14px rgba(7,11,18,.85),0 1px 2px rgba(7,11,18,.9)}
+  .hero-ph figcaption{top:auto;bottom:auto;display:none}
+  .hero-txt{position:relative;z-index:1;padding-top:150px}
+  .hero h1{font-size:clamp(36px,10vw,52px)}
+  .hero-lead{display:none}
+  .hero .hero-cta{margin-top:20px}
+  .hero .hero-cta .btn{flex:1 1 100%}
+  .hero-note{font-size:12px}
+  .offers{position:relative;z-index:1;margin-top:20px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .offers a{min-height:64px;padding:12px 28px 12px 14px;border-left:1px solid var(--line);border-top:1px solid var(--line)}
+  .offers a:nth-child(odd){border-left:0}.offers a:nth-child(-n+2){border-top:0}
+  .offers a::after{right:10px}
+  .offers b{font-size:14px}.offers span{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -883,7 +917,7 @@ footer .wrap{padding-top:26px}
   <div class="tf mat" data-d="1100"><img decoding="async" src="m/s_stone.webp?h=de8c9845" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>мрамор, травертин, плитка — облицовка и укладка</small></div></div>
   <div class="tf center tt" data-d="1500"><p class="tt-a">Shark Group · Сочи</p><h2>Из нашего цеха —<br>в ваш интерьер</h2></div>
   <div class="tf sh" data-d="1100" style="--kx:-2%;--ky:1%"><div class="sh-i"><img src="m/n_desk1.webp?h=e63ae120" alt="" style="object-position:50% 55%"></div><span class="cap"><i>01</i><b>Реставрация</b>раритетный письменный стол</span></div>
-  <div class="tf sh duo" data-d="1150" style="--kx:2%;--ky:-1%"><div class="sh-i"><img src="m/p124.webp?h=13dc8ec6" alt="" style="object-position:50% 60%"></div><div class="sh-i"><img src="m/n_rift1.webp?h=f46c56e4" alt="" style="object-position:50% 45%"></div><span class="cap"><i>02</i><b>Лестницы и стены</b>парящая лестница · панели «Разлом»</span></div>
+  <div class="tf sh duo" data-d="1150" style="--kx:2%;--ky:-1%"><div class="sh-i"><img src="m/p124.webp?h=13dc8ec6" alt="" style="object-position:50% 60%"></div><div class="sh-i"><img src="m/n_rift1.webp?h=f46c56e4" alt="" style="object-position:50% 45%"></div><span class="cap"><i>02</i><b>Лестницы и стены</b>облицовка бетонной лестницы · панели «Разлом»</span></div>
   <div class="tf sh" data-d="1050" style="--kx:-1.5%;--ky:-1%"><div class="sh-i"><img src="m/p1.webp?h=5ea0ed07" alt="" style="object-position:50% 40%"></div><span class="cap"><i>03</i><b>Рестораны</b>пять залов в Сочи</span></div>
   <div class="tf sh duo" data-d="1150" style="--kx:1.5%;--ky:1%"><div class="sh-i"><img src="m/p48.webp?h=adba71c2" alt="" style="object-position:50% 45%"></div><div class="sh-i"><img src="m/n_peb1.webp?h=6b2e5b73" alt="" style="object-position:50% 50%"></div><span class="cap"><i>04</i><b>Двери и мебель</b>резной массив · стол с галькой</span></div>
   <div class="tf sh" data-d="1000" style="--kx:2%;--ky:0%"><div class="sh-i"><img src="m/n_sofa4.webp?h=0135d91d" alt="" style="object-position:50% 55%"></div><span class="cap"><i>05</i><b>Мягкая мебель</b>премиум под заказ</span></div>
@@ -922,23 +956,28 @@ footer .wrap{padding-top:26px}
 
 <main>
 <section class="hero" id="top" aria-label="Первый экран">
-  <img fetchpriority="high" src="m/p124.webp?h=13dc8ec6" alt="Парящая лестница из тёмного дерева со стеклянным ограждением и подсветкой ступеней">
-  <canvas class="hero-gl" id="hero-gl" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">Своё производство · Сочи и Краснодарский край · по всей России</div>
-    <h1><span class="w">Дерево,</span> <span class="w">металл</span> <span class="w">и&nbsp;камень</span> <span class="w">в&nbsp;одном</span> <span class="w">интерьере</span></h1>
-    <span class="scrl" aria-hidden="true">листайте</span>
-    <div class="hero-row">
+    <div class="hero-txt">
+      <div class="eyebrow">Своё производство · Сочи и Краснодарский край</div>
+      <h1><span class="w">Дерево,</span> <span class="w">металл</span> <span class="w">и&nbsp;камень</span> <span class="w">в&nbsp;одном</span> <span class="w">интерьере</span></h1>
+      <p class="hero-lead">Стеновые панели из шпона, лестницы, двери и мебель — проектируем, делаем в своём цеху и монтируем своей бригадой.</p>
       <div class="hero-cta">
-        <a class="btn btn-brass" href="#quiz">Прислать фото — посчитаем</a>
-        <a class="btn btn-ghost" href="#cat">Каталог и цены</a>
-      </div>
-      <div class="facts">
-        <span><b>1,5 мм</b>шпона на массиве</span>
-        <span><b>5</b>ресторанов в Сочи</span>
-        <span><b>2 года</b>гарантии</span>
+        <a class="btn btn-brass" href="#quiz">Рассчитать по фото</a>
+        <span class="hero-note">Замер за 1–2 дня · смета до начала работ · гарантия 2 года</span>
       </div>
     </div>
+    <figure class="hero-ph">
+      <img fetchpriority="high" src="m/p24.webp?h=4c10ad2b" alt="Гостиная: стены в панелях из шпона и угловой диван — работа Shark Group">
+      <figcaption>Панели из шпона и мягкая мебель — наш объект</figcaption>
+    </figure>
+    <nav class="offers" aria-label="Что делаем">
+      <a href="?cat=ven#cat" data-c="ven"><b>Панели из шпона</b><span>от 25 000 ₽/м²</span></a>
+      <a href="?cat=st#cat" data-c="st"><b>Лестницы</b><span>от 250 000 ₽</span></a>
+      <a href="?cat=door#cat" data-c="door"><b>Двери из массива</b><span>от 65 000 ₽</span></a>
+      <a href="?cat=fur#cat" data-c="fur"><b>Мебель из массива</b><span>от 60 000 ₽</span></a>
+      <a href="?cat=soft#cat" data-c="soft"><b>Мягкая мебель</b><span>от 28 000 ₽</span></a>
+      <a href="?cat=restore#cat" data-c="restore"><b>Реставрация</b><span>по оценке</span></a>
+    </nav>
   </div>
 </section>
 
@@ -956,7 +995,6 @@ footer .wrap{padding-top:26px}
   </div>
 </section>
 
-<div class="mq" id="mq" aria-hidden="true"><div><div class="mq-t">Дерево <i>·</i> Металл <i>·</i> Камень <i>·</i> Шпон <i>·</i> Лестницы <i>·</i> Двери <i>·</i> Кухни <i>·</i> Мягкая мебель <i>·</i> Реставрация <i>·</i> Ковка <i>·</i> Дерево <i>·</i> Металл <i>·</i> Камень <i>·</i> Шпон <i>·</i> Лестницы <i>·</i> Двери <i>·</i> Кухни <i>·</i> Мягкая мебель <i>·</i> Реставрация <i>·</i> Ковка <i>·</i> </div></div></div>
 
 <section class="ven" id="veneer" aria-labelledby="ven-h">
   <div class="wrap">
@@ -1455,7 +1493,7 @@ var CATS=[
  ['door','Двери','Межкомнатные, скрытые, арочные, резные и входные — из массива и в шпоне.','от 65 000 ₽','4–8 недель','m/p48.webp?h=adba71c2'],
  ['kit','Кухни и корпус','Кухни, стеллажи, гардеробные и винные шкафы из массива и шпона.','от 150 000 ₽','6–10 недель','m/p52.webp?h=4e8c8ffe'],
  ['fur','Мебель','Кровати, обеденные столы, стол с рекой из гальки, резьба и декор из массива.','от 60 000 ₽','4–8 недель','m/p118.webp?h=a31be8da'],
- ['soft','Мягкая мебель','Премиум под заказ: честерфилды, угловые диваны, кресла и пуфы — размер, ткань и цвет под интерьер.','по проекту','под заказ','m/n_sofa4.webp?h=0135d91d'],
+ ['soft','Мягкая мебель','Премиум под заказ: честерфилды, угловые диваны, кресла и пуфы — размер, ткань и цвет под интерьер.','от 28 000 ₽','под заказ','m/n_sofa4.webp?h=0135d91d'],
  ['restore','Реставрация','Возвращаем к жизни старинную мебель из массива — вплоть до раритетов: резьба, шпон, покрытие.','по оценке','по объёму работ','m/n_desk2.webp?h=41ca6feb'],
  ['rest','Рестораны','Fish Bone, «Мамай Кале», Harat’s, Marani и Promenad: стойки, потолки, стены и мебель для залов.','индивидуально','проект — 2 недели','m/p15.webp?h=798e07be'],
  ['met','Металл и ковка','Ворота, перила, винтовые лестницы, кованые двери, мангалы и декор.','от 150 000 ₽','4–6 недель','m/p72.webp?h=fe1c2083'],
@@ -1476,17 +1514,17 @@ var ITEMS=[
  {id:'p_coff',c:'ven',d:0,n:'Кессонные панели',s:'Рельефные квадратные панели с резным жгутом и розетками, покраска в два цвета в своей малярной камере.',p:'по проекту',pn:'по размеру и цвету',t:'3–5 недель',im:'m/n_coff1.webp?h=dda2eaad',g:[['m/n_coff1.webp?h=dda2eaad','Кессонные панели, зелёный и оранжевый'],['m/n_coff2.webp?h=42f0814b','Кессоны: жгут и розетки, деталь']]},
  {id:'plinth',c:'ven',d:0,n:'Плинтусы',s:'Плинтус из МДФ под покраску и в шпоне на фанере — разные профили и высота.',p:'от 500 ₽/пог. м',pn:'по профилю и метражу',t:'под заказ',im:'m/oak_white.webp?h=5f5106f3',g:[['m/oak_white.webp?h=5f5106f3','Шпон: дуб беленый']],o:[['Исполнение',['МДФ под покраску','Шпон на фанере']],['Метраж, пог. м','например 60','in']],inc:['Профиль и высота — по образцу или эскизу','Покраска в малярной камере','Изготовление под заказ'],viz:1},
  {id:'paint',c:'ven',d:0,n:'Покраска фасадов',s:'Своя малярная камера: красим мебельные фасады, двери и детали — ровно и без пыли.',p:'от 5 000 ₽/м²',pn:'по площади и покрытию',t:'по объёму',im:'m/p53.webp?h=4aea2f0e',g:[['m/p53.webp?h=4aea2f0e','Кухня в эмали'],['m/p103.webp?h=9354d307','Двери в эмали']],o:[['Покрытие',['Эмаль','Лак','Масло','Тонировка']],['Площадь, м²','например 12','in']],inc:['Покраска в малярной камере','Подготовка и шлифовка','Цвет — по каталогу или образцу']},
- {id:'st_metal',c:'st',d:2,n:'Лестницы на металлокаркасе',s:'Каркас варим в своём цеху, ступени — массив дуба со шпоном 1,5 мм, подсветка.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p56.webp?h=83ab7526',g:[['m/p56.webp?h=83ab7526','Лестница из дуба с подсветкой'],['m/p58.webp?h=9ef4d842','Подсветка ступеней'],['m/p55.webp?h=5cae35cf','Лестница, вид сверху'],['m/p100.webp?h=9c023440','Металлокаркас с площадками'],['m/p99.webp?h=0bb87fee','Каркас на бетоне'],['m/n_stair.webp?h=baa9d67f','Лестница на одном косоуре']]},
- {id:'st_float',c:'st',d:2,n:'Парящие лестницы',s:'Консольные ступени, стеклянное ограждение, подсветка каждой ступени.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p124.webp?h=13dc8ec6',g:[['m/p124.webp?h=13dc8ec6','Парящая лестница со стеклом'],['m/p34.webp?h=e518357b','Ступени с подсветкой и стеклом']]},
- {id:'st_clad',c:'st',d:2,n:'Облицовка бетонной лестницы',s:'Ступени, подступенки, поручень и балюстрада на готовое бетонное основание.',p:'по замеру',pn:'',t:'3–8 недель',im:'m/p83.webp?h=9e49ceb1',g:[['m/p83.webp?h=9e49ceb1','Ступени и подступенки'],['m/p81.webp?h=c92fc89a','Забежные ступени'],['m/p84.webp?h=a0a5dbec','Балюстрада'],['m/p82.webp?h=8e901845','Марш с поручнем'],['m/p85.webp?h=a94a0441','Поручень на стене']]},
+ {id:'st_metal',c:'st',d:2,n:'Лестницы на металлокаркасе',s:'Каркас варим в своём цеху, ступени — массив дуба со шпоном 1,5 мм, подсветка.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p56.webp?h=83ab7526',g:[['m/p56.webp?h=83ab7526','Лестница из дуба с подсветкой'],['m/p58.webp?h=9ef4d842','Подсветка ступеней'],['m/p55.webp?h=5cae35cf','Лестница, вид сверху'],['m/n_stair.webp?h=baa9d67f','Лестница на одном косоуре']]},
+ {id:'st_float',c:'st',d:2,n:'Парящие лестницы',s:'Ступени держатся на металле, выходящем из стены, — без видимых опор. Ступени из массива, ограждение и подсветка — по проекту.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p99.webp?h=0bb87fee',g:[['m/p99.webp?h=0bb87fee','Каркас: металл выходит из стены'],['m/p100.webp?h=9c023440','Каркас из стены до облицовки ступеней']]},
+ {id:'st_clad',c:'st',d:2,n:'Облицовка бетонной лестницы',s:'Ступени из массива на готовое бетонное основание: подступенки, поручень, стеклянное ограждение или балюстрада, подсветка ступеней.',p:'по замеру',pn:'',t:'3–8 недель',im:'m/p124.webp?h=13dc8ec6',g:[['m/p124.webp?h=13dc8ec6','Облицовка бетона: тёмный дуб, стекло, подсветка'],['m/p34.webp?h=e518357b','Ступени с подсветкой и стеклянным ограждением'],['m/p83.webp?h=9e49ceb1','Ступени и подступенки'],['m/p81.webp?h=c92fc89a','Забежные ступени'],['m/p84.webp?h=a0a5dbec','Балюстрада'],['m/p82.webp?h=8e901845','Марш с поручнем'],['m/p85.webp?h=a94a0441','Поручень на стене']]},
  {id:'st_wood',c:'st',d:2,n:'Деревянные лестницы',s:'Цельнодеревянные лестницы для домов из бруса и сруба.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p79.webp?h=35b24166',g:[['m/p79.webp?h=35b24166','Деревянная лестница в срубе']]},
  {id:'st_spiral',c:'st',x:['met'],d:2,n:'Винтовые лестницы',s:'Металлический каркас, кованые перила, ступени из дерева.',p:'от 250 000 ₽',pn:'',t:'3–8 недель',im:'m/p62.webp?h=dd2c4baf',g:[['m/p62.webp?h=dd2c4baf','Винтовая лестница с коваными перилами']]},
  {id:'rails',c:'st',x:['met'],d:2,n:'Перила и ограждения',s:'Кованые, деревянные и резные экраны — на новую или готовую лестницу, балкон, террасу.',p:'по замеру',pn:'',t:'3–8 недель',im:'m/p74.webp?h=f10b300b',g:[['m/p74.webp?h=f10b300b','Кованые перила'],['m/p42.webp?h=4b749399','Перила с деревянным поручнем'],['m/p36.webp?h=cad16e58','Резной экран ограждения'],['m/p73.webp?h=ed388870','Ограждение второго света'],['m/p67.webp?h=38d2ee47','Балконное ограждение'],['m/n_balc.webp?h=2c690363','Деревянное балконное ограждение']],o:[['Материал',['Ковка','Дерево','Металл + дерево','Резной экран']]]},
- {id:'d_int',c:'door',d:3,n:'Межкомнатные двери',s:'Двери из массива и в шпоне: филёнки, карнизы, наличники.',p:'от 65 000 ₽',pn:'',t:'4–8 недель',im:'m/p121.webp?h=bc30eeb7',g:[['m/p121.webp?h=bc30eeb7','Классическая дверь из массива'],['m/p120.webp?h=fc5c7f46','Дверь из массива, открыта'],['m/p49.webp?h=d8ff0ebf','Филёнчатая дверь'],['m/p8.webp?h=17aa9c2d','Дверь из массива в ресторане'],['m/n_door_w.webp?h=424ed124','Белая дверь с карнизом']]},
+ {id:'d_int',c:'door',d:3,n:'Межкомнатные двери',s:'Двери из массива и в шпоне: филёнки, карнизы, наличники.',p:'от 65 000 ₽',pn:'',t:'4–8 недель',im:'m/p121.webp?h=bc30eeb7',g:[['m/p121.webp?h=bc30eeb7','Классическая дверь из массива'],['m/p120.webp?h=fc5c7f46','Дверь из массива, открыта'],['m/p49.webp?h=d8ff0ebf','Филёнчатая дверь'],['m/p8.webp?h=17aa9c2d','Дверь из массива в ресторане'],['m/n_door_w.webp?h=424ed124','Белая дверь с карнизом'],['m/n_door_tel.webp?h=a3091cca','Дверь из массива с порталом']]},
  {id:'d_barn',c:'door',d:3,n:'Амбарные двери',s:'Двери в амбарном стиле с накладками-«иксами», окраска в цвет интерьера.',p:'от 65 000 ₽',pn:'',t:'4–8 недель',im:'m/n_barn2.webp?h=99045662',g:[['m/n_barn2.webp?h=99045662','Две амбарные двери после покраски'],['m/n_barn1.webp?h=33f3ca00','Амбарная дверь в цеху']]},
  {id:'d_hidden',c:'door',x:['ven'],d:3,n:'Скрытые двери',s:'Дверь в плоскости стены — в одном шпоне с панелями, без наличников.',p:'от 65 000 ₽',pn:'',t:'4–8 недель',im:'m/p25.webp?h=fc4a6614',g:[['m/p25.webp?h=fc4a6614','Скрытая дверь в панелях из ореха'],['m/p24.webp?h=4c10ad2b','Панели из ореха со скрытой дверью']]},
  {id:'d_arch',c:'door',d:3,n:'Арочные двери со стеклом',s:'Двустворчатые и одинарные, эмаль, гравированное стекло, арочные порталы.',p:'от 65 000 ₽',pn:'',t:'4–8 недель',im:'m/p103.webp?h=9354d307',g:[['m/p103.webp?h=9354d307','Арочные двустворчатые двери'],['m/p107.webp?h=b0cc64c6','Арочные двери, эмаль'],['m/p105.webp?h=a4bd6685','Дверь со стеклом'],['m/p104.webp?h=9ecc5964','Дверь со стеклом, открыта'],['m/p108.webp?h=8dffa087','Дверь с гравированным стеклом'],['m/p109.webp?h=e18f8cd4','Арочный портал']]},
- {id:'d_carved',c:'door',d:3,n:'Резные двери',s:'Двустворчатые двери из массива с резными филёнками и латунной фурнитурой.',p:'по проекту',pn:'',t:'4–8 недель',im:'m/p48.webp?h=adba71c2',g:[['m/p48.webp?h=adba71c2','Резные двери из массива'],['m/p46.webp?h=c3824ef5','Резные двери, общий вид'],['m/p47.webp?h=1cdccd76','Латунная ручка'],['m/p145.webp?h=9d08dc16','Двери в зал'],['m/n_door_tel.webp?h=a3091cca','Дверь с порталом, тот же дом']]},
+ {id:'d_carved',c:'door',d:3,n:'Резные двери',s:'Двустворчатые двери из массива с резными филёнками и латунной фурнитурой.',p:'по проекту',pn:'',t:'4–8 недель',im:'m/p48.webp?h=adba71c2',g:[['m/p48.webp?h=adba71c2','Резные двери из массива'],['m/p46.webp?h=c3824ef5','Резные двери, общий вид'],['m/p47.webp?h=1cdccd76','Латунная ручка'],['m/p145.webp?h=9d08dc16','Двери в зал']]},
  {id:'d_entry',c:'door',d:3,n:'Входные двери',s:'Массив, филёнки-пирамиды, кованые накладки.',p:'от 180 000 ₽',pn:'',t:'4–8 недель',im:'m/p28.webp?h=5c6758e7',g:[['m/p28.webp?h=5c6758e7','Входная дверь с пирамидами'],['m/p27.webp?h=cecb0beb','Входная дверь, ракурс'],['m/p29.webp?h=3d4c56c5','Входная дверь'],['m/p31.webp?h=c890f658','Входная дверь, фронтально'],['m/p30.webp?h=c7dd513b','Филёнки-пирамиды, деталь']]},
  {id:'k_kitchen',c:'kit',d:4,n:'Кухни',s:'Кухни из массива и шпона: фасады в эмали и под состаренное дерево, острова со столешницей из массива.',p:'от 150 000 ₽',pn:'',t:'6–10 недель',im:'m/p52.webp?h=4e8c8ffe',g:[['m/p52.webp?h=4e8c8ffe','Белая кухня из массива'],['m/p53.webp?h=4aea2f0e','Кухня и обеденная зона'],['m/n_loft1.webp?h=6b588ac4','Кухня в стиле лофт'],['m/n_loft2.webp?h=bd14efd6','Лофт: фасады под старое дерево'],['m/n_island.webp?h=18c72076','Кухонный остров со столешницей из массива']]},
  {id:'k_shelf',c:'kit',d:4,n:'Стеллажи и шкафы',s:'Стеллажи, витрины, гардеробные и встроенные шкафы из массива и шпона.',p:'от 150 000 ₽',pn:'',t:'6–10 недель',im:'m/p4.webp?h=ff0c6cbc',g:[['m/p4.webp?h=ff0c6cbc','Стеллаж из массива'],['m/p5.webp?h=046c85ef','Стеллаж с подсветкой']],o:[['Что нужно',['Стеллаж','Гардеробная','Встроенный шкаф','Витрина'],1]]},
@@ -1495,8 +1533,8 @@ var ITEMS=[
  {id:'f_table',c:'fur',d:5,n:'Обеденные столы',s:'Столы из массива под размер комнаты, в масле или эмали.',p:'по проекту',pn:'',t:'4–8 недель',im:'m/p54.webp?h=c5df3e7c',g:[['m/p54.webp?h=c5df3e7c','Обеденный стол из массива'],['m/p53.webp?h=4aea2f0e','Стол в кухне-столовой'],['m/n_table.webp?h=8d794698','Стол на трапециевидных ногах']]},
  {id:'f_pebble',c:'fur',d:5,n:'Стол «река из гальки»',s:'Столешница из каштана толщиной 6 см, по центру — русло из морской гальки. Подстолье из металла.',p:'160 000 ₽',pn:'140 × 75 см, высота 75 см',t:'4–8 недель',im:'m/n_peb1.webp?h=6b2e5b73',g:[['m/n_peb1.webp?h=6b2e5b73','Стол из каштана с галькой'],['m/n_peb2.webp?h=dbf6cdac','Русло из морской гальки, деталь']],hot:1},
  {id:'f_carve',c:'fur',d:5,n:'Резьба и декор',s:'Резные панно, порталы, облицовка каминов.',p:'по проекту',pn:'',t:'4–8 недель',im:'m/p87.webp?h=b043d3cf',g:[['m/p87.webp?h=b043d3cf','Резное панно'],['m/p88.webp?h=893b002f','Резные панно в цеху'],['m/p80.webp?h=d45ae9f4','Облицовка биокамина']],o:[['Что нужно',['Резное панно','Портал','Облицовка камина'],1]]},
- {id:'s_sofa',c:'soft',d:5,n:'Диваны',s:'Честерфилды с каретной стяжкой, прямые и угловые диваны. Размер, ткань и цвет — под ваш интерьер.',p:'по проекту',pn:'по размеру и ткани',t:'под заказ',im:'m/n_sofa4.webp?h=0135d91d',g:[['m/n_sofa4.webp?h=0135d91d','Угловой диван в гостиной'],['m/n_sofa2.webp?h=599155ba','Честерфилд, бежевый'],['m/n_sofa1.webp?h=d560bc1f','Честерфилд в цеху'],['m/n_sofa3.webp?h=8e4c6095','Диван с каретной стяжкой'],['m/n_sofa5.webp?h=ee0616a9','Угловой диван, общий вид']],o:[['Тип',['Прямой','Угловой','Честерфилд'],1],['Цвет ткани',['Тёмная олива','Олива','Мох','Хаки','Шалфей','Светлый шалфей','Тёплый беж','Песочный','Мягкий коричневый','Тауп','Графит','Кремовый','Молочный'],0,'sw',['#2E3322','#3D4530','#535C38','#6A7343','#838C5C','#A9AF86','#DCC6A7','#CDB79E','#A57C64','#A89A8C','#4A4A4A','#F2E9DD','#F6F2EC']]],inc:['Размер, ткань и цвет — под интерьер','Изготовление под заказ','Доставка и сборка своей бригадой']},
- {id:'s_chair',c:'soft',d:5,n:'Кресла и пуфы',s:'Мягкие кресла к обеденному столу, кресла и пуфы — в одной ткани с диваном или отдельно.',p:'по проекту',pn:'по количеству и ткани',t:'под заказ',im:'m/n_dine.webp?h=1094ac04',g:[['m/n_dine.webp?h=1094ac04','Кресла к обеденному столу'],['m/n_chair.webp?h=892f18ee','Мягкое кресло, деталь']],o:[['Что нужно',['Кресла к столу','Кресла','Пуфы'],1],['Цвет ткани',['Тёмная олива','Олива','Мох','Хаки','Шалфей','Светлый шалфей','Тёплый беж','Песочный','Мягкий коричневый','Тауп','Графит','Кремовый','Молочный'],0,'sw',['#2E3322','#3D4530','#535C38','#6A7343','#838C5C','#A9AF86','#DCC6A7','#CDB79E','#A57C64','#A89A8C','#4A4A4A','#F2E9DD','#F6F2EC']],['Количество, шт.','например 6','in']],inc:['Ткань и цвет — под интерьер','Изготовление под заказ']},
+ {id:'s_sofa',c:'soft',d:5,n:'Диваны',s:'Честерфилды с каретной стяжкой, прямые и угловые диваны. Размер, ткань и цвет — под ваш интерьер.',p:'от 180 000 ₽',pn:'по размеру и ткани',t:'под заказ',im:'m/n_sofa4.webp?h=0135d91d',g:[['m/n_sofa4.webp?h=0135d91d','Угловой диван в гостиной'],['m/n_sofa2.webp?h=599155ba','Честерфилд, бежевый'],['m/n_sofa1.webp?h=d560bc1f','Честерфилд в цеху'],['m/n_sofa3.webp?h=8e4c6095','Диван с каретной стяжкой'],['m/n_sofa5.webp?h=ee0616a9','Угловой диван, общий вид']],o:[['Тип',['Прямой','Угловой','Честерфилд'],1],['Цвет ткани',['Тёмная олива','Олива','Мох','Хаки','Шалфей','Светлый шалфей','Тёплый беж','Песочный','Мягкий коричневый','Тауп','Графит','Кремовый','Молочный'],0,'sw',['#2E3322','#3D4530','#535C38','#6A7343','#838C5C','#A9AF86','#DCC6A7','#CDB79E','#A57C64','#A89A8C','#4A4A4A','#F2E9DD','#F6F2EC']]],inc:['Размер, ткань и цвет — под интерьер','Изготовление под заказ','Доставка и сборка своей бригадой']},
+ {id:'s_chair',c:'soft',d:5,n:'Кресла и пуфы',s:'Мягкие кресла к обеденному столу, кресла и пуфы — в одной ткани с диваном или отдельно.',p:'28 000 ₽/шт.',pn:'по количеству и ткани',t:'под заказ',im:'m/n_dine.webp?h=1094ac04',g:[['m/n_dine.webp?h=1094ac04','Кресла к обеденному столу'],['m/n_chair.webp?h=892f18ee','Мягкое кресло, деталь']],o:[['Что нужно',['Кресла к столу','Кресла','Пуфы'],1],['Цвет ткани',['Тёмная олива','Олива','Мох','Хаки','Шалфей','Светлый шалфей','Тёплый беж','Песочный','Мягкий коричневый','Тауп','Графит','Кремовый','Молочный'],0,'sw',['#2E3322','#3D4530','#535C38','#6A7343','#838C5C','#A9AF86','#DCC6A7','#CDB79E','#A57C64','#A89A8C','#4A4A4A','#F2E9DD','#F6F2EC']],['Количество, шт.','например 6','in']],inc:['Ткань и цвет — под интерьер','Изготовление под заказ']},
  {id:'rs_furn',c:'restore',x:['fur'],d:5,n:'Реставрация мебели из массива',s:'Восстанавливаем старинную мебель в своём цеху — вплоть до раритетов. На фото — письменный стол из тех, что покупали на выставках.',p:'по оценке',pn:'по фото или на месте',t:'по объёму работ',im:'m/n_desk1.webp?h=e63ae120',g:[['m/n_desk1.webp?h=e63ae120','Письменный стол после реставрации'],['m/n_desk2.webp?h=41ca6feb','Тумба и резная нога'],['m/n_desk_ws3.webp?h=742cc8cc','Стол в цеху'],['m/n_desk_ws1.webp?h=e72d8266','Резная нога на верстаке'],['m/n_desk_ws2.webp?h=dd6a90fb','Резная нога, деталь'],['m/n_desk3.webp?h=318350b7','Стол в кабинете'],['m/n_desk5.webp?h=a6080ffb','Стол, общий вид']],inc:['Осмотр и оценка — по фото или на месте','Реставрация в своём цеху','Стоимость и срок — до начала работ']},
  {id:'r_bar',c:'rest',d:6,n:'Барные стойки',s:'Стойки для баров и ресторанов, в том числе уличные с аквариумом.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'m/p15.webp?h=798e07be',g:[['m/p15.webp?h=798e07be','Барная стойка Harat’s'],['m/p17.webp?h=9c0cdfd8','Столешница стойки с логотипом'],['m/p11.webp?h=461ce7b8','Уличная стойка «Мамай Кале»'],['m/p12.webp?h=ce5db716','Стойка с аквариумом']]},
  {id:'r_ceil',c:'rest',d:6,n:'Потолки и стены',s:'Потолки с канатами и балками, люстры, цветные стеновые панели, стены из старых дверей.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'m/p9.webp?h=3d1aa79b',g:[['m/p9.webp?h=3d1aa79b','Потолок с канатами, Fish Bone'],['m/p1.webp?h=5ea0ed07','Люстра и потолок, Fish Bone'],['m/p18.webp?h=8b3f193d','Стеновые панели, Harat’s'],['m/p20.webp?h=6ad0cd57','Панели, деталь'],['m/p16.webp?h=5dbf7552','Стена из старых дверей']]},
@@ -1642,7 +1680,7 @@ var CASES=[
  {c:'home',n:'Дом с резными дверями',s:'Резные двери, дверь с порталом, въездные и гаражные ворота — один дом',ph:['m/p48.webp?h=adba71c2','m/p46.webp?h=c3824ef5','m/p47.webp?h=1cdccd76','m/p145.webp?h=9d08dc16','m/n_door_tel.webp?h=a3091cca','m/n_gate.webp?h=5544a38a','m/n_gate_ws.webp?h=0bedf655','m/p146.webp?h=0c002b94','m/p147.webp?h=51bb1643','m/p40.webp?h=0c002b94']},
  {c:'home',n:'Панели «Разлом» с подсветкой',s:'Объёмные тёмные панели, свет в изломах',ph:['m/n_rift1.webp?h=f46c56e4','m/n_rift2.webp?h=a420db5e']},
  {c:'home',n:'Кессонные панели',s:'Рельеф, резной жгут, розетки, покраска в два цвета',ph:['m/n_coff1.webp?h=dda2eaad','m/n_coff2.webp?h=42f0814b']},
- {c:'st',n:'Парящая лестница со стеклом',s:'Тёмный дуб, стеклянное ограждение, подсветка каждой ступени',ph:['m/p124.webp?h=13dc8ec6','m/p34.webp?h=e518357b']},
+ {c:'st',n:'Лестница по бетону: дуб, стекло и свет',s:'Облицовка бетонного марша тёмным дубом, стеклянное ограждение, подсветка каждой ступени',ph:['m/p124.webp?h=13dc8ec6','m/p34.webp?h=e518357b']},
  {c:'st',n:'Лестница от бетона до света',s:'Металлокаркас, ступени из массива со шпоном 1,5 мм, подсветка',ph:['m/p56.webp?h=83ab7526','m/p58.webp?h=9ef4d842','m/p55.webp?h=5cae35cf','m/p99.webp?h=0bb87fee','m/p100.webp?h=9c023440','m/p26.webp?h=2d318e99']},
  {c:'st',n:'Лестница на одном косоуре',s:'Металлический косоур, ступени из массива',ph:['m/n_stair.webp?h=baa9d67f']},
  {c:'st',n:'Облицовка бетонной лестницы',s:'Ступени и подступенки, поручень, балюстрада',ph:['m/p83.webp?h=9e49ceb1','m/p81.webp?h=c92fc89a','m/p84.webp?h=a0a5dbec','m/p82.webp?h=8e901845','m/p85.webp?h=a94a0441']},
@@ -1721,7 +1759,7 @@ var HFS='uniform sampler2D T;uniform vec2 R,I,M;uniform float t,k;'+
  'c+=amber*(mote(v*a,7.,.035)+mote(v*a+3.,13.,.02)*.6)*.45*k;'+
  'gl_FragColor=vec4(c,1.);}';
 (function(){
-  if(reduce||!fine||innerWidth<900)return;
+  if(reduce||!fine||innerWidth<900||!d.getElementById('hero-gl'))return;
   var img=hero.querySelector('img'),cv=d.getElementById('hero-gl'),HG=null,vis=true,raf=0,t0=0,mx=0,my=0,tx=0,ty=0,moved=false,n=0,acc=0,last=0,dead=false;
   function frame(now){
     raf=0;if(dead)return;
@@ -1823,13 +1861,11 @@ function fly(){
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)[].forEach.call(nav.children,function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
     SEC.forEach(function(x){io.observe(d.getElementById(x[0]))})}
 })();
+/* предложения первого экрана → раздел каталога */
+[].forEach.call(d.querySelectorAll('.offers a'),function(a){a.addEventListener('click',function(e){if(typeof catGo!=='function')return;e.preventDefault();catGo(a.dataset.c,true);goal('hero_offer')})});
 /* первый экран уходит мягко: текст отстаёт и гаснет (только десктоп) */
 if(fine&&!reduce)(function(){var w=hero.querySelector('.wrap'),raf=0;
   addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var y=scrollY,h=hero.offsetHeight;if(y>h)return;var k=y/h;w.style.transform='translate3d(0,'+(y*.22).toFixed(1)+'px,0)';w.style.opacity=(1-k*1.25).toFixed(3)})},{passive:true})})();
-/* бегущая строка материалов: едет сама и подталкивается скроллом */
-(function(){var m=d.getElementById('mq');if(!m||reduce)return;var t=m.firstElementChild,raf=0;
-  addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var r=m.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;t.style.transform='translate3d('+(-(innerHeight-r.top)*.18).toFixed(1)+'px,0,0)'})},{passive:true});
-  if('IntersectionObserver' in window)new IntersectionObserver(function(es){m.classList.toggle('run',es[0].isIntersecting)}).observe(m)})();
 /* карточки наклоняются за курсором (только мышь) */
 if(fine&&!reduce)d.addEventListener('pointermove',function(e){
   var c=e.target.closest?e.target.closest('.ctile,.ccard,.reel button'):null;
