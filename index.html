@@ -788,6 +788,43 @@ footer{border-top:0;padding-top:0}
 footer .wrap{padding-top:26px}
 @media (prefers-reduced-motion:reduce){.fword span{transform:none;opacity:1}.mq-t{animation:none}}
 @media (max-width:760px){.mq{padding-block:16px}}
+
+/* ---------- реставрация ---------- */
+.rst{padding-block:96px;background:linear-gradient(180deg,transparent,rgba(201,164,106,.05) 40%,transparent)}
+.rst-top{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:end;margin-bottom:34px}
+.rst-top .lead{margin:0;max-width:56ch}
+.rst-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:14px;height:min(68vh,640px)}
+.rst-grid button,.rst-strip button{position:relative;padding:0;border:0;border-radius:18px;overflow:hidden;background:var(--night-2);cursor:zoom-in}
+.rst-grid img,.rst-strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.rst-grid button:hover img,.rst-strip button:hover img{transform:scale(1.05)}
+.rst-a{grid-row:1/3}.rst-d{grid-column:2/4}
+.rst-t{position:absolute;left:14px;bottom:12px;z-index:1;padding:6px 12px;border-radius:999px;background:rgba(7,11,18,.72);backdrop-filter:blur(6px);font:600 11px/1.3 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--brass)}
+.rst-strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:10px}
+.rst-strip button{aspect-ratio:1/1;border-radius:12px}
+.rst-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin-top:30px}
+.rst-foot .kv{margin:0}
+.rst-cta{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){
+  .rst{padding-block:64px}
+  .rst-top{grid-template-columns:1fr;gap:14px;margin-bottom:22px}
+  .rst-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto;gap:10px}
+  .rst-grid button{aspect-ratio:1/1}
+  .rst-a{grid-row:auto;grid-column:1/-1;aspect-ratio:4/3!important}
+  .rst-d{grid-column:1/-1;aspect-ratio:16/10!important}
+  .rst-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .rst-cta,.rst-cta .btn{width:100%}
+}
+
+/* трейлер: работы сменяются наплывом, кадр медленно «дышит», подпись — номер и название */
+.tf.st .fr img{transform:scale(1.08) translateY(1.5%);transition:transform 3.2s cubic-bezier(.2,.6,.3,1)}
+.tf.st.on .fr img{transform:none}
+.tf.st img.bg{transition:opacity .45s}
+.tf.st .cap{position:absolute;z-index:3;left:max(24px,7vw);bottom:11vh;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(16px);transition:opacity .5s .25s,transform .8s .25s var(--ease)}
+.tf.st.on .cap{opacity:1;transform:none}
+.tf.st.on:has(~ .tf.on) .cap{opacity:0;transition:opacity .12s}
+.tf.st .cap b{font:600 clamp(30px,4vw,58px)/1 var(--display);color:var(--ivory);text-transform:none;letter-spacing:0}
+.tf.st .cap{font:600 clamp(11px,1.1vw,15px)/1.4 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+@media (max-width:700px){.tf.st .fr img{max-height:56vh;max-width:90vw}.tf.st .cap{bottom:12vh}}
 </style>
 </head>
 <body>
@@ -803,12 +840,12 @@ footer .wrap{padding-top:26px}
   <div class="tf mat" data-d="1100"><img src="m/s_wood.webp?h=ece7c4f4" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
   <div class="tf mat" data-d="950"><img decoding="async" src="m/s_metal.webp?h=238aaa9b" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
   <div class="tf mat" data-d="950"><img decoding="async" src="m/s_stone.webp?h=afd58722" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""><span class="fr"><img decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""></span><span class="lab">Лестницы</span><span class="blade"></span></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p25.webp?h=fc4a6614" alt=""><span class="fr"><img decoding="async" src="m/p25.webp?h=fc4a6614" alt=""></span><span class="lab">Панели из шпона</span><span class="blade"></span></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p48.webp?h=cd4b012b" alt=""><span class="fr"><img decoding="async" src="m/p48.webp?h=cd4b012b" alt=""></span><span class="lab">Двери из массива</span><span class="blade"></span></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p123.webp?h=6a1a16a3" alt=""><span class="fr"><img decoding="async" src="m/p123.webp?h=6a1a16a3" alt=""></span><span class="lab">Мебель и корпус</span><span class="blade"></span></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p62.webp?h=dd2c4baf" alt=""><span class="fr"><img decoding="async" src="m/p62.webp?h=dd2c4baf" alt=""></span><span class="lab">Металл и ковка</span><span class="blade"></span></div>
-  <div class="tf cut work" data-d="560"><img class="bg" decoding="async" src="m/p15.webp?h=798e07be" alt=""><span class="fr"><img decoding="async" src="m/p15.webp?h=798e07be" alt=""></span><span class="lab">Рестораны под ключ</span><span class="blade"></span></div>
+  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="m/n_desk1.webp?h=af632255" alt=""><span class="fr"><img decoding="async" src="m/n_desk1.webp?h=af632255" alt=""></span><span class="cap"><b>Реставрация</b>раритетный письменный стол</span></div>
+  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""><span class="fr"><img decoding="async" src="m/p124.webp?h=13dc8ec6" alt=""></span><span class="cap"><b>Лестницы</b>парящая, со стеклом и светом</span></div>
+  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="m/n_rift1.webp?h=9bbac30b" alt=""><span class="fr"><img decoding="async" src="m/n_rift1.webp?h=9bbac30b" alt=""></span><span class="cap"><b>Стеновые панели</b>«Разлом» с подсветкой</span></div>
+  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="m/n_peb1.webp?h=40a322c7" alt=""><span class="fr"><img decoding="async" src="m/n_peb1.webp?h=40a322c7" alt=""></span><span class="cap"><b>Мебель</b>стол с рекой из гальки</span></div>
+  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="m/p48.webp?h=cd4b012b" alt=""><span class="fr"><img decoding="async" src="m/p48.webp?h=cd4b012b" alt=""></span><span class="cap"><b>Двери</b>резные, из массива</span></div>
+  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="m/p1.webp?h=fba77007" alt=""><span class="fr"><img decoding="async" src="m/p1.webp?h=fba77007" alt=""></span><span class="cap"><b>Рестораны</b>Fish Bone, Сочи</span></div>
   <div class="tf center" data-d="1100"><img decoding="async" src="m/walnut.webp?h=55843323" alt="" style="filter:blur(14px) brightness(.26) saturate(.8);transform:scale(1.1)"><h2 style="position:relative">Своё производство</h2><div class="eyebrow" style="position:relative">Сочи · Краснодарский край · вся Россия</div></div>
   <div class="tf center" data-d="1000" style="background:var(--night)">
     <svg width="110" height="110" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle class="ring" cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="2.5" pathLength="360"/><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></svg>
@@ -828,7 +865,7 @@ footer .wrap{padding-top:26px}
       <span>SHARK GROUP</span>
     </a>
     <nav class="nav" aria-label="Разделы">
-      <a href="#cat">Каталог</a><a href="#veneer">Шпон</a><a href="#mood">Сочетания</a><a href="#how">Процесс</a><a href="#works">Работы</a>
+      <a href="#cat">Каталог</a><a href="#veneer">Шпон</a><a href="#mood">Сочетания</a><a href="#how">Процесс</a><a href="#works">Работы</a><a href="#restore">Реставрация</a>
     </nav>
     <div class="top-r">
       <button class="pill tr-btn" id="replay" type="button">▶ Трейлер</button>
@@ -852,7 +889,7 @@ footer .wrap{padding-top:26px}
       </div>
       <div class="facts">
         <span><b>1,5 мм</b>шпона на массиве</span>
-        <span><b>3</b>ресторана в Сочи</span>
+        <span><b>5</b>ресторанов в Сочи</span>
         <span><b>2 года</b>гарантии</span>
       </div>
     </div>
@@ -973,6 +1010,26 @@ footer .wrap{padding-top:26px}
     <div class="reel" id="reel" aria-label="Кейсы"></div>
   </div>
 </section>
+<section class="rst" id="restore" aria-labelledby="rst-h">
+  <div class="wrap">
+    <div class="rst-top rv">
+      <div><div class="eyebrow">Реставрация</div><h2 id="rst-h" style="margin-top:12px">Возвращаем жизнь раритетной мебели</h2></div>
+      <p class="lead">Письменный стол из массива — из тех, что когда-то покупали на выставках. Резные ноги, фигурный шпон на тумбах, столешница с бортиком. Стол приехал к нам в цех, а вернулся в кабинет таким, каким его задумали мастера.</p>
+    </div>
+    <div class="rst-grid rv" id="rst-grid">
+      <button type="button" class="rst-a" data-i="0"><img loading="lazy" decoding="async" src="m/n_desk1.webp?h=af632255" alt="Письменный стол после реставрации"><span class="rst-t">После · в кабинете</span></button>
+      <button type="button" class="rst-b" data-i="2"><img loading="lazy" decoding="async" src="m/n_desk_ws3.webp?h=742cc8cc" alt="Стол в цеху"><span class="rst-t">В цеху</span></button>
+      <button type="button" class="rst-c" data-i="4"><img loading="lazy" decoding="async" src="m/n_desk_ws2.webp?h=dd6a90fb" alt="Резная нога стола, деталь"><span class="rst-t">Резьба</span></button>
+      <button type="button" class="rst-d" data-i="1"><img loading="lazy" decoding="async" src="m/n_desk2.webp?h=41ca6feb" alt="Тумба и резная нога после реставрации"><span class="rst-t">Шпон и резьба после</span></button>
+    </div>
+    <div class="rst-strip" id="rst-strip"></div>
+    <div class="rst-foot rv">
+      <div class="kv"><div><small>Оценка</small>по фото или на месте</div><div><small>Где</small>в своём цеху</div><div><small>Цена и срок</small>до начала работ</div></div>
+      <div class="rst-cta"><a class="btn btn-brass" href="#quiz" id="rst-calc">Оценить мебель по фото</a><button class="btn btn-ghost" type="button" id="rst-all">Все 11 фото</button></div>
+    </div>
+  </div>
+</section>
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр работы" hidden><img id="lb-img" alt=""><button class="x" type="button" id="lb-x" aria-label="Закрыть">✕</button><button class="pv" type="button" id="lb-pv" aria-label="Предыдущая">←</button><button class="nx" type="button" id="lb-nx" aria-label="Следующая">→</button><div class="cap" id="lb-cap"></div></div>
 
 <section class="quiz" id="quiz" aria-labelledby="quiz-h">
@@ -1090,7 +1147,7 @@ var DIRS=[
  ['Двери','Двери','Входные группы и межкомнатные из массива: резьба, арки, стекло, ковка.','65 000 ₽','4–8 недель','m/p48.webp?h=cd4b012b','Резные двери из массива'],
  ['Кухни и корпус','Кухни','Кухни, стеллажи, гардеробные и винные шкафы из массива и шпона.','150 000 ₽','6–10 недель','m/p4.webp?h=ff0c6cbc','Стеллаж из массива'],
  ['Мебель из массива','Мебель','Столы, кровати, мягкая мебель, резные панно и реставрация.','[…] ₽','4–8 недель','m/p87.webp?h=b043d3cf','Резное панно'],
- ['Рестораны под ключ','Рестораны','Fish Bone, «Мамай Кале», Harat’s: стойки, потолки, мебель, мягкая мебель.','индивидуально','проект — 2 недели','m/p1.webp?h=fba77007','Зал ресторана Fish Bone'],
+ ['Рестораны под ключ','Рестораны','Fish Bone, «Мамай Кале», Harat’s, Marani, Promenad: стойки, потолки, мебель, мягкая мебель.','индивидуально','проект — 2 недели','m/p1.webp?h=fba77007','Зал ресторана Fish Bone'],
  ['Металл и ковка','Ковка','Ворота, перила, винтовые лестницы, мангалы и декор.','150 000 ₽','4–6 недель','m/p62.webp?h=dd2c4baf','Винтовая лестница с коваными перилами'],
  ['Улица и фасады','Фасады','Перголы, ставни, ограждения террас, плитка и камень.','[…] ₽','4–8 недель','m/p114.webp?h=fca07cce','Ограждение террасы с видом на горы']
 ];
@@ -1316,7 +1373,7 @@ var CATS=[
  ['fur','Мебель','Кровати, обеденные столы, стол с рекой из гальки, резьба и декор из массива.','от 60 000 ₽','4–8 недель','m/p118.webp?h=dbcf25f5'],
  ['soft','Мягкая мебель','Премиум под заказ: честерфилды, угловые диваны, кресла и пуфы — размер, ткань и цвет под интерьер.','по проекту','под заказ','m/n_sofa4.webp?h=479bbe06'],
  ['restore','Реставрация','Возвращаем к жизни старинную мебель из массива — вплоть до раритетов: резьба, шпон, покрытие.','по оценке','по объёму работ','m/n_desk2.webp?h=41ca6feb'],
- ['rest','Рестораны','Fish Bone, «Мамай Кале», Harat’s: стойки, потолки, стены и мебель для залов.','индивидуально','проект — 2 недели','m/p15.webp?h=798e07be'],
+ ['rest','Рестораны','Fish Bone, «Мамай Кале», Harat’s, Marani и Promenad: стойки, потолки, стены и мебель для залов.','индивидуально','проект — 2 недели','m/p15.webp?h=798e07be'],
  ['met','Металл и ковка','Ворота, перила, винтовые лестницы, кованые двери, мангалы и декор.','от 150 000 ₽','4–6 недель','m/p72.webp?h=92a520e1'],
  ['out','Улица и фасады','Ограждения террас, перголы, гаражные ворота, ставни и кашпо.','по проекту','4–8 недель','m/p114.webp?h=fca07cce']
 ];
@@ -1542,6 +1599,17 @@ var sx=null;lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX
 function reelBy(k){reel.scrollBy({left:k*(reel.querySelector('button:not([hidden])').offsetWidth+14)*2,behavior:reduce?'auto':'smooth'})}
 d.getElementById('rl-prev').addEventListener('click',function(){reelBy(-1)});d.getElementById('rl-next').addEventListener('click',function(){reelBy(1)});
 
+/* ---------- реставрация: галерея и кнопки ---------- */
+(function(){
+  var RST=CASES.filter(function(w){return w.c==='restore'})[0];if(!RST)return;
+  var L=RST.ph.map(function(x,i){return [x,RST.n+' · '+(i<2?'после':i<5?'в цеху':'после')]});
+  d.getElementById('rst-grid').addEventListener('click',function(e){var b=e.target.closest('button');if(b)lbOpen(+b.dataset.i,L)});
+  var st=d.getElementById('rst-strip');
+  RST.ph.slice(5).forEach(function(x,k){var b=d.createElement('button');b.type='button';b.setAttribute('aria-label','Фото '+(k+6)+' из '+L.length);b.innerHTML='<img loading="lazy" decoding="async" src="'+x+'" alt="">';b.addEventListener('click',function(){lbOpen(k+5,L)});st.appendChild(b)});
+  d.getElementById('rst-all').addEventListener('click',function(){lbOpen(0,L)});
+  d.getElementById('rst-calc').addEventListener('click',function(){preset(5,'it:rs_furn','Реставрация мебели из массива')});
+})();
+
 /* ---------- sticky header & mobile bar ---------- */
 var hdr=d.getElementById('hdr'),ly=scrollY,heroH=hero=d.querySelector('.hero');
 addEventListener('scroll',function(){var y=scrollY,past=y>hero.offsetHeight-80;hdr.classList.toggle('fixed',past);hdr.classList.toggle('hide',past&&y>ly&&y-ly>4);ly=y},{passive:true});
@@ -1664,7 +1732,7 @@ function fly(){
   var bar=d.getElementById('prog'),raf=0;
   function upd(){raf=0;var h=R.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
   addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});upd();
-  var SEC=[['top','Начало'],['cat','Каталог'],['veneer','Шпон'],['mood','Сочетания'],['how','Процесс'],['case','Было — стало'],['works','Кейсы'],['quiz','Расчёт']],nav=d.getElementById('dots');
+  var SEC=[['top','Начало'],['cat','Каталог'],['veneer','Шпон'],['mood','Сочетания'],['how','Процесс'],['case','Было — стало'],['works','Кейсы'],['restore','Реставрация'],['quiz','Расчёт']],nav=d.getElementById('dots');
   SEC.forEach(function(x){var a=d.createElement('a');a.href='#'+x[0];a.innerHTML='<span>'+x[1]+'</span>';nav.appendChild(a)});
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)[].forEach.call(nav.children,function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
     SEC.forEach(function(x){io.observe(d.getElementById(x[0]))})}
@@ -1762,7 +1830,7 @@ function play(){
   tfs.forEach(function(f,i){
     timers.push(setTimeout(function(){
       f.classList.add('on');
-      if(snd)cue(f.classList.contains('cut')?'cut':f.querySelector('.word')?'hit':i===tfs.length-1?'chord':'');
+      if(snd)cue(f.classList.contains('cut')||f.classList.contains('st')?'cut':f.querySelector('.word')?'hit':i===tfs.length-1?'chord':'');
       if(i>0&&!f.classList.contains('cut')){var prev=tfs[i-1];timers.push(setTimeout(function(){tfs.slice(0,i).forEach(function(x){x.classList.remove('on')})},450))}
       if(f.classList.contains('cut')&&i>0&&tfs[i-1].classList.contains('cut')){var pv=tfs[i-1];timers.push(setTimeout(function(){pv.classList.remove('on')},400))}
       d.getElementById('tc').textContent='SG · 00:'+('0'+Math.round(t/1000)).slice(-2);
