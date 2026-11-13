@@ -9,7 +9,7 @@
 Источники:
   wood  — Clem Onojeghuo,  https://unsplash.com/photos/hdW4rZPHe2g  (стружка на верстаке)
   metal — Ben Spray,       https://unsplash.com/photos/P_Obxo3hrVQ  (сварка в тёмном цеху, лица не видно)
-  stone — Peter Muniz,     https://unsplash.com/photos/lhIOmjqf728  (душевая, облицованная травертином)
+  stone — Lisa Anna,       https://unsplash.com/photos/0ydKHF_d41c  (облицовка чёрным мрамором с белыми прожилками)
 """
 import io, os, urllib.request
 import numpy as np
@@ -20,7 +20,7 @@ SRC = {
     # имя: (id фото, обрезка в долях кадра l,t,r,b, яркость)
     'wood':  ('photo-1470342495351-a5f90c5011cd', (0, .06, 1, .94), .80),
     'metal': ('photo-1745448797900-35d08e85e9db', (.24, .04, .82, .66), 1.25),
-    'stone': ('photo-1763485956229-a5e1396f7d3a', (.36, 0, 1, 1), .92),
+    'stone': ('photo-1722942115727-bea0c3c20cd1', (.168, .44, .832, 1), 1.0),  # ниже полки с банками
 }
 
 

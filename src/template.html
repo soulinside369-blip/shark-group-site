@@ -810,35 +810,41 @@ footer .wrap{padding-top:26px}
   .rst-cta,.rst-cta .btn{width:100%}
 }
 
-/* трейлер: работы сменяются наплывом, кадр медленно «дышит», подпись — номер и название */
-.tf.st .fr img{transform:scale(1.08) translateY(1.5%);transition:transform 3.2s cubic-bezier(.2,.6,.3,1)}
-.tf.st.on .fr img{transform:none}
-.tf.st img.bg{transition:opacity .45s}
-.tf.st .cap{position:absolute;z-index:3;left:max(24px,7vw);bottom:11vh;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(16px);transition:opacity .5s .25s,transform .8s .25s var(--ease)}
-.tf.st.on .cap{opacity:1;transform:none}
-.tf.st.on:has(~ .tf.on) .cap{opacity:0;transition:opacity .12s}
+/* трейлер: работы — быстрый монтаж; фото, фон и подпись появляются одновременно */
+.tf.st{transition:opacity .12s linear}
+.tf.st .fr img{transform:scale(1.12);transition:transform .65s cubic-bezier(.12,.7,.25,1)}
+.tf.st.on .fr img{transform:scale(1)}
+.tf.st .cap{position:absolute;z-index:3;left:max(24px,7vw);bottom:11vh;display:flex;flex-direction:column;gap:6px;font:600 clamp(11px,1.1vw,15px)/1.4 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--brass);transform:translateX(-18px);transition:transform .5s cubic-bezier(.12,.7,.25,1)}
+.tf.st.on .cap{transform:none}
 .tf.st .cap b{font:600 clamp(30px,4vw,58px)/1 var(--display);color:var(--ivory);text-transform:none;letter-spacing:0}
-.tf.st .cap{font:600 clamp(11px,1.1vw,15px)/1.4 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.tf.st::after{content:"";position:absolute;inset:0;z-index:4;background:rgba(226,196,143,.18);opacity:0;pointer-events:none}
+.tf.st.on::after{animation:tflash .28s ease-out}
+@keyframes tflash{0%{opacity:1}100%{opacity:0}}
 @media (max-width:700px){.tf.st .fr img{max-height:56vh;max-width:90vw}.tf.st .cap{bottom:12vh}}
+/* материалы: слово появляется вместе с кадром */
+.tf.mat{transition:opacity .16s linear}
+.tf.mat .word{transition:opacity .3s,transform .55s var(--ease),filter .3s}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
   <div class="grain"></div>
-  <div class="tf center gen" data-d="2100">
+  <div class="tf center gen" data-d="1500">
     <svg width="190" height="190" viewBox="0 0 240 240" fill="none" aria-hidden="true" style="width:min(190px,44vw);height:auto"><g id="gen-rings" transform="rotate(-90 120 120)"></g><g transform="scale(2)"><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></g></svg>
     <div class="brand">SHARK GROUP</div>
   </div>
   <!-- Слова о материалах идут по лицензионным кадрам Unsplash (src/stock.py — это не цех Shark Group, заменить своей съёмкой), работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
-  <div class="tf mat" data-d="1100"><img src="{{P:s_wood}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
-  <div class="tf mat" data-d="950"><img decoding="async" src="{{P:s_metal}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
-  <div class="tf mat" data-d="950"><img decoding="async" src="{{P:s_stone}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>плитка, керамогранит, натуральный камень</small></div></div>
-  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="{{P:n_desk1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_desk1}}" alt=""></span><span class="cap"><b>Реставрация</b>раритетный письменный стол</span></div>
-  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="{{P:p124}}" alt=""><span class="fr"><img decoding="async" src="{{P:p124}}" alt=""></span><span class="cap"><b>Лестницы</b>парящая, со стеклом и светом</span></div>
-  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="{{P:n_rift1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_rift1}}" alt=""></span><span class="cap"><b>Стеновые панели</b>«Разлом» с подсветкой</span></div>
-  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="{{P:n_peb1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_peb1}}" alt=""></span><span class="cap"><b>Мебель</b>стол с рекой из гальки</span></div>
-  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="{{P:p48}}" alt=""><span class="fr"><img decoding="async" src="{{P:p48}}" alt=""></span><span class="cap"><b>Двери</b>резные, из массива</span></div>
-  <div class="tf work st" data-d="1250"><img class="bg" decoding="async" src="{{P:p1}}" alt=""><span class="fr"><img decoding="async" src="{{P:p1}}" alt=""></span><span class="cap"><b>Рестораны</b>Fish Bone, Сочи</span></div>
-  <div class="tf center" data-d="1100"><img decoding="async" src="{{T:walnut}}" alt="" style="filter:blur(14px) brightness(.26) saturate(.8);transform:scale(1.1)"><h2 style="position:relative">Своё производство</h2><div class="eyebrow" style="position:relative">Сочи · Краснодарский край · вся Россия</div></div>
+  <div class="tf mat" data-d="800"><img src="{{P:s_wood}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
+  <div class="tf mat" data-d="800"><img decoding="async" src="{{P:s_metal}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
+  <div class="tf mat" data-d="900"><img decoding="async" src="{{P:s_stone}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>мрамор, травертин, плитка — облицовка и укладка</small></div></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_desk1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_desk1}}" alt=""></span><span class="cap"><b>Реставрация</b>раритетный письменный стол</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:p124}}" alt=""><span class="fr"><img decoding="async" src="{{P:p124}}" alt=""></span><span class="cap"><b>Лестницы</b>парящая, со стеклом и светом</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_rift1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_rift1}}" alt=""></span><span class="cap"><b>Панели «Разлом»</b>свет в изломах стены</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_peb1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_peb1}}" alt=""></span><span class="cap"><b>Стол с галькой</b>каштан и морская галька</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:p48}}" alt=""><span class="fr"><img decoding="async" src="{{P:p48}}" alt=""></span><span class="cap"><b>Двери</b>резные, из массива</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_coff1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_coff1}}" alt=""></span><span class="cap"><b>Кессонные панели</b>рельеф и цвет</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_sofa4}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_sofa4}}" alt=""></span><span class="cap"><b>Мягкая мебель</b>под заказ</span></div>
+  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:p1}}" alt=""><span class="fr"><img decoding="async" src="{{P:p1}}" alt=""></span><span class="cap"><b>Рестораны</b>пять залов в Сочи</span></div>
+  <div class="tf center" data-d="950"><img decoding="async" src="{{T:walnut}}" alt="" style="filter:blur(14px) brightness(.26) saturate(.8);transform:scale(1.1)"><h2 style="position:relative">Своё производство</h2><div class="eyebrow" style="position:relative">Сочи · Краснодарский край · вся Россия</div></div>
   <div class="tf center" data-d="1000" style="background:var(--night)">
     <svg width="110" height="110" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle class="ring" cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="2.5" pathLength="360"/><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></svg>
     <div class="brand">SHARK GROUP</div>
@@ -1823,7 +1829,7 @@ function play(){
     timers.push(setTimeout(function(){
       f.classList.add('on');
       if(snd)cue(f.classList.contains('cut')||f.classList.contains('st')?'cut':f.querySelector('.word')?'hit':i===tfs.length-1?'chord':'');
-      if(i>0&&!f.classList.contains('cut')){var prev=tfs[i-1];timers.push(setTimeout(function(){tfs.slice(0,i).forEach(function(x){x.classList.remove('on')})},450))}
+      if(i>0&&!f.classList.contains('cut')){var fast=!f.classList.contains('center')||!tfs[i-1].classList.contains('center');timers.push(setTimeout(function(){tfs.slice(0,i).forEach(function(x){x.classList.remove('on')})},fast?130:450))}
       if(f.classList.contains('cut')&&i>0&&tfs[i-1].classList.contains('cut')){var pv=tfs[i-1];timers.push(setTimeout(function(){pv.classList.remove('on')},400))}
       d.getElementById('tc').textContent='SG · 00:'+('0'+Math.round(t/1000)).slice(-2);
     },t));
