@@ -10,9 +10,11 @@ ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/'
 t=open(SRC+'template.html',encoding='utf-8').read()
 os.makedirs(ROOT+'m',exist_ok=True)
 cache={}
+# кадры трейлера идут на весь экран — отдаём их в полном размере исходника (до 1600 px), а не 1280
+TRAILER={'n_desk1','p1','n_sofa4','p52','p124','n_rift1','p48','n_peb1','p72','n_coff1','p118','p9','n_loft1'}
 def webp(kind,name):
     if kind=='P':
-        src=SRC+f'img/{name}.jpg'; big=name=='p124' or name.startswith('s_'); mw=2200 if big else 1280; q=84 if big else 78
+        src=SRC+f'img/{name}.jpg'; big=name=='p124' or name.startswith('s_') or name in TRAILER; mw=2200 if big else 1280; q=84 if big else 78
     elif kind=='T':
         src=SRC+f'wood/{name}.jpg'; mw=2000; q=90
     else:

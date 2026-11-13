@@ -823,29 +823,59 @@ footer .wrap{padding-top:26px}
 @media (max-width:700px){.tf.st .fr img{max-height:56vh;max-width:90vw}.tf.st .cap{bottom:12vh}}
 /* материалы: слово появляется вместе с кадром */
 .tf.mat{transition:opacity .16s linear}
-.tf.mat .word{transition:opacity .3s,transform .55s var(--ease),filter .3s}
+.tf.mat .word{transition:transform .55s var(--ease),filter .3s}
+
+/* ---------- трейлер как кино ---------- */
+.trailer{--bar:max(7vh,calc((100vh - 100vw / 2.39) / 2))}
+@media (max-aspect-ratio:1/1){.trailer{--bar:8vh}}
+.trailer::before,.trailer::after{height:var(--bar)}
+.t-ui{height:var(--bar)}
+.tf.sh{display:flex;background:#05080E;transition:none}
+.tf.sh.on,.tf.mat.on{transition:none}
+.tf.sh .sh-i{position:relative;flex:1;overflow:hidden}
+.tf.sh.duo .sh-i+.sh-i{border-left:2px solid rgba(201,164,106,.55)}
+.tf.sh img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.9);transform:scale(1.13) translate(var(--kx),var(--ky));transition:transform 1.7s cubic-bezier(.2,.5,.3,1)}
+.tf.sh.on img{transform:scale(1.02) translate(0,0)}
+.tf.sh.fl img{transform:scale(1.08);transition:transform .5s ease-out}
+.tf.sh.fl.on img{transform:scale(1)}
+.tf.sh::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 50%,rgba(5,8,14,.6)),linear-gradient(0deg,rgba(5,8,14,.85) 0%,rgba(5,8,14,.2) 38%,transparent 60%)}
+.tf.sh.fl::after{content:"";position:absolute;inset:0;z-index:4;background:rgba(226,196,143,.22);opacity:0;pointer-events:none}
+.tf.sh.fl.on::after{animation:tflash .26s ease-out}
+.tf.sh .cap{position:absolute;z-index:3;left:max(24px,7vw);right:24px;bottom:calc(var(--bar) + 4vh);display:flex;flex-direction:column;gap:8px;font:600 clamp(11px,1.1vw,15px)/1.4 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--brass);opacity:0;transform:translateY(12px);transition:transform .7s cubic-bezier(.12,.7,.25,1)}
+.tf.sh.on .cap{opacity:1;transform:none}
+.tf.sh .cap i{font-style:normal;color:rgba(242,235,221,.55);letter-spacing:.3em}
+.tf.sh .cap b{font:600 clamp(36px,5vw,76px)/.95 var(--display);color:var(--ivory);text-transform:none;letter-spacing:0}
+@media (max-aspect-ratio:1/1){.tf.sh.duo{flex-direction:column}.tf.sh.duo .sh-i+.sh-i{border-left:0;border-top:2px solid rgba(201,164,106,.55)}}
+.tf.tt{background:#05080E}
+.tf.tt .tt-a{margin:0;font:600 12px/1.4 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--brass);opacity:0;transition:opacity .7s .1s}
+.tf.tt.on .tt-a{opacity:1}
+.tf.tt h2{line-height:1.02}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
   <div class="grain"></div>
-  <div class="tf center gen" data-d="1500">
+  <div class="tf center gen" data-d="1700">
     <svg width="190" height="190" viewBox="0 0 240 240" fill="none" aria-hidden="true" style="width:min(190px,44vw);height:auto"><g id="gen-rings" transform="rotate(-90 120 120)"></g><g transform="scale(2)"><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></g></svg>
     <div class="brand">SHARK GROUP</div>
   </div>
-  <!-- Слова о материалах идут по лицензионным кадрам Unsplash (src/stock.py — это не цех Shark Group, заменить своей съёмкой), работы — в «окне» не крупнее исходника: фото заказчика из Telegram (до 1280 px) на весь экран мылятся. -->
-  <div class="tf mat" data-d="800"><img src="{{P:s_wood}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
-  <div class="tf mat" data-d="800"><img decoding="async" src="{{P:s_metal}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
-  <div class="tf mat" data-d="900"><img decoding="async" src="{{P:s_stone}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>мрамор, травертин, плитка — облицовка и укладка</small></div></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_desk1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_desk1}}" alt=""></span><span class="cap"><b>Реставрация</b>раритетный письменный стол</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:p124}}" alt=""><span class="fr"><img decoding="async" src="{{P:p124}}" alt=""></span><span class="cap"><b>Лестницы</b>парящая, со стеклом и светом</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_rift1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_rift1}}" alt=""></span><span class="cap"><b>Панели «Разлом»</b>свет в изломах стены</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_peb1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_peb1}}" alt=""></span><span class="cap"><b>Стол с галькой</b>каштан и морская галька</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:p48}}" alt=""><span class="fr"><img decoding="async" src="{{P:p48}}" alt=""></span><span class="cap"><b>Двери</b>резные, из массива</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_coff1}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_coff1}}" alt=""></span><span class="cap"><b>Кессонные панели</b>рельеф и цвет</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:n_sofa4}}" alt=""><span class="fr"><img decoding="async" src="{{P:n_sofa4}}" alt=""></span><span class="cap"><b>Мягкая мебель</b>под заказ</span></div>
-  <div class="tf work st" data-d="650"><img class="bg" decoding="async" src="{{P:p1}}" alt=""><span class="fr"><img decoding="async" src="{{P:p1}}" alt=""></span><span class="cap"><b>Рестораны</b>пять залов в Сочи</span></div>
-  <div class="tf center" data-d="950"><img decoding="async" src="{{T:walnut}}" alt="" style="filter:blur(14px) brightness(.26) saturate(.8);transform:scale(1.1)"><h2 style="position:relative">Своё производство</h2><div class="eyebrow" style="position:relative">Сочи · Краснодарский край · вся Россия</div></div>
-  <div class="tf center" data-d="1000" style="background:var(--night)">
+  <!-- Трейлер собран как кино: кадр 2.39:1, медленный наезд камеры, титры на чёрном, в конце — ускорение.
+       «Дерево. Металл. Камень.» — лицензионные кадры Unsplash (src/stock.py), всё остальное — работы Shark Group. -->
+  <div class="tf mat" data-d="1000"><img src="{{P:s_wood}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Дерево.<small>массив и шпон любой породы</small></div></div>
+  <div class="tf mat" data-d="1000"><img decoding="async" src="{{P:s_metal}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Металл.<small>каркасы, ковка, ворота</small></div></div>
+  <div class="tf mat" data-d="1100"><img decoding="async" src="{{P:s_stone}}" alt=""><div class="shade"></div><span class="sweep"></span><div class="word">Камень.<small>мрамор, травертин, плитка — облицовка и укладка</small></div></div>
+  <div class="tf center tt" data-d="1500"><p class="tt-a">Shark Group · Сочи</p><h2>Из нашего цеха —<br>в ваш интерьер</h2></div>
+  <div class="tf sh" data-d="1100" style="--kx:-2%;--ky:1%"><div class="sh-i"><img src="{{P:n_desk1}}" alt="" style="object-position:50% 55%"></div><span class="cap"><i>01</i><b>Реставрация</b>раритетный письменный стол</span></div>
+  <div class="tf sh duo" data-d="1150" style="--kx:2%;--ky:-1%"><div class="sh-i"><img src="{{P:p124}}" alt="" style="object-position:50% 60%"></div><div class="sh-i"><img src="{{P:n_rift1}}" alt="" style="object-position:50% 45%"></div><span class="cap"><i>02</i><b>Лестницы и стены</b>парящая лестница · панели «Разлом»</span></div>
+  <div class="tf sh" data-d="1050" style="--kx:-1.5%;--ky:-1%"><div class="sh-i"><img src="{{P:p1}}" alt="" style="object-position:50% 40%"></div><span class="cap"><i>03</i><b>Рестораны</b>пять залов в Сочи</span></div>
+  <div class="tf sh duo" data-d="1150" style="--kx:1.5%;--ky:1%"><div class="sh-i"><img src="{{P:p48}}" alt="" style="object-position:50% 45%"></div><div class="sh-i"><img src="{{P:n_peb1}}" alt="" style="object-position:50% 50%"></div><span class="cap"><i>04</i><b>Двери и мебель</b>резной массив · стол с галькой</span></div>
+  <div class="tf sh" data-d="1000" style="--kx:2%;--ky:0%"><div class="sh-i"><img src="{{P:n_sofa4}}" alt="" style="object-position:50% 55%"></div><span class="cap"><i>05</i><b>Мягкая мебель</b>премиум под заказ</span></div>
+  <div class="tf sh" data-d="1000" style="--kx:-2%;--ky:1%"><div class="sh-i"><img src="{{P:p52}}" alt="" style="object-position:50% 50%"></div><span class="cap"><i>06</i><b>Кухни</b>массив и эмаль</span></div>
+  <div class="tf sh fl" data-d="300" style="--kx:0%;--ky:0%"><div class="sh-i"><img src="{{P:p72}}" alt="" style="object-position:50% 50%"></div></div>
+  <div class="tf sh fl" data-d="300" style="--kx:0%;--ky:0%"><div class="sh-i"><img src="{{P:n_coff1}}" alt="" style="object-position:50% 50%"></div></div>
+  <div class="tf sh fl" data-d="300" style="--kx:0%;--ky:0%"><div class="sh-i"><img src="{{P:p118}}" alt="" style="object-position:50% 50%"></div></div>
+  <div class="tf sh fl" data-d="300" style="--kx:0%;--ky:0%"><div class="sh-i"><img src="{{P:p9}}" alt="" style="object-position:50% 50%"></div></div>
+  <div class="tf sh fl" data-d="340" style="--kx:0%;--ky:0%"><div class="sh-i"><img src="{{P:n_loft1}}" alt="" style="object-position:50% 50%"></div></div>
+  <div class="tf center" data-d="1700" style="background:var(--night)">
     <svg width="110" height="110" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle class="ring" cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="2.5" pathLength="360"/><g class="fin"><path d="M14 70 C 24 76, 40 79, 60 79 C 80 79, 96 76, 106 70" stroke="#C9A46A" stroke-width="2"/><path d="M20 82 C 32 88, 46 90, 60 90 C 74 90, 88 88, 100 82" stroke="#C9A46A" stroke-width="1.6"/><path d="M38 68 C 50 56, 58 38, 74 22 C 70 38, 70 54, 80 68 Z" fill="#C9A46A"/></g></svg>
     <div class="brand">SHARK GROUP</div>
     <div class="eyebrow">Дерево · металл · камень</div>
@@ -1816,26 +1846,46 @@ function end(){
   hero.classList.remove('play');void hero.offsetWidth;if(!reduce&&played)hero.classList.add('play');
   [].forEach.call(d.querySelectorAll('.hero h1 .w'),function(w,i){w.style.animationDelay=(0.5+i*0.1)+'s'});
 }
-var played=false;
+var played=false,playId=0;
+function trReady(cb){ /* ждём, пока загрузятся и раскодируются все кадры трейлера — иначе на медленной сети будут пустые кадры */
+  var ims=[].slice.call(tr.querySelectorAll('img')),done=false;
+  function fin(){if(!done){done=true;cb()}}
+  setTimeout(fin,5000);
+  Promise.all(ims.map(function(im){
+    return new Promise(function(r){
+      function dec(){if(im.decode)im.decode().catch(function(){});r()} /* ждём только загрузку: decode() у скрытых картинок может не завершиться */
+      if(im.complete&&im.naturalWidth)dec();else{im.addEventListener('load',dec,{once:true});im.addEventListener('error',r,{once:true})}
+    })
+  })).then(fin);
+}
 function play(){
   if(reduce){end();return}
   played=true;
   clear();sndOff();tfs.forEach(function(f){f.classList.remove('on')});
   if(snd)sndOn();
   tr.classList.remove('gone');tr.setAttribute('aria-hidden','false');R.style.overflow='hidden';
-  var p=d.getElementById('tprog');p.classList.remove('run');p.style.setProperty('--dur',total+'ms');void p.offsetWidth;p.classList.add('run');
-  var t=0;
-  tfs.forEach(function(f,i){
-    timers.push(setTimeout(function(){
-      f.classList.add('on');
-      if(snd)cue(f.classList.contains('cut')||f.classList.contains('st')?'cut':f.querySelector('.word')?'hit':i===tfs.length-1?'chord':'');
-      if(i>0&&!f.classList.contains('cut')){var fast=!f.classList.contains('center')||!tfs[i-1].classList.contains('center');timers.push(setTimeout(function(){tfs.slice(0,i).forEach(function(x){x.classList.remove('on')})},fast?130:450))}
-      if(f.classList.contains('cut')&&i>0&&tfs[i-1].classList.contains('cut')){var pv=tfs[i-1];timers.push(setTimeout(function(){pv.classList.remove('on')},400))}
-      d.getElementById('tc').textContent='SG · 00:'+('0'+Math.round(t/1000)).slice(-2);
-    },t));
-    t+= +f.dataset.d;
+  var p=d.getElementById('tprog');p.classList.remove('run');
+  tfs[0].classList.add('on');var t0=Date.now(),run=++playId;
+  trReady(function(){
+    if(run!==playId||tr.classList.contains('gone'))return;
+    var t=Math.max(0,+tfs[0].dataset.d-(Date.now()-t0)),rest=t;
+    tfs.forEach(function(f,i){if(i)rest+= +f.dataset.d});
+    p.style.setProperty('--dur',rest+'ms');void p.offsetWidth;p.classList.add('run');
+    tfs.forEach(function(f,i){
+      if(!i)return;
+      timers.push(setTimeout(function(){
+        f.classList.add('on');
+        if(snd)cue(f.classList.contains('sh')?'cut':f.querySelector('.word')?'hit':i===tfs.length-1?'chord':'');
+        /* склейка: прошлый кадр убираем в тот же момент (таймеры в фоне и на слабых телефонах опаздывают — иначе кадры накладываются);
+           наплыв оставляем только между титрами на чёрном */
+        var prev=tfs.slice(0,i);
+        if(f.classList.contains('center')&&tfs[i-1].classList.contains('center'))timers.push(setTimeout(function(){prev.forEach(function(x){x.classList.remove('on')})},450));
+        else prev.forEach(function(x){x.classList.remove('on')});
+      },t));
+      t+= +f.dataset.d;
+    });
+    timers.push(setTimeout(end,t+200));
   });
-  timers.push(setTimeout(end,total+200));
   var sec=0;(function tick(){if(tr.classList.contains('gone'))return;d.getElementById('tc').textContent='SG · 00:'+('0'+sec).slice(-2);sec++;timers.push(setTimeout(tick,1000))})();
 }
 d.getElementById('skip').addEventListener('click',end);
