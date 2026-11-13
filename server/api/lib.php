@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === 'lib.php') { http_response_code(404); exit; }
+date_default_timezone_set('Europe/Moscow');   // Сочи — московское время
 
 const SG_STATUSES = ['new' => 'Новая', 'work' => 'В работе', 'measure' => 'Замер', 'deal' => 'Договор', 'lost' => 'Отказ', 'spam' => 'Спам'];
 
@@ -44,7 +45,7 @@ function sg_db(): PDO {
     $db->exec('CREATE TABLE IF NOT EXISTS leads(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         created TEXT NOT NULL,
-        status TEXT NOT NULL DEFAULT "new",
+        status TEXT NOT NULL DEFAULT 'new',
         name TEXT, contact TEXT, city TEXT,
         dirs TEXT, picks TEXT, files TEXT,
         utm TEXT, page TEXT, referrer TEXT, ym_uid TEXT, ip TEXT, ua TEXT,
