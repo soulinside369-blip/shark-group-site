@@ -14,7 +14,7 @@
 <meta property="og:description" content="Свой цех в Сочи: панели из шпона, лестницы, двери и мебель из массива, реставрация. Монтаж своей бригадой.">
 <meta property="og:image" content="https://sharkgroup.pro/m/p124.webp">
 <meta property="og:locale" content="ru_RU">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Shark Group", "url": "https://sharkgroup.pro/", "image": "https://sharkgroup.pro/m/p124.webp", "description": "Своё производство в Сочи: стеновые панели из шпона, лестницы на металлокаркасе, двери и мебель из массива, реставрация мебели, мягкая мебель на заказ, ковка, плитка и камень. Монтаж своей бригадой.", "areaServed": ["Сочи", "Краснодарский край", "Россия"], "address": {"@type": "PostalAddress", "addressLocality": "Сочи", "addressRegion": "Краснодарский край", "addressCountry": "RU"}, "legalName": "ИП Шаркова Элина Валерьевна", "taxID": "232010079424", "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Стеновые панели из шпона под ключ"}, "priceSpecification": {"@type": "UnitPriceSpecification", "price": 25000, "priceCurrency": "RUB", "unitText": "м²"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Лестницы на металлокаркасе"}, "priceSpecification": {"@type": "PriceSpecification", "minPrice": 250000, "priceCurrency": "RUB"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Двери из массива на заказ"}, "priceSpecification": {"@type": "PriceSpecification", "minPrice": 65000, "priceCurrency": "RUB"}}, {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Стол «река из гальки», каштан, 140 × 75 см"}, "price": 160000, "priceCurrency": "RUB"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Реставрация мебели из массива"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Мягкая мебель на заказ"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Shark Group", "url": "https://sharkgroup.pro/", "image": "https://sharkgroup.pro/m/p124.webp", "description": "Своё производство в Сочи: стеновые панели из шпона, лестницы на металлокаркасе, двери и мебель из массива, реставрация мебели, мягкая мебель на заказ, ковка, плитка и камень. Монтаж своей бригадой.", "areaServed": ["Сочи", "Краснодарский край", "Россия"], "address": {"@type": "PostalAddress", "addressLocality": "Сочи", "addressRegion": "Краснодарский край", "addressCountry": "RU"}, "telephone": "+7 964 944-66-37", "logo": "https://sharkgroup.pro/logo.png", "sameAs": ["https://dzen.ru/sharkgroup"], "legalName": "ИП Шаркова Элина Валерьевна", "taxID": "232010079424", "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Стеновые панели из шпона под ключ"}, "priceSpecification": {"@type": "UnitPriceSpecification", "price": 25000, "priceCurrency": "RUB", "unitText": "м²"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Лестницы на металлокаркасе"}, "priceSpecification": {"@type": "PriceSpecification", "minPrice": 250000, "priceCurrency": "RUB"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Двери из массива на заказ"}, "priceSpecification": {"@type": "PriceSpecification", "minPrice": 65000, "priceCurrency": "RUB"}}, {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Стол «река из гальки», каштан, 140 × 75 см"}, "price": 160000, "priceCurrency": "RUB"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Реставрация мебели из массива"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Мягкая мебель на заказ"}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
@@ -923,6 +923,18 @@ footer .wrap{padding-top:26px}
 .hero-tel:hover{color:var(--brass)}
 @media (max-width:899px){.hero-ph .hc,.hc-nav{display:none}.hero-tel{font-size:15px}}
 @media (prefers-reduced-motion:reduce){.hero-ph img{transition:none;transform:none}.hc-bar{display:none}}
+
+/* статьи на главной */
+.arts{padding-block:80px}
+.arts-g{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.art{display:block;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);text-decoration:none;color:var(--ivory);background:var(--night-2);transition:border-color .25s,transform .3s var(--ease)}
+.art img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.art span{display:block;padding:14px 16px 16px}
+.art b{display:block;font-family:var(--display);font-size:21px;font-weight:600;line-height:1.15}
+.art i{display:block;margin-top:6px;font-style:normal;font-size:13px;color:var(--brass)}
+.art:hover{border-color:rgba(201,164,106,.55);transform:translateY(-3px)}
+@media (max-width:900px){.arts-g{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.arts{padding-block:56px}.arts-g{grid-template-columns:minmax(0,1fr)}.art{display:grid;grid-template-columns:110px minmax(0,1fr)}.art img{height:100%;aspect-ratio:auto}.art b{font-size:18px}}
 </style>
 </head>
 <body>
@@ -1168,6 +1180,12 @@ footer .wrap{padding-top:26px}
       <p class="hint-sla" id="q-sla">Ответим в рабочее время. Без спама и навязчивых звонков.</p><p class="err" id="q-err" role="alert"></p>
       <div class="q-nav"><button class="btn btn-ghost" type="button" id="q-back" hidden>Назад</button><button class="btn btn-brass" type="submit" id="q-next">Далее</button></div>
     </form>
+  </div>
+</section>
+<section class="arts saw" id="stati" aria-labelledby="arts-h">
+  <div class="wrap">
+    <div class="sec-head rv"><div><div class="eyebrow">Статьи</div><h2 id="arts-h" style="margin-top:12px">Как мы работаем</h2></div><p>Подробно о материалах, ценах и сроках — с фото наших объектов. <a href="/stati/">Все статьи →</a></p></div>
+    <div class="arts-g"><a class="art" href="/stati/stenovye-paneli-iz-shpona.html"><img src="m/p25.webp?h=fc4a6614" alt="Стеновые панели из шпона под ключ" loading="lazy" decoding="async"><span><b>Стеновые панели из шпона под ключ</b><i>от 25 000 ₽/м²</i></span></a><a class="art" href="/stati/lestnica-na-vtoroj-etazh-v-chastnom-dome.html"><img src="m/p56.webp?h=83ab7526" alt="Лестница на второй этаж в частный дом" loading="lazy" decoding="async"><span><b>Лестница на второй этаж в частный дом</b><i>от 250 000 ₽</i></span></a><a class="art" href="/stati/dveri-iz-massiva-na-zakaz.html"><img src="m/p48.webp?h=adba71c2" alt="Двери из массива на заказ" loading="lazy" decoding="async"><span><b>Двери из массива на заказ</b><i>от 65 000 ₽</i></span></a><a class="art" href="/stati/kuhni-iz-massiva-na-zakaz.html"><img src="m/p52.webp?h=4e8c8ffe" alt="Кухни из массива на заказ" loading="lazy" decoding="async"><span><b>Кухни из массива на заказ</b><i>от 150 000 ₽</i></span></a><a class="art" href="/stati/mebel-iz-massiva-na-zakaz.html"><img src="m/p118.webp?h=a31be8da" alt="Мебель из массива на заказ" loading="lazy" decoding="async"><span><b>Мебель из массива на заказ</b><i>от 60 000 ₽</i></span></a><a class="art" href="/stati/restavraciya-mebeli-iz-massiva.html"><img src="m/n_desk1.webp?h=e63ae120" alt="Реставрация мебели из массива" loading="lazy" decoding="async"><span><b>Реставрация мебели из массива</b><i>по оценке</i></span></a></div>
   </div>
 </section>
 </main>

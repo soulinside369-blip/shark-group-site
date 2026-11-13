@@ -99,7 +99,7 @@ def page(title, desc, canon, body, jsonld, og_img):
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{canon}">
-<meta property="og:type" content="article"><meta property="og:site_name" content="Shark Group">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Shark Group"><meta property="og:locale" content="ru_RU"><meta property="article:published_time" content="{DATE}">
 <meta property="og:title" content="{html.escape(title)}"><meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{canon}"><meta property="og:image" content="{og_img}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,12 +152,12 @@ for a in ARTICLES:
         {'@type': 'Article', 'headline': a['title'], 'description': a['desc'], 'image': SITE + cov.split('?')[0],
          'datePublished': DATE, 'dateModified': DATE, 'inLanguage': 'ru', 'mainEntityOfPage': canon, 'keywords': a['keys'],
          'author': {'@type': 'Organization', 'name': 'Shark Group', 'url': SITE + '/'},
-         'publisher': {'@type': 'Organization', 'name': 'Shark Group', 'url': SITE + '/'}},
+         'publisher': {'@type': 'Organization', 'name': 'Shark Group', 'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/logo.png'}, 'telephone': '+7 964 944-66-37', 'sameAs': ['https://dzen.ru/sharkgroup']}},
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': SITE + '/'},
             {'@type': 'ListItem', 'position': 2, 'name': 'Статьи', 'item': SITE + '/stati/'},
             {'@type': 'ListItem', 'position': 3, 'name': a['title'], 'item': canon}]}]}
-    open(OUT + a['slug'] + '.html', 'w', encoding='utf-8').write(page(a['title'] + ' — Shark Group', a['desc'], canon, body, ld, SITE + cov.split('?')[0]))
+    open(OUT + a['slug'] + '.html', 'w', encoding='utf-8').write(page(a.get('seo', a['title']) + ' — Shark Group', a['desc'], canon, body, ld, SITE + cov.split('?')[0]))
     thumb, _ = webp(a['cover'], big=True)
     cards.append(f'<a class="card" href="/stati/{a["slug"]}.html"><img src="{thumb}" alt="" loading="lazy"><span><b>{html.escape(a["title"])}</b><small>{html.escape(a["desc"])}</small></span></a>')
     urls.append(canon)
