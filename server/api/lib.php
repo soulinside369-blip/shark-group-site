@@ -45,7 +45,7 @@ function sg_db(): PDO {
     $db->exec('CREATE TABLE IF NOT EXISTS leads(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         created TEXT NOT NULL,
-        status TEXT NOT NULL DEFAULT 'new',
+        status TEXT NOT NULL DEFAULT \'new\',
         name TEXT, contact TEXT, city TEXT,
         dirs TEXT, picks TEXT, files TEXT,
         utm TEXT, page TEXT, referrer TEXT, ym_uid TEXT, ip TEXT, ua TEXT,
