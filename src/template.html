@@ -180,9 +180,6 @@ button{font:inherit;color:inherit}
 /* ---------- quiz ---------- */
 .quiz{background:var(--night-2);padding-block:88px}
 .quiz-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:start}
-.who{margin-top:28px;display:flex;gap:14px;align-items:center}
-.who .ph{width:60px;height:60px;flex:none;border-radius:50%;border:1px solid var(--brass);display:grid;place-items:center;font-size:11px;color:var(--mute);background:#2A3A57}
-.who small{display:block;font-size:14px;color:var(--mute)}
 form.q{background:var(--night);border:1px solid rgba(201,164,106,.4);border-radius:22px;padding:28px}
 .q-top{display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
 .q-track{margin-top:10px;height:4px;border-radius:4px;background:#2A3A57}
@@ -557,6 +554,11 @@ section[id]{scroll-margin-top:76px}
 .sh-og>div{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
 .sh-og button{min-height:44px;padding:0 14px;border-radius:999px;border:1px solid rgba(242,235,221,.25);background:transparent;color:var(--soft);font-size:14px;font-weight:600;cursor:pointer}
 .sh-og button[aria-pressed="true"]{border-color:var(--brass);background:rgba(201,164,106,.16);color:var(--brass)}
+.sh-og.sw>span b{color:var(--ivory);font-weight:600}
+.sh-og.sw>div{gap:10px}
+.sh-og.sw button{width:44px;height:44px;min-height:0;padding:0;border-radius:50%;border:1px solid rgba(242,235,221,.22);background:radial-gradient(120% 90% at 30% 22%,rgba(255,255,255,.28),rgba(255,255,255,0) 45%),radial-gradient(90% 90% at 70% 85%,rgba(0,0,0,.35),rgba(0,0,0,0) 60%),var(--c);box-shadow:inset 0 -6px 10px rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s}
+.sh-og.sw button[aria-pressed="true"]{border-color:var(--brass);background:radial-gradient(120% 90% at 30% 22%,rgba(255,255,255,.28),rgba(255,255,255,0) 45%),radial-gradient(90% 90% at 70% 85%,rgba(0,0,0,.35),rgba(0,0,0,0) 60%),var(--c);box-shadow:0 0 0 3px var(--night),0 0 0 5px var(--brass);transform:scale(1.04)}
+.sh-og.sw small{display:block;margin-top:10px;font-size:12px;color:var(--mute)}
 .sh-inc{margin:18px 0 0;padding:0;list-style:none;font-size:14px;color:var(--soft)}
 .sh-inc li{position:relative;padding:8px 0 8px 22px;border-top:1px solid var(--line)}
 .sh-inc li::before{content:"";position:absolute;left:2px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--brass)}
@@ -1073,7 +1075,6 @@ footer .wrap{padding-top:26px}
     <div>
       <h2 id="quiz-h">Пришлите фото —<br>посчитаем проект</h2>
       <p class="lead" style="margin-top:14px">Три шага, меньше минуты. В ответ — похожие работы и вилка цены.</p>
-      <div class="who"><div class="ph">[фото]</div><div><b>[Имя], основатель Shark Group</b><small>Отвечу сам. Telegram и MAX — [контакты]</small></div></div>
     </div>
     <form class="q" id="q" novalidate>
       <div class="q-top"><span id="q-lbl">Шаг 1 из 3</span><span>&lt; 1 минуты</span></div>
@@ -1093,7 +1094,7 @@ footer .wrap{padding-top:26px}
         <svg width="72" height="72" viewBox="0 0 120 120" fill="none" aria-hidden="true"><circle cx="60" cy="60" r="56" stroke="#C9A46A" stroke-width="3"/><path d="M38 62 L54 78 L84 44" stroke="#C9A46A" stroke-width="5"/></svg>
         <h3>Заявка принята</h3><p>Мы получили её и свяжемся с вами по указанному телефону или в Telegram.</p>
       </div>
-      <p class="hint-sla" id="q-sla">Ответим в течение [часа] в рабочее время. Без спама и навязчивых звонков.</p><p class="err" id="q-err" role="alert"></p>
+      <p class="hint-sla" id="q-sla">Ответим в рабочее время. Без спама и навязчивых звонков.</p><p class="err" id="q-err" role="alert"></p>
       <div class="q-nav"><button class="btn btn-ghost" type="button" id="q-back" hidden>Назад</button><button class="btn btn-brass" type="submit" id="q-next">Далее</button></div>
     </form>
   </div>
@@ -1486,8 +1487,8 @@ var ITEMS=[
  {id:'f_table',c:'fur',d:5,n:'Обеденные столы',s:'Столы из массива под размер комнаты, в масле или эмали.',p:'по проекту',pn:'',t:'4–8 недель',im:'{{P:p54}}',g:[['{{P:p54}}','Обеденный стол из массива'],['{{P:p53}}','Стол в кухне-столовой'],['{{P:n_table}}','Стол на трапециевидных ногах']]},
  {id:'f_pebble',c:'fur',d:5,n:'Стол «река из гальки»',s:'Столешница из каштана толщиной 6 см, по центру — русло из морской гальки. Подстолье из металла.',p:'160 000 ₽',pn:'140 × 75 см, высота 75 см',t:'4–8 недель',im:'{{P:n_peb1}}',g:[['{{P:n_peb1}}','Стол из каштана с галькой'],['{{P:n_peb2}}','Русло из морской гальки, деталь']],hot:1},
  {id:'f_carve',c:'fur',d:5,n:'Резьба и декор',s:'Резные панно, порталы, облицовка каминов.',p:'по проекту',pn:'',t:'4–8 недель',im:'{{P:p87}}',g:[['{{P:p87}}','Резное панно'],['{{P:p88}}','Резные панно в цеху'],['{{P:p80}}','Облицовка биокамина']],o:[['Что нужно',['Резное панно','Портал','Облицовка камина'],1]]},
- {id:'s_sofa',c:'soft',d:5,n:'Диваны',s:'Честерфилды с каретной стяжкой, прямые и угловые диваны. Размер, ткань и цвет — под ваш интерьер.',p:'по проекту',pn:'по размеру и ткани',t:'под заказ',im:'{{P:n_sofa4}}',g:[['{{P:n_sofa4}}','Угловой диван в гостиной'],['{{P:n_sofa2}}','Честерфилд, бежевый'],['{{P:n_sofa1}}','Честерфилд в цеху'],['{{P:n_sofa3}}','Диван с каретной стяжкой'],['{{P:n_sofa5}}','Угловой диван, общий вид']],o:[['Тип',['Прямой','Угловой','Честерфилд'],1]],inc:['Размер, ткань и цвет — под интерьер','Изготовление под заказ','Доставка и сборка своей бригадой']},
- {id:'s_chair',c:'soft',d:5,n:'Кресла и пуфы',s:'Мягкие кресла к обеденному столу, кресла и пуфы — в одной ткани с диваном или отдельно.',p:'по проекту',pn:'по количеству и ткани',t:'под заказ',im:'{{P:n_dine}}',g:[['{{P:n_dine}}','Кресла к обеденному столу'],['{{P:n_chair}}','Мягкое кресло, деталь']],o:[['Что нужно',['Кресла к столу','Кресла','Пуфы'],1],['Количество, шт.','например 6','in']],inc:['Ткань и цвет — под интерьер','Изготовление под заказ']},
+ {id:'s_sofa',c:'soft',d:5,n:'Диваны',s:'Честерфилды с каретной стяжкой, прямые и угловые диваны. Размер, ткань и цвет — под ваш интерьер.',p:'по проекту',pn:'по размеру и ткани',t:'под заказ',im:'{{P:n_sofa4}}',g:[['{{P:n_sofa4}}','Угловой диван в гостиной'],['{{P:n_sofa2}}','Честерфилд, бежевый'],['{{P:n_sofa1}}','Честерфилд в цеху'],['{{P:n_sofa3}}','Диван с каретной стяжкой'],['{{P:n_sofa5}}','Угловой диван, общий вид']],o:[['Тип',['Прямой','Угловой','Честерфилд'],1],['Цвет ткани',['Тёмная олива','Олива','Мох','Хаки','Шалфей','Светлый шалфей','Тёплый беж','Песочный','Мягкий коричневый','Тауп','Графит','Кремовый','Молочный'],0,'sw',['#2E3322','#3D4530','#535C38','#6A7343','#838C5C','#A9AF86','#DCC6A7','#CDB79E','#A57C64','#A89A8C','#4A4A4A','#F2E9DD','#F6F2EC']]],inc:['Размер, ткань и цвет — под интерьер','Изготовление под заказ','Доставка и сборка своей бригадой']},
+ {id:'s_chair',c:'soft',d:5,n:'Кресла и пуфы',s:'Мягкие кресла к обеденному столу, кресла и пуфы — в одной ткани с диваном или отдельно.',p:'по проекту',pn:'по количеству и ткани',t:'под заказ',im:'{{P:n_dine}}',g:[['{{P:n_dine}}','Кресла к обеденному столу'],['{{P:n_chair}}','Мягкое кресло, деталь']],o:[['Что нужно',['Кресла к столу','Кресла','Пуфы'],1],['Цвет ткани',['Тёмная олива','Олива','Мох','Хаки','Шалфей','Светлый шалфей','Тёплый беж','Песочный','Мягкий коричневый','Тауп','Графит','Кремовый','Молочный'],0,'sw',['#2E3322','#3D4530','#535C38','#6A7343','#838C5C','#A9AF86','#DCC6A7','#CDB79E','#A57C64','#A89A8C','#4A4A4A','#F2E9DD','#F6F2EC']],['Количество, шт.','например 6','in']],inc:['Ткань и цвет — под интерьер','Изготовление под заказ']},
  {id:'rs_furn',c:'restore',x:['fur'],d:5,n:'Реставрация мебели из массива',s:'Восстанавливаем старинную мебель в своём цеху — вплоть до раритетов. На фото — письменный стол из тех, что покупали на выставках.',p:'по оценке',pn:'по фото или на месте',t:'по объёму работ',im:'{{P:n_desk1}}',g:[['{{P:n_desk1}}','Письменный стол после реставрации'],['{{P:n_desk2}}','Тумба и резная нога'],['{{P:n_desk_ws3}}','Стол в цеху'],['{{P:n_desk_ws1}}','Резная нога на верстаке'],['{{P:n_desk_ws2}}','Резная нога, деталь'],['{{P:n_desk3}}','Стол в кабинете'],['{{P:n_desk5}}','Стол, общий вид']],inc:['Осмотр и оценка — по фото или на месте','Реставрация в своём цеху','Стоимость и срок — до начала работ']},
  {id:'r_bar',c:'rest',d:6,n:'Барные стойки',s:'Стойки для баров и ресторанов, в том числе уличные с аквариумом.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'{{P:p15}}',g:[['{{P:p15}}','Барная стойка Harat’s'],['{{P:p17}}','Столешница стойки с логотипом'],['{{P:p11}}','Уличная стойка «Мамай Кале»'],['{{P:p12}}','Стойка с аквариумом']]},
  {id:'r_ceil',c:'rest',d:6,n:'Потолки и стены',s:'Потолки с канатами и балками, люстры, цветные стеновые панели, стены из старых дверей.',p:'индивидуально',pn:'по проекту',t:'проект — 2 недели',im:'{{P:p9}}',g:[['{{P:p9}}','Потолок с канатами, Fish Bone'],['{{P:p1}}','Люстра и потолок, Fish Bone'],['{{P:p18}}','Стеновые панели, Harat’s'],['{{P:p20}}','Панели, деталь'],['{{P:p16}}','Стена из старых дверей']]},
@@ -1545,6 +1546,7 @@ function shOpts(){
   var it=shIt;
   shO.innerHTML=(it.o||[]).map(function(g,gi){
     if(g[2]==='in')return '<label class="sh-og sh-in"><span>'+g[0]+'</span><input type="text" inputmode="'+(/Размер/.test(g[0])?'text':'decimal')+'" data-g="'+gi+'" placeholder="'+g[1]+'" value="'+String(it.sel[gi]).replace(/"/g,'&quot;')+'"></label>';
+    if(g[3]==='sw')return '<div class="sh-og sw"><span>'+g[0]+': <b>'+g[1][it.sel[gi]]+'</b></span><div>'+g[1].map(function(v,k){return '<button type="button" data-g="'+gi+'" data-k="'+k+'" aria-pressed="'+(it.sel[gi]===k)+'" aria-label="'+v+'" title="'+v+'" style="--c:'+g[4][k]+'"></button>'}).join('')+'</div><small>Тон — ориентир: ткань подбираем по живым образцам, велюр, рогожка, букле и другие.</small></div>';
     if(g[1].length<2&&!g[2])return '<div class="sh-og"><span>'+g[0]+': '+g[1][0]+'</span></div>';
     return '<div class="sh-og"><span>'+g[0]+(g[2]?' — можно несколько':'')+'</span><div>'+g[1].map(function(v,k){var on=g[2]?it.sel[gi].indexOf(k)>=0:it.sel[gi]===k;return '<button type="button" data-g="'+gi+'" data-k="'+k+'" aria-pressed="'+on+'">'+v+'</button>'}).join('')+'</div></div>'}).join('');
 }
