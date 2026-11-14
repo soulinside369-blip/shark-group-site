@@ -930,6 +930,12 @@ footer .wrap{padding-top:26px}
 .art:hover{border-color:rgba(201,164,106,.55);transform:translateY(-3px)}
 @media (max-width:900px){.arts-g{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.arts{padding-block:56px}.arts-g{grid-template-columns:minmax(0,1fr)}.art{display:grid;grid-template-columns:110px minmax(0,1fr)}.art img{height:100%;aspect-ratio:auto}.art b{font-size:18px}}
+
+/* кнопка «Статьи» в шапке: видна и на телефоне */
+.top .pill-st{border-color:rgba(242,235,221,.35);color:var(--ivory)}
+.top .pill-st:hover{border-color:var(--brass);color:var(--brass)}
+@media (max-width:760px){.top .pill.pill-st{display:inline-flex;min-height:40px;padding:0 14px;font-size:13px}}
+@media (max-width:360px){.top .logo span{font-size:15px}}
 </style>
 
 <div class="trailer gone" id="trailer" role="dialog" aria-label="Трейлер Shark Group" aria-hidden="true">
@@ -977,6 +983,7 @@ footer .wrap{padding-top:26px}
     </nav>
     <div class="top-r">
       <button class="pill tr-btn" id="replay" type="button">▶ Трейлер</button>
+      <a class="pill pill-st" href="/stati/">Статьи</a>
       <a class="pill" href="#quiz">Рассчитать проект</a>
     </div>
   </div>
