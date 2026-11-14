@@ -941,6 +941,25 @@ footer .wrap{padding-top:26px}
 .top .pill-st:hover{border-color:var(--brass);color:var(--brass)}
 @media (max-width:760px){.top .pill.pill-st{display:inline-flex;min-height:40px;padding:0 14px;font-size:13px}}
 @media (max-width:360px){.top .logo span{font-size:15px}}
+
+/* быстрый звонок: на телефоне — круглая кнопка справа в нижней панели, на десктопе — кнопка в правом нижнем углу */
+.mbar a.call{flex:none;width:48px;min-height:48px;height:48px;margin:-2px -2px -2px 0;border-radius:50%;background:var(--ivory);color:var(--night);box-shadow:0 0 0 2px var(--brass)}
+.mbar a.call svg{width:22px;height:22px}
+.callfab{position:fixed;z-index:29;right:max(24px,env(safe-area-inset-right,0px));bottom:24px;display:flex;align-items:center;gap:0;height:56px;padding:0 17px;border-radius:999px;background:var(--brass);color:var(--night);text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:gap .35s var(--ease),padding .35s var(--ease),background-color .25s}
+.callfab:not(.on){opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;visibility:hidden}
+.callfab{transition:gap .35s var(--ease),padding .35s var(--ease),background-color .25s,opacity .35s var(--ease),transform .35s var(--ease),visibility .35s}
+.callfab span{max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .4s var(--ease),opacity .25s}
+.callfab:hover,.callfab:focus-visible{gap:10px;padding:0 22px 0 18px;background:var(--brass-hi);color:var(--night)}
+.callfab:hover span,.callfab:focus-visible span{max-width:200px;opacity:1}
+.callfab:focus-visible{outline:2px solid var(--ivory);outline-offset:3px}
+.callfab::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(201,164,106,.55);pointer-events:none}
+.callfab.ring::after,.mbar a.call.ring{animation:ringp 1.6s var(--ease) 2}
+@keyframes ringp{0%{box-shadow:0 0 0 0 rgba(201,164,106,.55),0 0 0 2px var(--brass)}100%{box-shadow:0 0 0 18px rgba(201,164,106,0),0 0 0 2px var(--brass)}}
+.callfab.ring::after{animation-name:ringf}
+@keyframes ringf{0%{box-shadow:0 0 0 0 rgba(201,164,106,.6)}100%{box-shadow:0 0 0 18px rgba(201,164,106,0)}}
+.dock{right:96px}
+@media (max-width:760px){.callfab{display:none}}
+@media (prefers-reduced-motion:reduce){.callfab,.callfab span{transition:none}.callfab.ring::after,.mbar a.call.ring{animation:none}}
 </style>
 </head>
 <body>
@@ -1228,6 +1247,7 @@ footer .wrap{padding-top:26px}
 </div>
 <a class="dock" id="dock" href="#quiz"><span class="dock-n" id="dock-n">0</span><span class="dock-b"><b>Ваш расчёт</b><small id="dock-t"></small></span><span class="dock-go">Оформить →</span></a>
 <div class="grain-g" aria-hidden="true"></div>
+<a class="callfab" id="callfab" href="tel:+79649446637" aria-label="Позвонить: +7 964 944-66-37"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3.5h2.6l1.3 3.9-1.9 1.3a12.2 12.2 0 0 0 6.7 6.7l1.3-1.9 3.9 1.3v2.6a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z" fill="currentColor"/></svg><span>+7 964 944-66-37</span></a>
 <div class="mbar"><nav aria-label="Быстрые действия" id="mnav"><a href="#cat">Каталог</a><a class="go" href="#quiz">Расчёт</a></nav></div>
 
 <script>
@@ -1533,7 +1553,7 @@ var UTM={};(function(){var q=new URLSearchParams(location.search),k=['utm_source
 d.addEventListener('click',function(e){if(e.target.closest('a[data-dzen]'))goal('dzen_click')});
 d.addEventListener('click',function(e){var a=e.target.closest('a[href^="tel:"],a[href*="t.me/"],a[href*="max.ru"]');if(a)goal(/^tel:/.test(a.getAttribute('href'))?'click_phone':'click_messenger')});
 (function(){var n=d.getElementById('mnav'),h='';
-  if(CONTACTS.tel)h+='<a href="tel:'+CONTACTS.tel.replace(/[^+\d]/g,'')+'">Позвонить</a>';
+  if(CONTACTS.tel)n.insertAdjacentHTML('beforeend','<a class="call" href="tel:'+CONTACTS.tel.replace(/[^+\d]/g,'')+'" aria-label="Позвонить: '+CONTACTS.tel+'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3.5h2.6l1.3 3.9-1.9 1.3a12.2 12.2 0 0 0 6.7 6.7l1.3-1.9 3.9 1.3v2.6a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z" fill="currentColor"/></svg></a>');
   if(CONTACTS.tg)h+='<a href="https://t.me/'+CONTACTS.tg.replace(/^@/,'')+'" rel="noopener">Telegram</a>';
   if(h)n.querySelector('.go').insertAdjacentHTML('beforebegin',h)})();
 /* Разделы каталога: [id, название, описание, цена «от», срок, обложка] */
@@ -1927,6 +1947,13 @@ function shOpen(it,from){
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;run()}).observe(fig);
   fig.addEventListener('click',function(e){var b=e.target.closest('.hc-nav button');if(b){show(i+(+b.dataset.d));if(!reduce)run();return}goal('hero_card');shOpen(list[i])});
   fig.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();goal('hero_card');shOpen(list[i])}else if(e.key==='ArrowRight'||e.key==='ArrowLeft'){show(i+(e.key==='ArrowRight'?1:-1))}});
+})();
+/* быстрый звонок: один мягкий «звонок» через 6 с после загрузки, дальше без анимации */
+(function(){var f=d.getElementById('callfab'),o=d.querySelector('.offers'),rung=false;
+  function ring(b){if(b&&!reduce){b.classList.remove('ring');void b.offsetWidth;b.classList.add('ring')}}
+  if(f&&o){var raf=0,upd=function(){raf=0;var on=o.getBoundingClientRect().bottom<0;f.classList.toggle('on',on);if(on&&!rung){rung=true;setTimeout(function(){ring(f)},900)}};
+    addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});upd()}
+  setTimeout(function(){ring(d.querySelector('.mbar a.call'))},6000);
 })();
 /* «в расчёт»: позиция улетает в кнопку расчёта, счётчик подпрыгивает */
 var lastTap=null;
